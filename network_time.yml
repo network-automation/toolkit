@@ -1,6 +1,6 @@
 ---
 - name: CONFIGURE NETWORK TIME
-  hosts: routers
+  hosts: all
   connection: network_cli
   gather_facts: no
 
