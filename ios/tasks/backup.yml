@@ -3,13 +3,8 @@
     backup: yes
   register: config_output
 
-- name: RENAME BACKUP
-  copy:
-    src: "{{config_output.backup_path}}"
-    dest: "{{playbook_dir}}/backup/{{inventory_hostname}}.config"
-
 - name: REMOVE NON CONFIG LINES - REGEXP
   lineinfile:
-    path: "{{playbook_dir}}/backup/{{inventory_hostname}}.config"
+    path: "{{config_output.backup_path}}"
     regexp: 'Current configuration.*'
     state: absent

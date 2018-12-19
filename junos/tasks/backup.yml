@@ -2,8 +2,3 @@
   junos_config:
     backup: yes
   register: config_output
-
-- name: RENAME BACKUP
-  copy:
-    src: "{{config_output.backup_path}}"
-    dest: "{{playbook_dir}}/backup/{{inventory_hostname}}.config"
