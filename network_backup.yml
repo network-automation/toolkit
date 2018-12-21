@@ -23,7 +23,8 @@
     # This might be required because you might be running a Tower cluster
     # e.g. we want the configs backed up to one spot
     # versus scattered indidivual nodes
-    - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_cofigs}}
+    # the conditional when doesn't push it, if that router failed earlier
+    - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_configs}}
       vars:
         backup_filename: "{{config_output.backup_path.split('/')[-1]}}"
         ansible_connection: ssh
@@ -31,3 +32,4 @@
         src: "{{config_output.backup_path}}"
         dest: "/tmp/backup/{{backup_filename}}"
       delegate_to: "{{store_configs}}"
+      when: config_output is defined
