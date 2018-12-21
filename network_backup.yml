@@ -18,13 +18,16 @@
         path: /tmp/backup
         state: directory
       delegate_to: "{{store_configs}}"
+      run_once: yes
 
-    # This is required because you might be running a Tower cluster, so we want the configs to all be in one place
+    # This might be required because you might be running a Tower cluster
+    # e.g. we want the configs backed up to one spot
+    # versus scattered indidivual nodes
     - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_cofigs}}
       vars:
         backup_filename: "{{config_output.backup_path.split('/')[-1]}}"
         ansible_connection: ssh
       copy:
         src: "{{config_output.backup_path}}"
-        dest: "/backup/{{backup_filename}}"
+        dest: "/tmp/backup/{{backup_filename}}"
       delegate_to: "{{store_configs}}"
