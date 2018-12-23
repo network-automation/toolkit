@@ -37,7 +37,7 @@
       vars:
         backup_filename: "{{config_output.backup_path.split('/')[-1]}}"
         ansible_connection: ssh
-        backup_folder: "{{config_output.backup_path.split('.')[-1]"
+        backup_folder: "{{config_output.backup_path.split('.')[-1]}}"
       copy:
         src: "{{config_output.backup_path}}"
         dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
