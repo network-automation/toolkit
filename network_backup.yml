@@ -11,11 +11,20 @@
       when: ansible_network_os is defined
 
     # This verifies the backup directory exists on the host you want to store conifgs
-    - name: CREATE DIRECTORY ON {{store_configs}}
+    - name: CREATE /tmp/BACKUP DIRECTORY ON {{store_configs}}
       vars:
         ansible_connection: ssh
       file:
         path: /tmp/backup
+        state: directory
+      delegate_to: "{{store_configs}}"
+      run_once: yes
+
+    - name: CREATE TIMESTAMP DIRECTORY ON {{store_configs}}
+      vars:
+        ansible_connection: ssh
+      file:
+        path: "/tmp/backup/{{config_output.backup_path.split('.')[-1]}}"
         state: directory
       delegate_to: "{{store_configs}}"
       run_once: yes
