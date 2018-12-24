@@ -58,6 +58,7 @@
 - name: BACKUP ROUTER CONFIGURATIONS
   hosts: "{{store_configs}}"
   gather_facts: no
+  tasks:
     - name: CREATE RESTORE JOB TEMPLATE
       tower_job_template:
         name: "RESTORE NETWORK CONFIG"
