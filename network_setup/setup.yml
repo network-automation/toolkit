@@ -5,7 +5,6 @@
 - name: SETUP NETWORK JOBS IN TOWER
   hosts: routers
   connection: local
-  become: yes
   gather_facts: no
   tasks:
     - name: CREATE INVENTORY
