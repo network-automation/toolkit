@@ -67,3 +67,4 @@
         tower_username: admin
         tower_password: ansible
         tower_host: "https://{{store_configs}}"
+      run_once: true
