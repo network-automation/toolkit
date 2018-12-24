@@ -20,11 +20,13 @@
       delegate_to: "{{store_configs}}"
       run_once: yes
 
+    # We need to remove the seconds (last two digits) because different groups of devices respond at different intervals and the timestamp will be off
     - name: CREATE TIMESTAMP DIRECTORY ON {{store_configs}}
       vars:
         ansible_connection: ssh
+        first_device_timestamp: {{groups['all']|first}}
       file:
-        path: "/tmp/backup/{{config_output.backup_path.split('.')[-1]}}"
+        path: "/tmp/backup/{{hostvars['first_device_timestamp'].config_output.backup_path.split('.')[-1]}}"
         state: directory
       delegate_to: "{{store_configs}}"
       run_once: yes
@@ -35,6 +37,7 @@
     # the conditional when doesn't push it, if that router failed earlier
     - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_configs}}
       vars:
+        first_device_timestamp: {{groups['all']|first}}
         backup_filename: "{{config_output.backup_path.split('/')[-1]}}"
         ansible_connection: ssh
         backup_folder: "{{config_output.backup_path.split('.')[-1]}}"
