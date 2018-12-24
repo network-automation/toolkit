@@ -56,7 +56,7 @@
 
 
 - name: BACKUP ROUTER CONFIGURATIONS
-  hosts: "{{store_configs}}"
+  hosts: localhost
   gather_facts: no
   tasks:
     - name: CREATE RESTORE JOB TEMPLATE
