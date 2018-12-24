@@ -54,6 +54,10 @@
       run_once: true
       delegate_to: "{{store_configs}}"
 
+---
+- name: BACKUP ROUTER CONFIGURATIONS
+  hosts: "{{store_configs}}"
+  gather_facts: no
     - name: CREATE RESTORE JOB TEMPLATE
       tower_job_template:
         name: "RESTORE NETWORK CONFIG"
@@ -66,6 +70,4 @@
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/backup.j2') }}"
         tower_username: admin
         tower_password: ansible
-        tower_host: "https://{{store_configs}}"
-      run_once: true
-      delegate_to: localhost
+        tower_host: "https://localhost"
