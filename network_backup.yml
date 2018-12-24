@@ -66,4 +66,4 @@
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/backup.j2') }}"
         tower_username: admin
         tower_password: ansible
-      delegate_to: "https://{{store_configs}}"
+        tower_host: "https://{{store_configs}}"
