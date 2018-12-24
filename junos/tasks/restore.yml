@@ -1,5 +1,4 @@
-# This task will backup the configuration
-- name: BACKUP THE CONFIG
+- name: RESTORE THE CONFIG
   junos_config:
     replace: yes
     update: replace

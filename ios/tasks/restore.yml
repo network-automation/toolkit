@@ -1,5 +1,6 @@
-# This task will backup the configuration
-- name: BACKUP THE CONFIG
+- debug:
+    msg: "restoring from /tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
+- name: RESTORE THE CONFIG
   ios_config:
     replace: block
     src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
