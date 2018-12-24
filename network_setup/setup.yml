@@ -71,26 +71,6 @@
         tower_password: ansible
         tower_host: https://localhost
 
-    - name: FIND BACKUPS
-      find:
-        paths: /tmp/backup
-        file_type: directory
-      register: backups
-
-    - name: CREATE RESTORE JOB TEMPLATE
-      tower_job_template:
-        name: "RESTORE NETWORK CONFIG"
-        job_type: "run"
-        inventory: "Workshop Inventory"
-        project: "Workshop Project"
-        playbook: "network_restore.yml"
-        credential: "Workshop Credential"
-        survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/backup.j2') }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-
 - name: NETWORK SETUP
   hosts: routers
   connection: local
