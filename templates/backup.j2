@@ -7,17 +7,17 @@
       "question_name": "example question",
       "question_description": "Rollback to which date?",
       "variable": "rollback_date",
-      "choices": "
+      "choices": [
 {% for file in backups.files %}
 {% if loop.last %}
-        \n{{file.path.split('/')[-1]}}
+        "\n{{file.path.split('/')[-1]}}"
 {% elif loop.first %}
-        {{file.path.split('/')[-1]}}
+        "{{file.path.split('/')[-1]}}",
 {% else %}
-        \n{{file.path.split('/')[-1]}}
+        "\n{{file.path.split('/')[-1]}}",
 {% endif %}
 {% endfor %}
-      ",
+      ],
       "required": true,
       "default": "{{backups.files[0].path.split('/')[-1]}}"
     }
