@@ -1,0 +1,6 @@
+# This task will backup the configuration
+- name: BACKUP THE CONFIG
+  ios_config:
+    replace: block
+    src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
+  register: config_output

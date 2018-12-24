@@ -10,7 +10,7 @@
       "choices": [
 {% for file in backups.files %}
 {% if loop.last %}
-        "{{file.path.split('/')[-1]}}"
+        "\n{{file.path.split('/')[-1]}}"
 {% elif loop.first %}
         "\n{{file.path.split('/')[-1]}}",
 {% else %}
@@ -19,7 +19,7 @@
 {% endfor %}
       ],
       "required": true,
-      "default": "{{backups.files[0].path.split('.')[-1]}},"
+      "default": "{{file.path.split('/')[-1]}}"
     }
   ]
 }

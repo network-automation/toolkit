@@ -1,0 +1,7 @@
+# This task will backup the configuration
+- name: BACKUP THE CONFIG
+  junos_config:
+    replace: yes
+    update: replace
+    src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
+  register: config_output
