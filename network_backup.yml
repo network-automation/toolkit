@@ -45,3 +45,25 @@
         dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
       delegate_to: "{{store_configs}}"
       when: config_output is defined
+
+    - name: FIND BACKUPS
+      find:
+        paths: /tmp/backup
+        file_type: directory
+      register: backups
+      run_once: true
+      delegate_to: "{{store_configs}}"
+
+    - name: CREATE RESTORE JOB TEMPLATE
+      tower_job_template:
+        name: "RESTORE NETWORK CONFIG"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_restore.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/backup.j2') }}"
+        tower_username: admin
+        tower_password: ansible
+      delegate_to: "https://{{store_configs}}"
