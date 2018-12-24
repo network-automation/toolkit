@@ -3,7 +3,7 @@
 # PLEASE RUN WITH ANSIBLE-PLAYBOOK COMMAND
 # ansible-playbook setup.yml
 - name: TOWER CONFIGURATION IN PLAYBOOK FORM
-  hosts: localhost
+  hosts: ansible
   connection: local
   become: yes
   gather_facts: no
