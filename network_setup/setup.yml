@@ -2,9 +2,10 @@
 # THIS PLAYBOOK MUST BE RUN FROM CLI
 # PLEASE RUN WITH ANSIBLE-PLAYBOOK COMMAND
 # ansible-playbook setup.yml
-- name: SETUP NETWORK JOBS IN TOWER
-  hosts: routers
+- name: TOWER CONFIGURATION IN PLAYBOOK FORM
+  hosts: routers,ansible
   connection: local
+  become: yes
   gather_facts: no
   tasks:
     - name: CREATE INVENTORY
@@ -47,7 +48,7 @@
     - debug:
         msg: "{{ansible_user}}"
       run_once: true
-      delegate_to: localhost
+      delegate_to: ansible
 
     - name: ADD CREDENTIAL INTO TOWER
       tower_credential:
@@ -59,7 +60,7 @@
         tower_password: ansible
         tower_host: https://localhost
       run_once: true
-      delegate_to: localhost
+      delegate_to: ansible
 
     - name: ADD REPO INTO TOWER
       tower_project:
