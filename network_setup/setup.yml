@@ -3,7 +3,7 @@
 # PLEASE RUN WITH ANSIBLE-PLAYBOOK COMMAND
 # ansible-playbook setup.yml
 - name: TOWER CONFIGURATION IN PLAYBOOK FORM
-  hosts: routers,ansible
+  hosts: localhost
   connection: local
   become: yes
   gather_facts: no
@@ -15,8 +15,6 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
-      run_once: true
-      delegate_to: localhost
 
     - name: ADD ANSIBLE HOST INTO TOWER
       tower_host:
@@ -29,26 +27,6 @@
           ansible_host: "{{ansible_host}}"
           ansible_user: "{{ansible_user}}"
           private_ip: "{{private_ip}}"
-      run_once: true
-      delegate_to: localhost
-
-    - name: ADD NETWORK HOSTS INTO TOWER
-      tower_host:
-        name: "{{ inventory_hostname }}"
-        inventory: "Workshop Inventory"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-        variables:
-          ansible_network_os: "{{ansible_network_os}}"
-          ansible_host: "{{ansible_host}}"
-          ansible_user: "{{ansible_user}}"
-          private_ip: "{{private_ip}}"
-
-    - debug:
-        msg: "{{ansible_user}}"
-      run_once: true
-      delegate_to: ansible
 
     - name: ADD CREDENTIAL INTO TOWER
       tower_credential:
@@ -59,8 +37,6 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
-      run_once: true
-      delegate_to: ansible
 
     - name: ADD REPO INTO TOWER
       tower_project:
@@ -71,8 +47,6 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
-      run_once: true
-      delegate_to: localhost
 
     - name: REMOVE DEMO JOB TEMPLATE
       tower_job_template:
@@ -84,8 +58,6 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
-      run_once: true
-      delegate_to: localhost
 
     - name: CREATE BACKUP JOB TEMPLATE
       tower_job_template:
@@ -98,16 +70,12 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
-      run_once: true
-      delegate_to: localhost
 
     - name: FIND BACKUPS
       find:
         paths: /tmp/backup
         file_type: directory
       register: backups
-      run_once: true
-      delegate_to: localhost
 
     - name: CREATE RESTORE JOB TEMPLATE
       tower_job_template:
@@ -122,3 +90,22 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
+
+- name: NETWORK SETUP
+  hosts: routers
+  connection: local
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: ADD NETWORK HOSTS INTO TOWER
+      tower_host:
+        name: "{{ inventory_hostname }}"
+        inventory: "Workshop Inventory"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
+        variables:
+          ansible_network_os: "{{ansible_network_os}}"
+          ansible_host: "{{ansible_host}}"
+          ansible_user: "{{ansible_user}}"
+          private_ip: "{{private_ip}}"
