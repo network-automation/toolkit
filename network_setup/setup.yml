@@ -89,3 +89,4 @@
           ansible_host: "{{ansible_host}}"
           ansible_user: "{{ansible_user}}"
           private_ip: "{{private_ip}}"
+          ansible_connection: "{{ansible_connection}}"
