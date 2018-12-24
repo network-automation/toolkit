@@ -54,7 +54,7 @@
       run_once: true
       delegate_to: "{{store_configs}}"
 
----
+
 - name: BACKUP ROUTER CONFIGURATIONS
   hosts: "{{store_configs}}"
   gather_facts: no
