@@ -1,4 +1,7 @@
 ---
+# THIS PLAYBOOK MUST BE RUN FROM CLI
+# PLEASE RUN WITH ANSIBLE-PLAYBOOK COMMAND
+# ansible-playbook setup.yml
 - name: SETUP NETWORK JOBS IN TOWER
   hosts: routers
   connection: local
@@ -15,7 +18,7 @@
       run_once: true
       delegate_to: localhost
 
-    - name: ADD HOST INTO TOWER
+    - name: ADD ANSIBLE HOST INTO TOWER
       tower_host:
         name: "{{ inventory_hostname }}"
         inventory: "Workshop Inventory"
@@ -23,12 +26,13 @@
         tower_password: ansible
         tower_host: https://localhost
         variables:
-          ansible_network_os: "{{ansible_network_os}}"
           ansible_host: "{{ansible_host}}"
           ansible_user: "{{ansible_user}}"
           private_ip: "{{private_ip}}"
+      run_once: true
+      delegate_to: localhost
 
-    - name: ADD HOST INTO TOWER
+    - name: ADD NETWORK HOSTS INTO TOWER
       tower_host:
         name: "{{ inventory_hostname }}"
         inventory: "Workshop Inventory"
