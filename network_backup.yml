@@ -40,7 +40,7 @@
         first_device_timestamp: "{{groups['all']|first}}"
         backup_filename: "{{inventory_hostname}}"
         ansible_connection: ssh
-        backup_folder: "/tmp/backup/{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
+        backup_folder: "{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
       copy:
         src: "{{config_output.backup_path}}"
         dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
