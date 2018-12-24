@@ -24,7 +24,7 @@
     - name: CREATE TIMESTAMP DIRECTORY ON {{store_configs}}
       vars:
         ansible_connection: ssh
-        first_device_timestamp: {{groups['all']|first}}
+        first_device_timestamp: "{{groups['all']|first}}"
       file:
         path: "/tmp/backup/{{hostvars['first_device_timestamp'].config_output.backup_path.split('.')[-1]}}"
         state: directory
@@ -37,7 +37,7 @@
     # the conditional when doesn't push it, if that router failed earlier
     - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_configs}}
       vars:
-        first_device_timestamp: {{groups['all']|first}}
+        first_device_timestamp: "{{groups['all']|first}}"
         backup_filename: "{{config_output.backup_path.split('/')[-1]}}"
         ansible_connection: ssh
         backup_folder: "{{config_output.backup_path.split('.')[-1]}}"
