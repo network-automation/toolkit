@@ -46,6 +46,10 @@
       delegate_to: "{{store_configs}}"
       when: config_output is defined
 
+- name: BACKUP ROUTER CONFIGURATIONS
+  hosts: localhost
+  gather_facts: no
+  tasks:
     - name: FIND BACKUPS
       find:
         paths: /tmp/backup
@@ -54,11 +58,6 @@
       run_once: true
       delegate_to: "{{store_configs}}"
 
-
-- name: BACKUP ROUTER CONFIGURATIONS
-  hosts: localhost
-  gather_facts: no
-  tasks:
     - name: CREATE RESTORE JOB TEMPLATE
       tower_job_template:
         name: "RESTORE NETWORK CONFIG"
