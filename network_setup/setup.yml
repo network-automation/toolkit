@@ -44,6 +44,11 @@
           ansible_user: "{{ansible_user}}"
           private_ip: "{{private_ip}}"
 
+    - debug:
+        msg: "{{ansible_user}}"
+      run_once: true
+      delegate_to: localhost
+
     - name: ADD CREDENTIAL INTO TOWER
       tower_credential:
         name: Workshop Credential
