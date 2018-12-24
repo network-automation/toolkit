@@ -26,7 +26,7 @@
         ansible_connection: ssh
         first_device_timestamp: "{{groups['all']|first}}"
       file:
-        path: "/tmp/backup/{{hostvars['first_device_timestamp'].config_output.backup_path.split('.')[-1]}}"
+        path: "/tmp/backup/{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
         state: directory
       delegate_to: "{{store_configs}}"
       run_once: yes
