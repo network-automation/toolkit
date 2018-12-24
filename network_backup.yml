@@ -38,9 +38,9 @@
     - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_configs}}
       vars:
         first_device_timestamp: "{{groups['all']|first}}"
-        backup_filename: "{{config_output.backup_path.split('/')[-1]}}"
+        backup_filename: "{{inventory_hostname}}"
         ansible_connection: ssh
-        backup_folder: "{{config_output.backup_path.split('.')[-1]}}"
+        backup_folder: "/tmp/backup/{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
       copy:
         src: "{{config_output.backup_path}}"
         dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
