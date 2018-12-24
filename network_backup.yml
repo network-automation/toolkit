@@ -68,3 +68,4 @@
         tower_password: ansible
         tower_host: "https://{{store_configs}}"
       run_once: true
+      delegate_to: localhost
