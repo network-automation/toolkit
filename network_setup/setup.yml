@@ -77,7 +77,7 @@
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
-        playbook: "network_l3_interfaces.yml"
+        playbook: "network_l3_interface.yml"
         credential: "Workshop Credential"
         tower_username: admin
         tower_password: ansible
