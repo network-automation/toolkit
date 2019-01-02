@@ -103,6 +103,7 @@
         credential: "Workshop Credential"
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/l3_interface.json') }}"
+        ask_inventory: True
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
