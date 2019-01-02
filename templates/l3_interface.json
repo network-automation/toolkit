@@ -1,0 +1,14 @@
+{
+  "name": "L3 Survey",
+  "description": "Prompt for interface name, ipv4 and ipv6",
+  "spec": [
+    {
+      "type": "text",
+      "question_name": "Which interface?",
+      "question_description": "Please specify the interface name",
+      "variable": "interface_name",
+      "required": true,
+      "default": "lo0"
+    }
+  ]
+}
