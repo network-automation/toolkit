@@ -1,0 +1,15 @@
+---
+- name: CONFIGURE SYSTEM PROPERTIRES
+  hosts: all
+  gather_facts: no
+
+  tasks:
+
+    - name: LOAD BANNER ONTO NETWORK DEVICE
+      net_system:
+        domain_name: "{{network_domain_name | default(omit) }}"
+        domain_search: "{{network_domain_search | default(omit)}}"
+        hostname: "{{network_hostname | default(omit)}}"
+        lookup_source: "{{network_lookup_source | default(omit) }}"
+        name_servers: "{{network_name_servers | default(omit) }}"
+      when: ansible_network_os is defined
