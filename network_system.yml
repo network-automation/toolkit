@@ -5,7 +5,7 @@
 
   tasks:
 
-    - name: LOAD BANNER ONTO NETWORK DEVICE
+    - name: LOAD SYSTEM PROPERTIES ONTO DEVICE
       net_system:
         domain_name: "{{network_domain_name | default(omit, True) }}"
         domain_search: "{{network_domain_search | default(omit, True)}}"
