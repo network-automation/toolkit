@@ -8,7 +8,7 @@
       "question_description": "Please specify the interface name",
       "variable": "interface_name",
       "required": true,
-      "default": "Loopback0"
+      "default": "lo0"
     },
     {
       "type": "text",
