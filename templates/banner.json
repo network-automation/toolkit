@@ -3,7 +3,7 @@
   "description": "Prompt for banner text",
   "spec": [
     {
-      "type": "text",
+      "type": "textarea",
       "question_name": "Please enter the login banner information",
       "question_description": "Please type into the text field the desired banner",
       "variable": "network_banner",
