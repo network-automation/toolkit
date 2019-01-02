@@ -27,12 +27,13 @@
       "default": ""
     },
     {
-      "type": "text",
+      "type": "textarea",
       "question_name": "Please Set the name servers",
       "question_description": "e.g. 8.8.8.8, List of DNS name servers by IP address to use to perform name resolution lookups",
       "variable": "network_name_servers",
       "required": false,
-      "default": ""
+      "default": "8.8.8.8"
+
     }
   ]
 }
