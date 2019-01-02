@@ -121,6 +121,20 @@
         tower_password: ansible
         tower_host: https://localhost
 
+    - name: CREATE SYSTEM JOB TEMPLATE
+      tower_job_template:
+        name: "CONFIGURE SYSTEM PROPERTIES (e.g. hostname)"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_system.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/system.json') }}"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
+
 - name: NETWORK SETUP
   hosts: routers
   connection: local
