@@ -16,7 +16,7 @@
       "question_description": "Set the IP domain name",
       "variable": "network_domain_name",
       "required": false,
-      "default": "test.example.com"
+      "default": ""
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
       "question_description": "e.g. 8.8.8.8, List of DNS name servers by IP address to use to perform name resolution lookups",
       "variable": "network_name_servers",
       "required": false,
-      "default": "8.8.8.8"
+      "default": ""
     }
   ]
 }
