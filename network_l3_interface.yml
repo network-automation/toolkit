@@ -1,0 +1,13 @@
+---
+- name: BACKUP ROUTER CONFIGURATIONS
+  hosts: all
+  gather_facts: no
+
+  tasks:
+
+    - name: SET SURVEY
+      net_l3_interface:
+        name: "{{interface_name}}"
+        ipv4: "{{interface_ipv4 | default(omit) }}"
+        ipv6: "{{interface_ipv6 | default(omit) }}"
+      when: ansible_network_os is defined

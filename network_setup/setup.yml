@@ -71,6 +71,18 @@
         tower_password: ansible
         tower_host: https://localhost
 
+    - name: CREATE L3 INTERFACE JOB TEMPLATE
+      tower_job_template:
+        name: "CONFIGURE LAYER 3 INTERFACE"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_l3_interfaces.yml"
+        credential: "Workshop Credential"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
+
 - name: NETWORK SETUP
   hosts: routers
   connection: local
