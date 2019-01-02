@@ -16,6 +16,28 @@
         tower_password: ansible
         tower_host: https://localhost
 
+    - name: CREATE DEVICE INVENTORY
+      tower_inventory:
+        name: "{{item}}"
+        organization: Default
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
+      loop:
+        - rtr1
+        - rtr2
+        - rtr3
+        - rtr4
+
+    - name: REMOVE INVENTORY
+      tower_inventory:
+        name: "Demo Inventory"
+        organization: Default
+        state: absent
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
+
     - name: ADD ANSIBLE HOST INTO TOWER
       tower_host:
         name: "{{ inventory_hostname }}"
@@ -95,6 +117,20 @@
       tower_host:
         name: "{{ inventory_hostname }}"
         inventory: "Workshop Inventory"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
+        variables:
+          ansible_network_os: "{{ansible_network_os}}"
+          ansible_host: "{{ansible_host}}"
+          ansible_user: "{{ansible_user}}"
+          private_ip: "{{private_ip}}"
+          ansible_connection: "{{ansible_connection}}"
+
+    - name: ADD NETWORK HOSTS INTO INDIVIDUAL INVENTORIES
+      tower_host:
+        name: "{{ inventory_hostname }}"
+        inventory: "{{ inventory_hostname }}"
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
