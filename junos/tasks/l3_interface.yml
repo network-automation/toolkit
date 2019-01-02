@@ -1,0 +1,5 @@
+- name: CONFIGURE LAYER3 INTERFACE
+  net_l3_interface:
+    name: "{{interface_name}}"
+    ipv4: "{{interface_ipv4 | default(omit) }}"
+    ipv6: "{{interface_ipv6 | default(omit) }}"

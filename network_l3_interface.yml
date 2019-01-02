@@ -5,9 +5,8 @@
 
   tasks:
 
-    - name: SET SURVEY
-      net_l3_interface:
-        name: "{{interface_name}}"
-        ipv4: "{{interface_ipv4 | default(omit) }}"
-        ipv6: "{{interface_ipv6 | default(omit) }}"
+    - name: LOAD L3 INTERFACE
+      include_role:
+        name: "{{ansible_network_os}}"
+        tasks_from: l3_interface.yml
       when: ansible_network_os is defined

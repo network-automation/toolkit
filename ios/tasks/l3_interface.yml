@@ -1,0 +1,8 @@
+- name: CONFIGURE LAYER3 INTERFACE
+  vars:
+    netmask: {{ interface_ipv4 | ipaddr('netmask') | default(omit) }}
+    network: {{ interface_ipv4 | ipaddr('network') | default(omit) }}
+  net_l3_interface:
+    name: "{{interface_name}}"
+    ipv4: "{{network | default(omit) }} {{netmask | default(omit) }}"
+    ipv6: "{{interface_ipv6 | default(omit) }}"
