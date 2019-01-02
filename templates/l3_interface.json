@@ -9,7 +9,7 @@
       "variable": "interface_name",
       "required": true,
       "default": "lo0"
-    }
+    },
     {
       "type": "text",
       "question_name": "Please set an IPv4 Address",
@@ -17,7 +17,7 @@
       "variable": "interface_ipv4",
       "required": true,
       "default": "lo0"
-    }
+    },
     {
       "type": "text",
       "question_name": "Please Set an IPv6 Address",
