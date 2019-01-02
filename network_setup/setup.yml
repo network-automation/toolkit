@@ -80,7 +80,7 @@
         playbook: "network_l3_interface.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../l3_interface.json') }}"
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/l3_interface.json') }}"
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
