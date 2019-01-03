@@ -16,7 +16,7 @@
       "question_description": "this is not required if using an SSH key",
       "variable": "network_configured_password",
       "required": false,
-      "default": "ansible"
+      "default": "ansible123"
     },
     {
       "type": "textarea",
