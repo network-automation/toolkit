@@ -47,6 +47,7 @@
         dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
       delegate_to: "{{store_configs}}"
       when: config_output is defined
+      become: yes
 
 - name: BACKUP ROUTER CONFIGURATIONS
   hosts: localhost
@@ -59,6 +60,7 @@
       register: backups
       run_once: true
       delegate_to: "{{store_configs}}"
+      become: yes
 
     - name: CREATE RESTORE JOB TEMPLATE
       tower_job_template:
