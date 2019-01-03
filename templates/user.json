@@ -24,7 +24,7 @@
       "question_description": "This argument accepts integer values in the range of 1 to 15",
       "variable": "network_privilege",
       "required": false,
-      "default": "15"
+      "default": ""
     },
     {
       "type": "text",
