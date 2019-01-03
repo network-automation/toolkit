@@ -20,7 +20,7 @@
     },
     {
       "type": "text",
-      "question_name": "Please enter a privilege level",
+      "question_name": "Please enter a privilege level (for network OS that support it)",
       "question_description": "This argument accepts integer values in the range of 1 to 15",
       "variable": "network_privilege",
       "required": false,
