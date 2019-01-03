@@ -4,7 +4,11 @@
     ssh_key: "{{network_key | default(omit, True) }}"
   when: network_key is defined and network_key
 
-- name: CHANGE PASSWORD TO WORKSHOP DEFAULT
+- name: debug this
+  debug:
+    msg: "{{ansible_connection}}"
+
+- name: CHANGE PASSWORD FOR JUNIPER DEVICE
   cli_command:
     command: "{{item}}"
     prompt:
