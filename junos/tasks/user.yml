@@ -24,5 +24,6 @@
     - "configure"
     - "rollback"
     - "set system login user {{network_name}} authentication plain-text-password"
+    - "set system login user {{network_name}} class {{network_juniper_class}}"
     - "commit"
   when: network_configured_password is defined and network_configured_password

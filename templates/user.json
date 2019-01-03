@@ -11,6 +11,14 @@
       "default": "ansible"
     },
     {
+      "type": "text",
+      "question_name": "Please enter the plain-text password",
+      "question_description": "this is not required if using an SSH key",
+      "variable": "network_configured_password",
+      "required": false,
+      "default": "ansible"
+    },
+    {
       "type": "textarea",
       "question_name": "Please paste the SSH public key here",
       "question_description": "this is not required, please leave blank to use plain-text password",
@@ -27,12 +35,18 @@
       "default": ""
     },
     {
-      "type": "text",
-      "question_name": "Please enter the plain-text password",
-      "question_description": "this is not required if using an SSH key",
-      "variable": "network_configured_password",
+      "type": "multiplechoice",
+      "question_name": "Which login class? (Juniper only)",
+      "question_description": "non-Juniper devices will ignore this field",
+      "variable": "network_juniper_class",
+      "choices": [
+        "operator",
+        "\nread-only",
+        "\nsuper-user",
+        "\nunauthorized"
+      ],
       "required": false,
-      "default": "ansible"
+      "default": "super-user"
     }
   ]
 }
