@@ -1,0 +1,38 @@
+{
+  "name": "System Survey",
+  "description": "Prompt for system propertires such as hostname",
+  "spec": [
+    {
+      "type": "text",
+      "question_name": "Please enter the username",
+      "question_description": "this will set the username on the network device",
+      "variable": "network_name",
+      "required": false,
+      "default": "ansible"
+    },
+    {
+      "type": "textarea",
+      "question_name": "Please paste the SSH public key here",
+      "question_description": "this is not required, please leave blank to use plain-text password",
+      "variable": "network_key",
+      "required": false,
+      "default": ""
+    },
+    {
+      "type": "text",
+      "question_name": "Please enter a privilege level",
+      "question_description": "This argument accepts integer values in the range of 1 to 15",
+      "variable": "network_privilege",
+      "required": false,
+      "default": "15"
+    },
+    {
+      "type": "text",
+      "question_name": "Please enter the plain-text password",
+      "question_description": "this is not required if using an SSH key",
+      "variable": "network_configured_password",
+      "required": false,
+      "default": "ansible"
+    }
+  ]
+}
