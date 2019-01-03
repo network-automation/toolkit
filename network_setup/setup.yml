@@ -155,8 +155,6 @@
   connection: local
   become: yes
   gather_facts: no
-  vars:
-    ansible_connection: local
   tasks:
     - name: ADD NETWORK HOSTS INTO TOWER
       tower_host:
