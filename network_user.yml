@@ -1,10 +1,10 @@
 ---
-- name: CONFIGURE SYSTEM PROPERTIRES
+- name: CONFIGURE USER ON NETWORK DEVICES
   hosts: all
   gather_facts: no
 
   tasks:
-    - name: BACKUP CONFIGURATION
+    - name: LOAD PLATFORM ROLE {{ansible_network_os}}
       include_role:
         name: "{{ansible_network_os}}"
         tasks_from: user.yml

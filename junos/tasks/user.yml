@@ -9,6 +9,8 @@
     msg: "{{ansible_connection}}"
 
 - name: CHANGE PASSWORD FOR JUNIPER DEVICE
+  vars:
+    ansible_connection: network_cli
   cli_command:
     command: "{{item}}"
     prompt:
