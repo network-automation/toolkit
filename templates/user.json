@@ -35,18 +35,15 @@
       "default": ""
     },
     {
-      "type": "multiplechoice",
-      "question_name": "Which login class? (Juniper only)",
-      "question_description": "non-Juniper devices will ignore this field",
-      "variable": "network_juniper_class",
-      "choices": [
-        "operator",
-        "\nread-only",
-        "\nsuper-user",
-        "\nunauthorized"
-      ],
-      "required": false,
-      "default": "super-user"
+        "question_description": "non-Juniper devices will ignore this field",
+        "min": null,
+        "default": "super-user",
+        "max": null,
+        "required": false,
+        "choices": "operator\nread-only\nsuper-user\nunauthorized",
+        "variable": "network_juniper_class",
+        "question_name": "Which login class? (Juniper only)",
+        "type": "multiplechoice"
     }
   ]
 }
