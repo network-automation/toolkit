@@ -8,5 +8,5 @@
 - name: REMOVE NON CONFIG LINES - REGEXP
   lineinfile:
     path: "{{config_output.backup_path}}"
-    regexp: 'Current configuration.*'
+    regexp: "Building configuration..."
     state: absent
