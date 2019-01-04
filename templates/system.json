@@ -33,7 +33,7 @@
       "variable": "network_name_servers",
       "required": false,
       "default": "8.8.8.8"
-    }
+    },
     {
       "type": "text",
       "question_name": "Please enter the domain search names",
