@@ -8,6 +8,12 @@
   become: yes
   gather_facts: no
   tasks:
+    - name: WE NEED TO RUN ANSIBLE >2.8 BECAUSE OF THE survey_spec
+      assert:
+        that:
+          - ansible_version.major >= 2
+          - ansible_version.minor >= 8
+
     - name: CREATE INVENTORY
       tower_inventory:
         name: "Workshop Inventory"
@@ -80,6 +86,16 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
+
+    - name: SYNC WORKSHOP PROJECT
+      tower_job_launch:
+        job_template: "Workshop Project"
+      register: job
+
+    - name: WAIT FOR JOB MAX 120 SECONDS
+      tower_job_wait:
+        job_id: job.id
+        timeout: 120
 
     - name: CREATE BACKUP JOB TEMPLATE
       tower_job_template:
