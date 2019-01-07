@@ -13,4 +13,4 @@
         name: WORKFLOW AUTOMATED
         description: configure user and system properties
         organization: Default
-        schema: "{{ lookup(file, network_workflow.yml }}"
+        schema: "{{ lookup(file, network_workflow.yml) }}"
