@@ -17,7 +17,7 @@
       ignore_errors: true
 
     - name: ADDITIONAL INFORMATION IF ANSIBLE >2.8
-      debug:
+      fail:
         msg: |
           PLEASE INSTALL ANSIBLE 2.8 OR NEWER
           INSTRUCTIONS ARE AT: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
