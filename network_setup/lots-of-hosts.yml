@@ -31,7 +31,7 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
-      loop: "{{ range(1, 200 + 1)|list }}"
+      loop: "{{ range(1, 1500 + 1)|list }}"
 
     - name: ADD LOTS OF HOSTS INTO TOWER
       tower_host:
@@ -40,4 +40,4 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
-      loop: "{{ range(1, 200 + 1)|list }}"
+      loop: "{{ range(1, 1553 + 1)|list }}"
