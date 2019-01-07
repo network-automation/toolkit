@@ -1,0 +1,13 @@
+- id: 1
+  job_template: 7
+  success_nodes:
+  - failure_nodes:
+    - id: 4
+      job_template: 10
+    id: 2
+    job_template: 14
+  - failure_nodes:
+    - id: 4
+      job_template: 10
+    id: 9
+    job_template: 13

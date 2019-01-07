@@ -1,0 +1,16 @@
+---
+# THIS PLAYBOOK MUST BE RUN FROM CLI
+# PLEASE RUN WITH ANSIBLE-PLAYBOOK COMMAND
+# ansible-playbook setup.yml
+- name: TOWER CONFIGURATION IN PLAYBOOK FORM
+  hosts: ansible
+  connection: local
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: CREATE NETWORK WORKFLOW
+      tower_workflow_template:
+        name: WORKFLOW AUTOMATED
+        description: configure user and system properties
+        organization: Default
+        schema: "{{ lookup(file, network_workflow.yml }}"
