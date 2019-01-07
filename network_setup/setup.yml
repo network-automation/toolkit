@@ -16,7 +16,7 @@
       register: result
       ignore_errors: true
 
-    - name: ADDITIONAL INFORMATION IF ANSIBLE >2.8
+    - name: ADDITIONAL INFORMATION IF ANSIBLE <2.8
       fail:
         msg: |
           PLEASE INSTALL ANSIBLE 2.8 OR NEWER
@@ -102,12 +102,18 @@
     - name: SYNC WORKSHOP PROJECT
       tower_job_launch:
         job_template: "Workshop Project"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
       register: job
 
     - name: WAIT FOR JOB MAX 120 SECONDS
       tower_job_wait:
         job_id: job.id
         timeout: 120
+        tower_username: admin
+        tower_password: ansible
+        tower_host: https://localhost
 
     - name: CREATE BACKUP JOB TEMPLATE
       tower_job_template:
