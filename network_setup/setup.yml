@@ -99,22 +99,6 @@
         tower_password: ansible
         tower_host: https://localhost
 
-    - name: SYNC WORKSHOP PROJECT
-      tower_job_launch:
-        job_template: "Workshop Project"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-      register: job
-
-    - name: WAIT FOR JOB MAX 120 SECONDS
-      tower_job_wait:
-        job_id: job.id
-        timeout: 120
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-
     - name: CREATE BACKUP JOB TEMPLATE
       tower_job_template:
         name: "BACKUP NETWORK CONFIG"
@@ -126,6 +110,9 @@
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
+      register: create_first_job
+      until: create_first_job is not failed
+      retries: 5
 
     - name: CREATE L3 INTERFACE JOB TEMPLATE
       tower_job_template:

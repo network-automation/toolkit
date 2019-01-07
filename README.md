@@ -1,4 +1,10 @@
-# Tower Workshop
+# Red Hat Ansible Tower - Workshop and Demo
+
+
+
+
+# Ansible Tower Workshop
+
 Exercises to be used with the Tower Workshop
 
 Please refer to README in the Linklight project
