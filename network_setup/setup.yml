@@ -13,6 +13,17 @@
         that:
           - ansible_version.major >= 2
           - ansible_version.minor >= 8
+      register: result
+      ignore_errors: true
+
+    - name: ADDITIONAL INFORMATION IF ANSIBLE >2.8
+      debug:
+        msg: |
+          PLEASE INSTALL ANSIBLE 2.8 OR NEWER
+          INSTRUCTIONS ARE AT: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+          
+          TO INSTALL DEV BRANCH VIA PIP:
+          pip install git+https://github.com/ansible/ansible.git@devel
 
     - name: CREATE INVENTORY
       tower_inventory:
