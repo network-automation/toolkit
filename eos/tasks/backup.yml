@@ -1,0 +1,4 @@
+- name: BACKUP THE CONFIG
+  eos_config:
+    backup: yes
+  register: config_output

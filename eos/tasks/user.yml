@@ -1,0 +1,7 @@
+- name: LOAD SYSTEM PROPERTIES ONTO DEVICE
+  net_user:
+    name: "{{network_name | default(omit, True) }}"
+    ssh_key: "{{network_key | default(omit, True) }}"
+    privilege: "{{network_privilege | default(omit, True) }}"
+    configured_password: "{{network_configured_password | default(omit, True) }}"
+  when: ansible_network_os is defined
