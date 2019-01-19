@@ -67,8 +67,6 @@
           ansible_host: "{{ansible_host}}"
           ansible_user: "{{ansible_user}}"
           private_ip: "{{private_ip}}"
-          ansible_become: yes
-          ansible_become_method: enable
 
     - name: ADD CREDENTIAL INTO TOWER
       tower_credential:
@@ -192,6 +190,8 @@
           ansible_user: "{{ansible_user}}"
           private_ip: "{{private_ip}}"
           ansible_connection: "{{ansible_connection}}"
+          ansible_become: yes
+          ansible_become_method: enable
 
     - name: ADD NETWORK HOSTS INTO INDIVIDUAL INVENTORIES
       tower_host:
