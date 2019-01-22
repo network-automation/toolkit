@@ -45,8 +45,9 @@
       copy:
         src: "{{config_output.backup_path}}"
         dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
-      delegate_to: "{{store_configs}}"
-      when: config_output is defined
+      # delegate_to: "{{store_configs}}"
+      delegate_to: localhost
+      # when: config_output is defined
       become: yes
 
 - name: BACKUP ROUTER CONFIGURATIONS
