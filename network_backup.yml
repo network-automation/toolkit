@@ -13,7 +13,7 @@
     # This verifies the backup directory exists on the host you want to store conifgs
     - name: CREATE /tmp/BACKUP DIRECTORY ON {{store_configs}}
       vars:
-        ansible_connection: ssh
+        ansible_connection: local
       file:
         path: /tmp/backup
         state: directory
@@ -24,7 +24,7 @@
 
     - name: CREATE TIMESTAMP DIRECTORY ON {{store_configs}}
       vars:
-        ansible_connection: ssh
+        ansible_connection: local
         first_device_timestamp: "{{groups['all']|first}}"
       file:
         path: "/tmp/backup/{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
@@ -42,7 +42,7 @@
       vars:
         first_device_timestamp: "{{groups['all']|first}}"
         backup_filename: "{{inventory_hostname}}"
-        ansible_connection: ssh
+        ansible_connection: local
         backup_folder: "{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
       copy:
         src: "{{config_output.backup_path}}"
