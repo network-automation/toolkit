@@ -19,7 +19,6 @@
         path: /tmp/backup
         state: directory
       # delegate_to: "{{store_configs}}"
-      delegate_to: localhost
       run_once: yes
       become: yes
 
