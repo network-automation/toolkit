@@ -17,7 +17,8 @@
       file:
         path: /tmp/backup
         state: directory
-      delegate_to: "{{store_configs}}"
+      # delegate_to: "{{store_configs}}"
+      delegate_to: localhost
       run_once: yes
       become: yes
 
@@ -28,7 +29,8 @@
       file:
         path: "/tmp/backup/{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
         state: directory
-      delegate_to: "{{store_configs}}"
+      # delegate_to: "{{store_configs}}"
+      delegate_to: localhost
       run_once: yes
       become: yes
 
@@ -59,8 +61,6 @@
         paths: /tmp/backup
         file_type: directory
       register: backups
-      run_once: true
-      delegate_to: "{{store_configs}}"
       become: yes
 
     - name: CREATE RESTORE JOB TEMPLATE

@@ -1,4 +1,9 @@
+- name: ENSURE NETCONF IS RUNNING
+  junos_netconf:
+
 - name: BACKUP THE CONFIG
+  vars:
+    ansible_connection: netconf
   junos_config:
     backup: yes
   register: config_output
