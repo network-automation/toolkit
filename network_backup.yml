@@ -14,6 +14,7 @@
     - name: CREATE /tmp/BACKUP DIRECTORY ON {{store_configs}}
       vars:
         ansible_connection: local
+        ansible_user: awx
       file:
         path: /tmp/backup
         state: directory
@@ -26,6 +27,7 @@
       vars:
         ansible_connection: local
         first_device_timestamp: "{{groups['all']|first}}"
+        ansible_user: awx
       file:
         path: "/tmp/backup/{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
         state: directory
