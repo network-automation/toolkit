@@ -1,5 +1,9 @@
+# - name: RESTORE THE CONFIG
+#   eos_config:
+#     replace: config
+#     src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
+#   register: config_output
+
 - name: RESTORE THE CONFIG
-  eos_config:
-    replace: config
-    src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
-  register: config_output
+  debug:
+    msg: "RESTORE COMPLETE FOR EOS {{inventory_hostname}}"
