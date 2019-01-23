@@ -1,6 +1,6 @@
 - name: RESTORE THE CONFIG
   eos_config:
-    replace: yes
+    replace: config
     update: replace
     src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
   register: config_output
