@@ -1,16 +1,12 @@
 ---
 - name: GATHER INFORMATION FROM ROUTERS
   hosts: all
-  connection: network_cli
   gather_facts: no
+  connection: network_cli
 
   tasks:
-    - name: RUN SHOW COMMAND
-      ios_command:
-        commands:
-          - "{{ tower_input | default('show run | i hostname')}}"
-      register: show_output
-
-    - name: RETURN RESULTS
-      debug:
-        msg: "{{ show_output }}"
+    - name: SHOW COMMAND
+      include_role:
+        name: "{{ansible_network_os}}"
+        tasks_from: show_commands.yml
+      when: ansible_network_os is defined
