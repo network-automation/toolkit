@@ -6,7 +6,10 @@
 
   tasks:
     - name: SHOW COMMAND
-      include_role:
-        name: "{{ansible_network_os}}"
-        tasks_from: show_commands.yml
+      cli_command:
+        command: "{{ tower_input | default('')}}"
       when: ansible_network_os is defined
+      register: output
+
+    - debug:
+        msg: "{{ output }}"

@@ -1,9 +1,0 @@
-- name: RUN SHOW COMMAND
-  ios_command:
-    commands:
-      - "{{ tower_input | default('show run | i hostname')}}"
-  register: show_output
-
-- name: RETURN RESULTS
-  debug:
-    msg: "{{ show_output }}"
