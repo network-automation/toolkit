@@ -5,7 +5,6 @@
 - name: TOWER CONFIGURATION IN PLAYBOOK FORM
   hosts: ansible
   connection: local
-  become: yes
   tasks:
     - name: CREATE INVENTORY
       tower_inventory:
@@ -25,6 +24,7 @@
         tower_host: "https://{{ansible_fqdn}}"
 
     - name: ADD CREDENTIAL INTO TOWER
+      become: true
       tower_credential:
         name: Workshop F5 Credential
         ssh_key_data: "/home/{{ansible_user}}/.ssh/aws-private.pem"
@@ -44,6 +44,15 @@
         tower_password: ansible
         tower_host: "https://{{ansible_fqdn}}"
 
+    - name: REMOVE DEMO REPO FROM TOWER
+      tower_project:
+        name: "Demo Project"
+        organization: "Default"
+        state: absent
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+
     - name: REMOVE DEMO JOB TEMPLATE
       tower_job_template:
         name: "Demo Job Template"
@@ -54,6 +63,7 @@
         tower_username: admin
         tower_password: ansible
         tower_host: "https://{{ansible_fqdn}}"
+      ignore_errors: true
 
     - name: ADD F5 FULL LAB JOB TEMPLATE
       tower_job_template:
@@ -68,7 +78,8 @@
         credential: "Workshop F5 Credential"
 
     - name: IMPORT INVENTORY
-      shell: awx-manage inventory_import --source=~/networking-workshop/lab_inventory/hosts --inventory-name="Workshop F5 Inventory"
+      become: true
+      shell: 'awx-manage inventory_import --source=/home/student1/networking-workshop/lab_inventory/hosts --inventory-name="Workshop F5 Inventory"'
 
 # - name: F5 SETUP
 #   hosts: routers
