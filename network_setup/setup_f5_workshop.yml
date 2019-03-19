@@ -1,0 +1,89 @@
+---
+# THIS PLAYBOOK MUST BE RUN FROM CLI
+# PLEASE RUN WITH ANSIBLE-PLAYBOOK COMMAND
+# ansible-playbook setup.yml
+- name: TOWER CONFIGURATION IN PLAYBOOK FORM
+  hosts: ansible
+  connection: local
+  become: yes
+  tasks:
+    - name: CREATE INVENTORY
+      tower_inventory:
+        name: "Workshop F5 Inventory"
+        organization: Default
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+
+    - name: REMOVE INVENTORY
+      tower_inventory:
+        name: "Demo Inventory"
+        organization: Default
+        state: absent
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+
+    - name: ADD CREDENTIAL INTO TOWER
+      tower_credential:
+        name: Workshop F5 Credential
+        ssh_key_data: "/home/{{ansible_user}}/.ssh/aws-private.pem"
+        kind: ssh
+        organization: Default
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+
+    - name: ADD REPO INTO TOWER
+      tower_project:
+        name: "Workshop F5 Project"
+        organization: "Default"
+        scm_type: git
+        scm_url: "https://github.com/network-automation/tower_workshop"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+
+    - name: REMOVE DEMO JOB TEMPLATE
+      tower_job_template:
+        name: "Demo Job Template"
+        job_type: "run"
+        project: "Demo Project"
+        state: absent
+        playbook: "null"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+
+    - name: ADD F5 FULL LAB JOB TEMPLATE
+      tower_job_template:
+        name: "F5 FULL LAB"
+        job_type: "run"
+        project: "Workshop F5 Project"
+        playbook: "f5_full_lab.yml"
+        inventory: "Workshop F5 Inventory"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+        credential: "Workshop F5 Credential"
+
+    - name: IMPORT INVENTORY
+      shell: awx-manage inventory_import --source=~/networking-workshop/lab_inventory/hosts --inventory-name="Workshop F5 Inventory"
+
+# - name: F5 SETUP
+#   hosts: routers
+#   connection: local
+#   become: yes
+#   gather_facts: no
+#   tasks:
+#     - name: ADD F5 HOSTS INTO TOWER
+#       tower_host:
+#         name: "{{ inventory_hostname }}"
+#         inventory: "Workshop F5 Inventory"
+#         tower_username: admin
+#         tower_password: ansible
+#         tower_host: "https://{{ansible_fqdn}}"
+#         variables:
+#           ansible_host: "{{ansible_host}}"
+#           ansible_user: "{{ansible_user}}"
+#           private_ip: "{{private_ip}}"
