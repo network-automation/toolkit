@@ -6,6 +6,18 @@
   hosts: ansible
   connection: local
   tasks:
+    - name: REMOVE DEMO JOB TEMPLATE
+      tower_job_template:
+        name: "Demo Job Template"
+        job_type: "run"
+        project: "Demo Project"
+        state: absent
+        playbook: "null"
+        tower_username: admin
+        tower_password: ansible
+        tower_host: "https://{{ansible_fqdn}}"
+      ignore_errors: true
+
     - name: CREATE INVENTORY
       tower_inventory:
         name: "Workshop F5 Inventory"
@@ -14,14 +26,6 @@
         tower_password: ansible
         tower_host: "https://{{ansible_fqdn}}"
 
-    - name: REMOVE INVENTORY
-      tower_inventory:
-        name: "Demo Inventory"
-        organization: Default
-        state: absent
-        tower_username: admin
-        tower_password: ansible
-        tower_host: "https://{{ansible_fqdn}}"
 
     - name: ADD CREDENTIAL INTO TOWER
       become: true
@@ -53,17 +57,14 @@
         tower_password: ansible
         tower_host: "https://{{ansible_fqdn}}"
 
-    - name: REMOVE DEMO JOB TEMPLATE
-      tower_job_template:
-        name: "Demo Job Template"
-        job_type: "run"
-        project: "Demo Project"
+    - name: REMOVE INVENTORY
+      tower_inventory:
+        name: "Demo Inventory"
+        organization: Default
         state: absent
-        playbook: "null"
         tower_username: admin
         tower_password: ansible
         tower_host: "https://{{ansible_fqdn}}"
-      ignore_errors: true
 
     - name: ADD F5 FULL LAB JOB TEMPLATE
       tower_job_template:
