@@ -76,6 +76,9 @@
         tower_password: ansible
         tower_host: "https://{{ansible_fqdn}}"
         credential: "Workshop F5 Credential"
+      register: create_first_job
+      until: create_first_job is not failed
+      retries: 5
 
     - name: IMPORT INVENTORY
       become: true
