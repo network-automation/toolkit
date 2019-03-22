@@ -21,7 +21,7 @@
       run_once: yes
       become: yes
 
-    - name: CREATE TIMESTAMP DIRECTORY ON {{store_configs}}
+    - name: CREATE TIMESTAMP DIRECTORY
       vars:
         ansible_connection: ssh
         first_device_timestamp: "{{groups['all']|first}}"
