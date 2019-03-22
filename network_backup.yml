@@ -21,6 +21,10 @@
       run_once: yes
       become: yes
 
+    - name: DEBUG WHO IS FIRST
+      debug:
+        msg: "{{groups['all']|first}}"
+
     - name: CREATE TIMESTAMP DIRECTORY
       vars:
         ansible_connection: ssh
