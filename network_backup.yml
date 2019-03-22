@@ -21,32 +21,31 @@
       run_once: yes
       become: yes
 
-    - name: DEBUG WHO IS FIRST
-      debug:
-        msg: "{{groups['all']|first}}"
-
-    - name: DEBUG WHO IS FIRST
-      debug:
-        msg: "{{hostvars.rtr1}}"
-
-    - name: DEBUG WHO IS FIRST
-      debug:
-        msg: "{{hostvars.rtr1.config_output}}"
-
-    - name: DEBUG WHO IS FIRST
-      debug:
-        msg: "{{hostvars.rtr1.config_output.backup_path}}"
-
-    - name: DEBUG WHO IS FIRST
-      debug:
-        msg: "{{hostvars[rtr1]}}"
+    # - name: DEBUG WHO IS FIRST
+    #   debug:
+    #     msg: "{{groups['all']|first}}"
+    #
+    # - name: DEBUG WHO IS FIRST
+    #   debug:
+    #     msg: "{{hostvars.rtr1}}"
+    #
+    # - name: DEBUG WHO IS FIRST
+    #   debug:
+    #     msg: "{{hostvars.rtr1.config_output}}"
+    #
+    # - name: DEBUG WHO IS FIRST
+    #   debug:
+    #     msg: "{{hostvars.rtr1.config_output.backup_path}}"
+    #
+    # - name: DEBUG WHO IS FIRST
+    #   debug:
+    #     msg: "{{hostvars[rtr1]}}"
 
     - name: CREATE TIMESTAMP DIRECTORY
       vars:
         ansible_connection: ssh
-        first_device_timestamp: "{{groups['all']|first}}"
       file:
-        path: "/tmp/backup/{{hostvars[rtr1].config_output.backup_path.split('.')[-1]}}"
+        path: "/tmp/backup/{{hostvars.rtr1.config_output.backup_path.split('.')[-1]}}"
         state: directory
       delegate_to: "{{store_configs}}"
       run_once: yes
@@ -58,10 +57,9 @@
     # the conditional when doesn't push it, if that router failed earlier
     - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_configs}}
       vars:
-        first_device_timestamp: "{{groups['all']|first}}"
         backup_filename: "{{inventory_hostname}}"
         ansible_connection: ssh
-        backup_folder: "{{hostvars[first_device_timestamp].config_output.backup_path.split('.')[-1]}}"
+        backup_folder: "{{hostvars.rtr1.config_output.backup_path.split('.')[-1]}}"
       copy:
         src: "{{config_output.backup_path}}"
         dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
