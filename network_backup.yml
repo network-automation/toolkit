@@ -25,6 +25,22 @@
       debug:
         msg: "{{groups['all']|first}}"
 
+    - name: DEBUG WHO IS FIRST
+      debug:
+        msg: "{{hostvars.rtr1}}"
+
+    - name: DEBUG WHO IS FIRST
+      debug:
+        msg: "{{hostvars.rtr1.config_output}}"
+
+    - name: DEBUG WHO IS FIRST
+      debug:
+        msg: "{{hostvars.rtr1.config_output.backup_path}}"
+
+    - name: DEBUG WHO IS FIRST
+      debug:
+        msg: "{{hostvars[rtr1]}}"
+
     - name: CREATE TIMESTAMP DIRECTORY
       vars:
         ansible_connection: ssh
