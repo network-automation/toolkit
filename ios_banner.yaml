@@ -1,0 +1,5 @@
+---
+- name: ADD THE IOS BANNER
+  ios_banner:
+    text: "{{ network_banner }}"
+    banner: "{{ banner_type }}"
