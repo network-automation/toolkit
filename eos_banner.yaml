@@ -1,0 +1,6 @@
+---
+
+- name: ADD THE IOS BANNER
+  eos_banner:
+    text: "{{ network_banner }}"
+    banner: "{{ banner_type }}"

@@ -5,9 +5,9 @@
 
   tasks:
 
+
     - name: LOAD BANNER ONTO NETWORK DEVICE
-      net_banner:
-        banner: login
-        text: |
-          "{{network_banner}}"
-      when: ansible_network_os is defined
+      include_tasks: "{{ ansible_network_os }}_banner.yaml"
+      vars:
+        - network_banner:  "{{ net_banner | default(None) }}"
+        - banner_type: "{{ banner_type | default('login') }}"
