@@ -3,9 +3,11 @@
   hosts: ansible
   gather_facts: no
   become: yes
-  vars:
-    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
   tasks:
+    - name: CREATE TIME STAMP FOR PLAY
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+
     - name: CREATE /tmp/backup DIRECTORY ON CONTROL NODE
       file:
         path: /tmp/backup
