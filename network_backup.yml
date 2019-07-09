@@ -1,5 +1,22 @@
 ---
-- name: BACKUP ROUTER CONFIGURATIONS
+- name: SETUP CONTROL NODE TIMESTAMP
+  hosts: ansible
+  gather_facts: no
+  become: yes
+  vars:
+    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+  tasks:
+    - name: CREATE /tmp/backup DIRECTORY ON CONTROL NODE
+      file:
+        path: /tmp/backup
+        state: directory
+
+    - name: CREATE TIMESTAMP DIRECTORY
+      file:
+        path: "/tmp/backup/{{datetime}}"
+        state: directory
+
+- name: RETRIEVE ROUTER CONFIGURATIONS
   hosts: all
   gather_facts: no
 
@@ -10,65 +27,19 @@
         tasks_from: backup.yml
       when: ansible_network_os is defined
 
-    # This verifies the backup directory exists on the host you want to store conifgs
-    - name: CREATE /tmp/BACKUP DIRECTORY ON {{store_configs}}
+    - name: SAVE CONFIGURATION LOCALLY
       vars:
         ansible_connection: ssh
-      file:
-        path: /tmp/backup
-        state: directory
-      delegate_to: "{{store_configs}}"
-      run_once: yes
-      become: yes
-
-    # - name: DEBUG WHO IS FIRST
-    #   debug:
-    #     msg: "{{groups['all']|first}}"
-    #
-    # - name: DEBUG WHO IS FIRST
-    #   debug:
-    #     msg: "{{hostvars.rtr1}}"
-    #
-    # - name: DEBUG WHO IS FIRST
-    #   debug:
-    #     msg: "{{hostvars.rtr1.config_output}}"
-    #
-    # - name: DEBUG WHO IS FIRST
-    #   debug:
-    #     msg: "{{hostvars.rtr1.config_output.backup_path}}"
-    #
-    # - name: DEBUG WHO IS FIRST
-    #   debug:
-    #     msg: "{{hostvars[rtr1]}}"
-
-    - name: CREATE TIMESTAMP DIRECTORY
-      vars:
-        ansible_connection: ssh
-      file:
-        path: "/tmp/backup/{{hostvars.rtr1.config_output.backup_path.split('.')[-1]}}"
-        state: directory
-      delegate_to: "{{store_configs}}"
-      run_once: yes
-      become: yes
-
-    # This might be required because you might be running a Tower cluster
-    # e.g. we want the configs backed up to one spot
-    # versus scattered indidivual nodes
-    # the conditional when doesn't push it, if that router failed earlier
-    - name: TRANSFER FILE FROM THIS ANSIBLE HOST TO {{store_configs}}
-      vars:
-        backup_filename: "{{inventory_hostname}}"
-        ansible_connection: ssh
-        backup_folder: "{{hostvars.rtr1.config_output.backup_path.split('.')[-1]}}"
       copy:
         src: "{{config_output.backup_path}}"
-        dest: "/tmp/backup/{{backup_folder}}/{{backup_filename}}"
-      delegate_to: "{{store_configs}}"
+        dest: "/tmp/backup/{{datetime}}/{{inventory_hostname}}"
+      delegate_to: ansible
       when: config_output is defined
       become: yes
 
+
 - name: BACKUP ROUTER CONFIGURATIONS
-  hosts: localhost
+  hosts: ansible
   gather_facts: yes
   tasks:
     - name: FIND BACKUPS
@@ -77,7 +48,6 @@
         file_type: directory
       register: backups
       run_once: true
-      delegate_to: "{{store_configs}}"
       become: yes
 
     - name: CREATE RESTORE JOB TEMPLATE
