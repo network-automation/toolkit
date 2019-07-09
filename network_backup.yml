@@ -8,7 +8,8 @@
   tasks:
     - name: CREATE TIME STAMP FOR PLAY
       set_stats:
-        backup_datetime: "{{datetime}}"
+        data:
+          backup_datetime: "{{datetime}}"
 
     - name: CREATE /tmp/backup DIRECTORY ON CONTROL NODE
       file:
