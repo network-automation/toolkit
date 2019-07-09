@@ -5,7 +5,7 @@
   become: yes
   tasks:
     - name: CREATE TIME STAMP FOR PLAY
-      set_fact:
+      set_stat:
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
 
     - name: CREATE /tmp/backup DIRECTORY ON CONTROL NODE
