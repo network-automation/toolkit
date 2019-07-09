@@ -3,11 +3,12 @@
   hosts: ansible
   gather_facts: no
   become: yes
+  vars:
+    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
   tasks:
     - name: CREATE TIME STAMP FOR PLAY
       set_stats:
-        data:
-          datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+        backup_datetime: "{{datetime}}"
 
     - name: CREATE /tmp/backup DIRECTORY ON CONTROL NODE
       file:
@@ -35,7 +36,7 @@
         ansible_connection: ssh
       copy:
         src: "{{config_output.backup_path}}"
-        dest: "/tmp/backup/{{datetime}}/{{inventory_hostname}}"
+        dest: "/tmp/backup/{{backup_datetime}}/{{inventory_hostname}}"
       delegate_to: ansible
       when: config_output is defined
       become: yes
