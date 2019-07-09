@@ -37,7 +37,7 @@
         ansible_connection: ssh
       copy:
         src: "{{config_output.backup_path}}"
-        dest: "/tmp/backup/{{backup_datetime}}/{{inventory_hostname}}"
+        dest: "/tmp/backup/{{hostvars["ansible"].datetime}}/{{inventory_hostname}}"
       delegate_to: ansible
       when: config_output is defined
       become: yes
