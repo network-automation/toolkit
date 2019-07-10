@@ -1,10 +1,9 @@
 ---
 - name: SET ROUTER BANNERS
-  hosts: all
+  hosts: routers
   gather_facts: no
 
   tasks:
-
 
     - name: LOAD BANNER ONTO NETWORK DEVICE
       include_tasks: "{{ ansible_network_os }}_banner.yaml"
