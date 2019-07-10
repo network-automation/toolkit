@@ -1,5 +1,5 @@
 ---
-- name: ADD THE IOS BANNER
+- name: ADD THE JUNOS BANNER
   junos_banner:
     text: "{{ network_banner }}"
     banner: "{{ banner_type }}"

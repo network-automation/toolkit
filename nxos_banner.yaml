@@ -1,6 +1,5 @@
 ---
-
-- name: ADD THE IOS BANNER
+- name: ADD THE NXOS BANNER
   nxos_banner:
     text: "{{ network_banner }}"
     banner: "{{ banner_type }}"
