@@ -65,3 +65,4 @@
         tower_username: admin
         tower_password: ansible
         tower_host: "https://{{ansible_fqdn}}"
+        validate_certs: no
