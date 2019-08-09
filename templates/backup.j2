@@ -12,7 +12,7 @@
 {% if loop.last %}
         "{{file.path.split('/')[-1]}}"
 {% else %}
-        "{{file.path.split('/')[-1]}}\n",
+        "{{file.path.split('/')[-1]}}",
 {% endif %}
 {% endfor %}
       ],
