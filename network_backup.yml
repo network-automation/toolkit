@@ -25,8 +25,7 @@
   tasks:
     - name: BACKUP CONFIGURATION
       include_role:
-        name: "{{ansible_network_os}}"
-        tasks_from: backup.yml
+        name: backup
       when: ansible_network_os is defined
 
     - name: SAVE CONFIGURATION LOCALLY
