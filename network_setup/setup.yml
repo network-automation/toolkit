@@ -44,6 +44,22 @@
     - name: IMPORT INVENTORY
       shell: 'tower-manage inventory_import --source=/home/{{ username }}/networking-workshop/lab_inventory/hosts --inventory-name="Workshop Inventory"'
 
+    - name: REMOVE HARD CODED SSH KEY VAR IN INVENTORY
+      uri:
+        url: "{{tower_url}}/api/v2/inventories/Workshop%20Inventory++Default/"
+        user: "admin"
+        password: "{{admin_password}}"
+        method: PATCH
+        validate_certs: False
+        force_basic_auth: yes
+        body_format: json
+        body: ' {"variables": ""}'
+        status_code:
+          - 200
+          - 204
+      register: result_uri
+      ignore_errors: yes
+
     - name: REMOVE INVENTORY
       tower_inventory:
         name: "Demo Inventory"
