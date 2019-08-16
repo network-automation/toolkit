@@ -1,10 +1,10 @@
 - debug:
-    msg: "restoring from /tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
+    msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}"
 
 - name: restore the config
   eos_config:
     replace: config
-    src: "{{lookup('file', '/tmp/backup/' + rollback_date + '/' + inventory_hostname)}}"
+    src: "{{lookup('file', '/backup/' + rollback_date + '/' + inventory_hostname)}}"
     # src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
 
 - name: print to terminal window
