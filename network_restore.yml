@@ -2,6 +2,7 @@
 - name: restore router configurations
   hosts: routers
   gather_facts: no
+  become: yes
 
   tasks:
 
