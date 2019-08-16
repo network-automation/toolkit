@@ -7,6 +7,8 @@
   connection: local
   become: yes
   gather_facts: no
+  vars:
+    tower_workshop: "https://github.com/IPvSean/tower_workshop"
   tasks:
     - name: WE NEED TO RUN ANSIBLE >2.8 BECAUSE OF THE survey_spec
       assert:
@@ -38,7 +40,7 @@
       tower_inventory:
         name: "{{item}}"
         organization: Default
-        tower_username: admin
+        tower_username: adminI
         tower_password: ansible
         tower_host: https://localhost
       loop:
@@ -83,7 +85,7 @@
         name: "Workshop Project"
         organization: "Default"
         scm_type: git
-        scm_url: "https://github.com/network-automation/tower_workshop"
+        scm_url: "{{tower_workshop}}"
         tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
