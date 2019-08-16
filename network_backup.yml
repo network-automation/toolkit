@@ -8,14 +8,14 @@
       set_fact:
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
 
-    - name: create /tmp/backup directory on control node
+    - name: create /backup directory on control node
       file:
-        path: /tmp/backup
+        path: /backup
         state: directory
 
     - name: create timestamp directory
       file:
-        path: "/tmp/backup/{{datetime}}"
+        path: "/backup/{{datetime}}"
         state: directory
 
 - name: retrieve router configurations
@@ -33,7 +33,7 @@
         ansible_connection: ssh
       copy:
         src: "{{config_output.backup_path}}"
-        dest: "/tmp/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
+        dest: "/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
       delegate_to: ansible
       when: config_output is defined
       become: yes
@@ -45,7 +45,7 @@
   tasks:
     - name: find backups
       find:
-        paths: /tmp/backup
+        paths: /backup
         file_type: directory
       register: backups
       run_once: true
