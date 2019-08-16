@@ -10,7 +10,9 @@
   vars:
     tower_workshop: "https://github.com/IPvSean/tower_workshop"
     username: "student1"
-
+    admin_password: "ansible"
+    admin_username: "admin"
+    tower_url: "https://localhost"
   tasks:
     - name: WE NEED TO RUN ANSIBLE >2.8 BECAUSE OF THE survey_spec
       assert:
@@ -34,7 +36,7 @@
       tower_inventory:
         name: "Workshop Inventory"
         organization: REDHAT NETWORK ORGANIZATION
-        tower_username: admin
+        tower_username: "{{admin_username}}"
         tower_password: "{{ admin_password }}"
         tower_host: "{{ ansible_host }}"
         tower_verify_ssl: no
@@ -47,9 +49,9 @@
         name: "Demo Inventory"
         organization: Default
         state: absent
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
 
     - name: ADD CREDENTIAL INTO TOWER
@@ -58,9 +60,9 @@
         ssh_key_data: "/home/{{ansible_user}}/.ssh/aws-private.pem"
         kind: ssh
         organization: Default
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
 
     - name: ADD REPO INTO TOWER
@@ -69,9 +71,9 @@
         organization: "Default"
         scm_type: git
         scm_url: "{{tower_workshop}}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
 
     - name: REMOVE DEMO JOB TEMPLATE
@@ -81,9 +83,9 @@
         project: "Demo Project"
         state: absent
         playbook: "null"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
 
     - name: CREATE BACKUP JOB TEMPLATE
@@ -94,9 +96,9 @@
         project: "Workshop Project"
         playbook: "network_backup.yml"
         credential: "Workshop Credential"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
       register: create_first_job
       until: create_first_job is not failed
@@ -113,9 +115,9 @@
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/l3_interface.json') }}"
         ask_inventory: True
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
 
     - name: CREATE BANNER JOB TEMPLATE
@@ -128,9 +130,9 @@
         credential: "Workshop Credential"
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/banner.json') }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
 
 
@@ -144,9 +146,9 @@
         credential: "Workshop Credential"
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/system.json') }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
 
     - name: CREATE USER JOB TEMPLATE
@@ -159,7 +161,7 @@
         credential: "Workshop Credential"
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/user.json') }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
         validate_certs: no
