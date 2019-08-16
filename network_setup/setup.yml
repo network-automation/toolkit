@@ -70,7 +70,6 @@
         tower_password: ansible
         tower_host: https://localhost
         validate_certs: no
-
         variables:
           ansible_host: "{{ansible_host}}"
           ansible_user: "{{ansible_user}}"
