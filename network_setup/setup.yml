@@ -9,7 +9,7 @@
   gather_facts: no
   vars:
     tower_workshop: "https://github.com/IPvSean/tower_workshop"
-    user: "student1"
+    username: "student1"
 
   tasks:
     - name: WE NEED TO RUN ANSIBLE >2.8 BECAUSE OF THE survey_spec
