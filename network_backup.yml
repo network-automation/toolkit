@@ -1,29 +1,29 @@
 ---
-- name: SETUP CONTROL NODE TIMESTAMP
+- name: setup control node timestamp
   hosts: ansible
   gather_facts: no
   become: yes
   tasks:
-    - name: CREATE TIME STAMP FOR PLAY
+    - name: create time stamp for play
       set_fact:
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
 
-    - name: CREATE /tmp/backup DIRECTORY ON CONTROL NODE
+    - name: create /tmp/backup directory on control node
       file:
         path: /tmp/backup
         state: directory
 
-    - name: CREATE TIMESTAMP DIRECTORY
+    - name: create timestamp directory
       file:
         path: "/tmp/backup/{{datetime}}"
         state: directory
 
-- name: RETRIEVE ROUTER CONFIGURATIONS
+- name: retrieve router configurations
   hosts: all
   gather_facts: no
 
   tasks:
-    - name: BACKUP CONFIGURATION
+    - name: backup configuration
       include_role:
         name: backup
       when: ansible_network_os is defined
@@ -39,11 +39,11 @@
       become: yes
 
 
-- name: BACKUP ROUTER CONFIGURATIONS
+- name: backup router configurations
   hosts: ansible
   gather_facts: yes
   tasks:
-    - name: FIND BACKUPS
+    - name: find backups
       find:
         paths: /tmp/backup
         file_type: directory
@@ -51,7 +51,7 @@
       run_once: true
       become: yes
 
-    - name: CREATE RESTORE JOB TEMPLATE
+    - name: create restore job template
       tower_job_template:
         name: "Network-Restore"
         job_type: "run"

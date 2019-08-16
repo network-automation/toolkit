@@ -1,11 +1,10 @@
 ---
-- name: BACKUP ROUTER CONFIGURATIONS
-  hosts: all
+- name: restore router configurations
+  hosts: routers
   gather_facts: no
 
   tasks:
-    - name: RESTORE CONFIGURATION
+
+    - name: load restore role
       include_role:
-        name: "{{ansible_network_os}}"
-        tasks_from: restore.yml
-      when: ansible_network_os is defined
+        name: restore

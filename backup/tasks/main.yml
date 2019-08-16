@@ -1,2 +1,0 @@
-- name: backup network device config
-  include_tasks: "{{ ansible_network_os }}.yaml"
