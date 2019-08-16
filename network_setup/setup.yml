@@ -41,7 +41,7 @@
       tower_inventory:
         name: "{{item}}"
         organization: Default
-        tower_username: adminI
+        tower_username: admin
         tower_password: ansible
         tower_host: https://localhost
         validate_certs: no
