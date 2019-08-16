@@ -35,7 +35,7 @@
     - name: CREATE INVENTORY
       tower_inventory:
         name: "Workshop Inventory"
-        organization: REDHAT NETWORK ORGANIZATION
+        organization: Default
         tower_username: "{{admin_username}}"
         tower_password: "{{ admin_password }}"
         tower_host: "{{ ansible_host }}"
@@ -68,7 +68,7 @@
     - name: ADD REPO INTO TOWER
       tower_project:
         name: "Workshop Project"
-        organization: "Default"
+        organization: Default
         scm_type: git
         scm_url: "{{tower_workshop}}"
         tower_username: "{{admin_username}}"
