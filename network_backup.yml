@@ -41,7 +41,7 @@
 
 - name: backup router configurations
   hosts: ansible
-  gather_facts: yes
+  gather_facts: no
   tasks:
     - name: find backups
       find:
@@ -63,5 +63,5 @@
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/backup.j2') }}"
         tower_username: admin
         tower_password: ansible
-        tower_host: "https://{{ansible_fqdn}}"
+        tower_host: "https://{{ansible}}"
         validate_certs: no
