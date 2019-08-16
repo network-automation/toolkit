@@ -100,6 +100,7 @@
         tower_password: "{{admin_password}}"
         tower_host: "{{tower_url}}"
         validate_certs: no
+        state: "present"
       register: create_first_job
       until: create_first_job is not failed
       retries: 5
