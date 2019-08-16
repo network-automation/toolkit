@@ -1,8 +1,7 @@
-# - name: RESTORE THE CONFIG
-#   junos_config:
-#     update: replace
-#     src: "/tmp/backup/{{rollback_date}}/{{inventory_hostname}}"
-#   register: config_output
+- name: RESTORE THE CONFIG
+  junos_config:
+    update: replace
+    src: "/backup/{{rollback_date}}/{{inventory_hostname}}"
 
 - name: RESTORE THE CONFIG
   debug:
