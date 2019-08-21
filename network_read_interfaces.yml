@@ -2,7 +2,8 @@
 - name: configure l3 interface
   hosts: routers
   gather_facts: no
-
+  vars:
+    interfaces_info: ""
   tasks:
     - name: load read interfaces role
       include_role:
