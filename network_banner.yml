@@ -6,7 +6,7 @@
   tasks:
     - name: load banner onto network device
       vars:
-        - network_banner:  "{{ net_banner | default(None) }}"
-        - banner_type: "{{ banner_type | default('login') }}"
+        - network_banner:  "{{ net_banner | default('Default Ansible Banner', true) }}"
+        - banner_type: "{{ banner_type | default('login', true) }}"
       include_role:
         name: banner
