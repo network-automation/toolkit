@@ -153,7 +153,6 @@
         credential: "Workshop Credential"
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/l3_interface.json') }}"
-        ask_inventory: True
         ask_limit: True
         tower_username: "{{admin_username}}"
         tower_password: "{{admin_password}}"
