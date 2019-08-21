@@ -8,7 +8,7 @@
       "question_description": "Please type into the text field the desired banner",
       "variable": "net_banner",
       "required": true
-    }
+    },
     {
       "type": "multiplechoice",
       "question_name": "Please enter the banner type",
