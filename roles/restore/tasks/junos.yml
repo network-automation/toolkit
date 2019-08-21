@@ -2,6 +2,8 @@
     msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}"
 
 - name: restore the config
+  vars:
+    ansible_connection: network_cli
   junos_config:
     update: replace
     src: "/backup/{{rollback_date}}/{{inventory_hostname}}"`
