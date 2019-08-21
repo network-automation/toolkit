@@ -161,7 +161,7 @@
 
     - name: create banner job template
       tower_job_template:
-        name: "CONFIGURE BANNER"
+        name: "Network-Banner"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
