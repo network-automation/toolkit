@@ -32,7 +32,17 @@
           pip install git+https://github.com/ansible/ansible.git@devel
       when: result.failed
 
-    - name: CREATE INVENTORY
+    - name: DELETE WORKSHOP INVENTORY
+      tower_inventory:
+        name: "Workshop Inventory"
+        organization: "REDHAT NETWORK ORGANIZATION"
+        state: absent
+        tower_username: "{{admin_username}}"
+        tower_password: "{{ admin_password }}"
+        tower_host: "{{ ansible_host }}"
+        tower_verify_ssl: no
+
+    - name: create inventory
       tower_inventory:
         name: "Workshop Inventory"
         organization: Default
