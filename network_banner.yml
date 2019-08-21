@@ -7,6 +7,6 @@
     - name: load banner onto network device
       vars:
         - network_banner:  "{{ net_banner | default(None) }}"
-        - banner_type: "{{ net_type | default('login'}}"
+        - banner_type: "{{ net_type | default('login') }}"
       include_role:
         name: banner
