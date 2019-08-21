@@ -7,6 +7,12 @@
   connection: local
   become: yes
   gather_facts: no
+  vars:
+    tower_workshop: "https://github.com/IPvSean/tower_workshop"
+    username: "student1"
+    admin_password: "ansible"
+    admin_username: "admin"
+    tower_url: "https://localhost"
   tasks:
     - name: WE NEED TO RUN ANSIBLE >2.8 BECAUSE OF THE survey_spec
       assert:
@@ -26,183 +32,235 @@
           pip install git+https://github.com/ansible/ansible.git@devel
       when: result.failed
 
-    - name: CREATE INVENTORY
+    - name: DELETE WORKSHOP INVENTORY
+      tower_inventory:
+        name: "Workshop Inventory"
+        organization: "REDHAT NETWORK ORGANIZATION"
+        state: absent
+        tower_username: "{{admin_username}}"
+        tower_password: "{{ admin_password }}"
+        tower_host: "{{ ansible_host }}"
+        tower_verify_ssl: no
+
+    - name: create inventory
       tower_inventory:
         name: "Workshop Inventory"
         organization: Default
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{ admin_password }}"
+        tower_host: "{{ ansible_host }}"
+        tower_verify_ssl: no
 
-    - name: CREATE DEVICE INVENTORY
-      tower_inventory:
-        name: "{{item}}"
-        organization: Default
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-      loop:
-        - rtr1
-        - rtr2
-        - rtr3
-        - rtr4
+    - name: IMPORT INVENTORY
+      shell: 'tower-manage inventory_import --source=/home/{{ username }}/networking-workshop/lab_inventory/hosts --inventory-name="Workshop Inventory" --overwrite --overwrite-vars'
+
+    - name: REMOVE HARD CODED SSH KEY VAR IN INVENTORY
+      uri:
+        url: "{{tower_url}}/api/v2/inventories/Workshop%20Inventory++Default/"
+        user: "admin"
+        password: "{{admin_password}}"
+        method: PATCH
+        validate_certs: False
+        force_basic_auth: yes
+        body_format: json
+        body: ' {"variables": ""}'
+        status_code:
+          - 200
+          - 204
+      register: result_uri
+      ignore_errors: yes
 
     - name: REMOVE INVENTORY
       tower_inventory:
         name: "Demo Inventory"
         organization: Default
         state: absent
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: ADD ANSIBLE HOST INTO TOWER
-      tower_host:
-        name: "{{ inventory_hostname }}"
-        inventory: "Workshop Inventory"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-        variables:
-          ansible_host: "{{ansible_host}}"
-          ansible_user: "{{ansible_user}}"
-          private_ip: "{{private_ip}}"
+    - name: delete credential into tower
+      tower_credential:
+        name: Workshop Credential
+        ssh_key_data: "/home/{{ansible_user}}/.ssh/aws-private.pem"
+        kind: ssh
+        organization: "REDHAT NETWORK ORGANIZATION"
+        state: absent
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: ADD CREDENTIAL INTO TOWER
+    - name: add credential into tower
       tower_credential:
         name: Workshop Credential
         ssh_key_data: "/home/{{ansible_user}}/.ssh/aws-private.pem"
         kind: ssh
         organization: Default
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: ADD REPO INTO TOWER
+    - name: add repo into tower
       tower_project:
         name: "Workshop Project"
-        organization: "Default"
+        organization: Default
         scm_type: git
-        scm_url: "https://github.com/network-automation/tower_workshop"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        scm_url: "{{tower_workshop}}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: REMOVE DEMO JOB TEMPLATE
+    - name: remove demo job template
       tower_job_template:
         name: "Demo Job Template"
         job_type: "run"
         project: "Demo Project"
         state: absent
         playbook: "null"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: CREATE BACKUP JOB TEMPLATE
+    - name: create backup job template
       tower_job_template:
-        name: "BACKUP NETWORK CONFIG"
+        name: "Network-Backup"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_backup.yml"
         credential: "Workshop Credential"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+        state: "present"
       register: create_first_job
       until: create_first_job is not failed
       retries: 5
 
-    - name: CREATE L3 INTERFACE JOB TEMPLATE
+    - name: create L3 interface job template
       tower_job_template:
-        name: "CONFIGURE LAYER 3 INTERFACE"
+        name: "Network-L3-Interface"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_l3_interface.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/l3_interface.json') }}"
-        ask_inventory: True
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/l3_interface.json') }}"
+        ask_limit: True
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: CREATE BANNER JOB TEMPLATE
+    - name: create banner job template
       tower_job_template:
-        name: "CONFIGURE BANNER"
+        name: "Network-Banner"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_banner.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/banner.json') }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/banner.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: CREATE SYSTEM JOB TEMPLATE
+
+    - name: create system job template
       tower_job_template:
-        name: "CONFIGURE SYSTEM PROPERTIES (hostname, domain name, domain search, DNS)"
+        name: "Network-System"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_system.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/system.json') }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/system.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: CREATE USER JOB TEMPLATE
+    - name: create user job template
       tower_job_template:
-        name: "CONFIGURE USER"
+        name: "Network-User"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_user.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/user.json') }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/user.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-- name: NETWORK SETUP
-  hosts: routers
-  connection: local
-  become: yes
-  gather_facts: no
-  tasks:
-    - name: ADD NETWORK HOSTS INTO TOWER
-      tower_host:
-        name: "{{ inventory_hostname }}"
+    - name: create user job template
+      tower_job_template:
+        name: "Network-User"
+        job_type: "run"
         inventory: "Workshop Inventory"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-        variables:
-          ansible_network_os: "{{ansible_network_os}}"
-          ansible_host: "{{ansible_host}}"
-          ansible_user: "{{ansible_user}}"
-          private_ip: "{{private_ip}}"
-          ansible_connection: "{{ansible_connection}}"
-          ansible_become: yes
-          ansible_become_method: enable
+        project: "Workshop Project"
+        playbook: "network_user.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/user.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
 
-    - name: ADD NETWORK HOSTS INTO INDIVIDUAL INVENTORIES
-      tower_host:
-        name: "{{ inventory_hostname }}"
-        inventory: "{{ inventory_hostname }}"
-        tower_username: admin
-        tower_password: ansible
-        tower_host: https://localhost
-        variables:
-          ansible_network_os: "{{ansible_network_os}}"
-          ansible_host: "{{ansible_host}}"
-          ansible_user: "{{ansible_user}}"
-          private_ip: "{{private_ip}}"
-          ansible_connection: "{{ansible_connection}}"
+    - name: create user job template
+      tower_job_template:
+        name: "Network-User"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_user.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/user.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+
+    - name: create commands job template
+      tower_job_template:
+        name: "Network-Commands"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_commands.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/commands.json') }}"
+        limit: "cisco"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+
+    - name: create time job template
+      tower_job_template:
+        name: "Network-Time"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_time.yml"
+        credential: "Workshop Credential"
+        limit: "cisco"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no

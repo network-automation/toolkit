@@ -1,0 +1,10 @@
+- debug:
+    msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}"
+
+- name: restore the config
+  ios_config:
+    src: "/backup/{{rollback_date}}/{{inventory_hostname}}"
+
+- name: print to terminal window
+  debug:
+    msg: "Restore is complete for device {{inventory_hostname}} is set to {{rollback_date}} timestamp"

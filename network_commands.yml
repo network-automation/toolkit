@@ -1,11 +1,12 @@
 ---
-- name: GATHER INFORMATION FROM ROUTERS
+- name: cli command playbook
   hosts: all
   gather_facts: no
-  connection: network_cli
+  vars:
+    ansible_connection: network_cli
 
   tasks:
-    - name: SHOW COMMAND
+    - name: show command
       cli_command:
         command: "{{ tower_input | default('')}}"
       when: ansible_network_os is defined

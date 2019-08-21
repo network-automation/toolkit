@@ -1,11 +1,9 @@
 ---
-- name: CONFIGURE USER ON NETWORK DEVICES
-  hosts: all
+- name: configure user on network devices
+  hosts: routers
   gather_facts: no
 
   tasks:
-    - name: LOAD PLATFORM ROLE {{ansible_network_os}}
+    - name: load user role
       include_role:
-        name: "{{ansible_network_os}}"
-        tasks_from: user.yml
-      when: ansible_network_os is defined
+        name: user

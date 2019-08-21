@@ -1,12 +1,10 @@
 ---
-- name: BACKUP ROUTER CONFIGURATIONS
-  hosts: all
+- name: configure l3 interface
+  hosts: routers
   gather_facts: no
 
   tasks:
 
-    - name: LOAD L3 INTERFACE
+    - name: load l3 interface role
       include_role:
-        name: "{{ansible_network_os}}"
-        tasks_from: l3_interface.yml
-      when: ansible_network_os is defined
+        name: l3_interface
