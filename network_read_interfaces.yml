@@ -4,9 +4,8 @@
   gather_facts: no
 
   tasks:
-
-    - name: load l3 interface role
-      import_role:
+    - name: load read interfaces role
+      include_role:
         name: read_interfaces
 
     - name: print l3 interface role
