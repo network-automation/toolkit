@@ -1,2 +1,3 @@
-eos_interfaces:
-register: interfaces_info
+ - name: grab interface facts
+   eos_interfaces:
+   register: interfaces_info
