@@ -4,11 +4,19 @@
   "spec": [
     {
       "type": "textarea",
-      "question_name": "Please enter the login banner information",
+      "question_name": "Please enter the banner text",
       "question_description": "Please type into the text field the desired banner",
-      "variable": "network_banner",
+      "variable": "net_banner",
+      "required": true
+    }
+    {
+      "type": "multiplechoice",
+      "question_name": "Please enter the banner type",
+      "question_description": "Please choose an option",
+      "variable": "net_type",
       "required": true,
-      "default": "THIS DEVICE HAS BEEN CONFIGURED BY ANSIBLE"
+      "default": "login",
+      "choices": ["login", "motd"]
     }
   ]
 }
