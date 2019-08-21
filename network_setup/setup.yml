@@ -42,7 +42,7 @@
         tower_verify_ssl: no
 
     - name: IMPORT INVENTORY
-      shell: 'tower-manage inventory_import --source=/home/{{ username }}/networking-workshop/lab_inventory/hosts --inventory-name="Workshop Inventory" --overwrite-vars'
+      shell: 'tower-manage inventory_import --source=/home/{{ username }}/networking-workshop/lab_inventory/hosts --inventory-name="Workshop Inventory" --overwrite --overwrite-vars'
 
     - name: REMOVE HARD CODED SSH KEY VAR IN INVENTORY
       uri:
