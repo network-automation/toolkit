@@ -70,7 +70,7 @@
         tower_host: "{{tower_url}}"
         validate_certs: no
 
-    - name: ADD CREDENTIAL INTO TOWER
+    - name: add credential into tower
       tower_credential:
         name: Workshop Credential
         ssh_key_data: "/home/{{ansible_user}}/.ssh/aws-private.pem"
@@ -81,7 +81,7 @@
         tower_host: "{{tower_url}}"
         validate_certs: no
 
-    - name: ADD REPO INTO TOWER
+    - name: add repo into tower
       tower_project:
         name: "Workshop Project"
         organization: Default
@@ -92,7 +92,7 @@
         tower_host: "{{tower_url}}"
         validate_certs: no
 
-    - name: REMOVE DEMO JOB TEMPLATE
+    - name: remove demo job template
       tower_job_template:
         name: "Demo Job Template"
         job_type: "run"
@@ -104,9 +104,9 @@
         tower_host: "{{tower_url}}"
         validate_certs: no
 
-    - name: CREATE BACKUP JOB TEMPLATE
+    - name: create backup job template
       tower_job_template:
-        name: "BACKUP NETWORK CONFIG"
+        name: "Network-Backup"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
@@ -121,23 +121,23 @@
       until: create_first_job is not failed
       retries: 5
 
-    - name: CREATE L3 INTERFACE JOB TEMPLATE
+    - name: create L3 interface job template
       tower_job_template:
-        name: "CONFIGURE LAYER 3 INTERFACE"
+        name: "Network-L3-Interface"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_l3_interface.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/l3_interface.json') }}"
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/l3_interface.json') }}"
         ask_inventory: True
         tower_username: "{{admin_username}}"
         tower_password: "{{admin_password}}"
         tower_host: "{{tower_url}}"
         validate_certs: no
 
-    - name: CREATE BANNER JOB TEMPLATE
+    - name: create banner job template
       tower_job_template:
         name: "CONFIGURE BANNER"
         job_type: "run"
@@ -146,38 +146,97 @@
         playbook: "network_banner.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/banner.json') }}"
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/banner.json') }}"
         tower_username: "{{admin_username}}"
         tower_password: "{{admin_password}}"
         tower_host: "{{tower_url}}"
         validate_certs: no
 
 
-    - name: CREATE SYSTEM JOB TEMPLATE
+    - name: create system job template
       tower_job_template:
-        name: "CONFIGURE SYSTEM PROPERTIES (hostname, domain name, domain search, DNS)"
+        name: "Network-System"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_system.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/system.json') }}"
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/system.json') }}"
         tower_username: "{{admin_username}}"
         tower_password: "{{admin_password}}"
         tower_host: "{{tower_url}}"
         validate_certs: no
 
-    - name: CREATE USER JOB TEMPLATE
+    - name: create user job template
       tower_job_template:
-        name: "CONFIGURE USER"
+        name: "Network-User"
         job_type: "run"
         inventory: "Workshop Inventory"
         project: "Workshop Project"
         playbook: "network_user.yml"
         credential: "Workshop Credential"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/../templates/user.json') }}"
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/user.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+
+    - name: create user job template
+      tower_job_template:
+        name: "Network-User"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_user.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/user.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+
+    - name: create user job template
+      tower_job_template:
+        name: "Network-User"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_user.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/user.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+
+    - name: create commands job template
+      tower_job_template:
+        name: "Network-Commands"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_commands.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/commands.json') }}"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+
+    - name: create time job template
+      tower_job_template:
+        name: "Network-Time"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_time.yml"
+        credential: "Workshop Credential"
+        limit: "cisco"
         tower_username: "{{admin_username}}"
         tower_password: "{{admin_password}}"
         tower_host: "{{tower_url}}"
