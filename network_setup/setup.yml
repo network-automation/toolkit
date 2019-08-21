@@ -245,6 +245,7 @@
         credential: "Workshop Credential"
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/templates/commands.json') }}"
+        limit: "cisco"
         tower_username: "{{admin_username}}"
         tower_password: "{{admin_password}}"
         tower_host: "{{tower_url}}"
