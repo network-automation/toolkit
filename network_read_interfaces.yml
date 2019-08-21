@@ -11,4 +11,6 @@
 
     - name: print l3 interface role
       debug:
-        msg: "{{interfaces_info}}"
+        msg:
+        - "Interface info for {{inventory_hostname}}"
+        - "{{interfaces_info}}"
