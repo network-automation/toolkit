@@ -6,7 +6,7 @@
     ansible_connection: network_cli
   junos_config:
     update: replace
-    src: "/backup/{{rollback_date}}/{{inventory_hostname}}"`
+    src: "/backup/{{rollback_date}}/{{inventory_hostname}}"
 
 - name: print to terminal window
   debug:
