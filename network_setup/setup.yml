@@ -80,6 +80,18 @@
         tower_host: "{{tower_url}}"
         validate_certs: no
 
+    - name: delete credential into tower
+      tower_credential:
+        name: Workshop Credential
+        ssh_key_data: "/home/{{ansible_user}}/.ssh/aws-private.pem"
+        kind: ssh
+        organization: "REDHAT NETWORK ORGANIZATION"
+        state: absent
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
+
     - name: add credential into tower
       tower_credential:
         name: Workshop Credential
