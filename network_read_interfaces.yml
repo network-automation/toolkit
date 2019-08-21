@@ -6,9 +6,9 @@
   tasks:
 
     - name: load l3 interface role
-      include_role:
+      import_role:
         name: read_interfaces
 
-    - name: load l3 interface role
+    - name: print l3 interface role
       debug:
         msg: "{{interfaces_info}}"
