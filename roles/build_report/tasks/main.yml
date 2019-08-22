@@ -24,7 +24,7 @@
     body: ' {"AWX_PROOT_ENABLED": false}'
     status_code:
       - 200
-  when: {{lookup('env','USER') }} is 'awx'
+  when: lookup('env','USER') is 'awx'
 
 - name: start httpd
   become: yes
