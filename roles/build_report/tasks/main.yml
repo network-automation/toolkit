@@ -4,6 +4,12 @@
     name: httpd
     state: present
 
+- lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen '
+    insertafter: '^#Listen '
+    line: 'Listen {{web_port}}'
+
 - name: start httpd
   become: yes
   service:
