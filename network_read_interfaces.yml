@@ -1,5 +1,5 @@
 ---
-- name: configure l3 interface
+- name: convert interface to structured data
   hosts: routers
   gather_facts: no
 

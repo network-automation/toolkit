@@ -1,0 +1,3 @@
+file_path: /var/www/html/index.html
+web_host: ansible
+web_port: 8888

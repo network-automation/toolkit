@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>Transport</th>
+            <th>Platform</th>
+            <th>Serial Number</th>
+            <th>Code Version</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for network_switch in groups['routers'] %}
+        <tr>
+            <td>{{hostvars[network_switch]['ansible_net_hostname']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_api']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_system']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
