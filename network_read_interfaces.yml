@@ -18,6 +18,8 @@
   hosts: ansible
   gather_facts: no
 
+  tasks:
+
     - name: build a report
       include_role:
         name: build_report
