@@ -12,7 +12,7 @@
     insertafter: '^#Listen '
     line: 'Listen {{web_port}}'
 
-- name: REMOVE HARD CODED SSH KEY VAR IN INVENTORY
+- name: turn off isolated nodes if the webserver happens to be tower
   uri:
     url: "https://{{ansible_host}}/api/v2/settings/jobs/"
     user: "{{tower_user}}"
@@ -24,7 +24,7 @@
     body: ' {"AWX_PROOT_ENABLED": false}'
     status_code:
       - 200
-  when: "{{lookup('env','USER') }} is 'awx'"
+  when: {{lookup('env','USER') }} is 'awx'
 
 - name: start httpd
   become: yes
