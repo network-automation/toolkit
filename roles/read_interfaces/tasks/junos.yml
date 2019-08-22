@@ -2,6 +2,10 @@
   junos_facts:
     gather_subset: min
     gather_network_resources: interfaces
+  register: stuff
+
+- debug:
+    msg: "{{stuff}}"
 
 - debug:
     msg: "{{ansible_network_resources}}"
