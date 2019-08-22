@@ -4,4 +4,4 @@
     gather_network_resources: interfaces
 
 - debug:
-    msg: {{"ansible_network_resources"}}
+    msg: "{{ansible_network_resources}}"
