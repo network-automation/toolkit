@@ -1,4 +1,4 @@
-- name: grab arista eos info
-  eos_facts:
+- name: grab juniper junos info
+  junos_facts:
     gather_subset: min
     gather_network_resources: interfaces

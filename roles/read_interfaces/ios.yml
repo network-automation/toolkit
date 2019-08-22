@@ -1,4 +1,4 @@
-- name: grab arista eos info
-  eos_facts:
+- name: grab cisco ios info
+  ios_facts:
     gather_subset: min
     gather_network_resources: interfaces

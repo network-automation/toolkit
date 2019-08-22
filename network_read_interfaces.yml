@@ -2,8 +2,7 @@
 - name: configure l3 interface
   hosts: routers
   gather_facts: no
-  vars:
-    interfaces_info: ""
+
   tasks:
     - name: load read interfaces role
       include_role:
@@ -13,4 +12,4 @@
       debug:
         msg:
         - "Interface info for {{inventory_hostname}}"
-        - "{{interfaces_info}}"
+        - "{{ansible_network_resources.interfaces}}"
