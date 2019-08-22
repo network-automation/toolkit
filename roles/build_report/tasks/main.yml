@@ -4,7 +4,9 @@
     name: httpd
     state: present
 
-- lineinfile:
+- name: change apache to specified port
+  become: yes
+  lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^Listen '
     insertafter: '^#Listen '
