@@ -1,3 +1,15 @@
+- name: install apache
+  become: yes
+  yum:
+    name: httpd
+    state: present
+
+- name: start httpd
+  become: yes
+  service:
+    name: httpd
+    state: started
+
 - name: create HTML report
   become: yes
   template:
