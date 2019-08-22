@@ -12,6 +12,20 @@
     insertafter: '^#Listen '
     line: 'Listen {{web_port}}'
 
+- name: REMOVE HARD CODED SSH KEY VAR IN INVENTORY
+  uri:
+    url: "https://{{ansible_host}}/api/v2/settings/jobs/"
+    user: "{{tower_user}}"
+    password: "{{tower_pass}}"
+    method: PATCH
+    validate_certs: False
+    force_basic_auth: yes
+    body_format: json
+    body: ' {"AWX_PROOT_ENABLED": false}'
+    status_code:
+      - 200
+  when: "{{lookup('env','USER') }} is 'awx'"
+
 - name: start httpd
   become: yes
   service:
