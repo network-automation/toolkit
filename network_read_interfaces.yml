@@ -18,6 +18,6 @@
   hosts: ansible
   gather_facts: no
 
-    - name: load read interfaces role
+    - name: build a report
       include_role:
         name: build_report
