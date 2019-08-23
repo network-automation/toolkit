@@ -42,8 +42,8 @@
             <td>{% if interface['description'] is defined %} {{interface['description']}} {% endif %}</td>
             <td>{{interface['duplex']|default("")}}</td>
             <td>{{interface['enabled']}}</td>
-            <td>{{interface['mtu']}}</td>
-            <td>{{interface['speed']}}</td>
+            <td>{{interface['mtu']|default("")}}</td>
+            <td>{{interface['speed']|default("")}}</td>
         </tr>
 {% endfor %}
 {% endif %}
