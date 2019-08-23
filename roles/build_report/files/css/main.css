@@ -83,3 +83,12 @@ span.highlight {
 #subtable {
   background: #ebebeb;
 }
+
+.expandclass {
+  color: #5f6062;
+}
+
+.content{
+         display:none;
+         margin: 10px;
+}
