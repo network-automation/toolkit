@@ -55,3 +55,5 @@
 - name: display link to inventory report
   debug:
     msg: "Please go to http://{{hostvars[web_host].ansible_host}}:{{web_port}}"
+
+- debug: var=groups['routers']
