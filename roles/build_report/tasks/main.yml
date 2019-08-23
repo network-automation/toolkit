@@ -48,7 +48,14 @@
 - name: copy CSS over
   become: yes
   copy:
-    src: "{{playbook_dir}}/css"
+    src: "css"
+    dest: "{{ file_path }}"
+    directory_mode: true
+
+- name: copy CSS over
+  become: yes
+  copy:
+    src: "webpage_logo.png"
     dest: "{{ file_path }}"
     directory_mode: true
 
