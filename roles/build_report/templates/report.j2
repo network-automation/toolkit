@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-{% for network_switch in groups['routers']|sort(attribute='inventory_hostname') %}
+{% for network_switch in groups['routers'] %}
         <tr>
             <td>{{hostvars[network_switch]['ansible_net_hostname']}}</td>
             <td>{{hostvars[network_switch]['ansible_net_api']}}</td>
