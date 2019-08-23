@@ -3,6 +3,26 @@
 <head>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+$("document").ready(function(){
+  $click =  $('.studentinfo');   // Click selector
+
+
+  $click.click(function () {
+
+    $clicked = $(this);
+    $expand = $(this).parent('.expand').next();  // Expand and collapse content selector
+
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $expand.slideToggle(500, function () {
+            //execute this after slideToggle is done
+            //change text of expand based on visibility of content div
+        });
+
+    });
+});
+</script>
 </head>
 <body>
 <center>
@@ -23,6 +43,11 @@
         <tr>
             <td>{{hostvars[network_switch]['ansible_net_hostname']}}
  <!–– INTERNAL TABLE FOR INTERFACES --!>
+<div class="expand">
+
+  <p class="studentinfo">Interfaces Facts - Click to see details</p>
+</div>
+<div class="content">
 <table id="subtable">
     <thead>
         <tr>
@@ -49,6 +74,8 @@
 {% endif %}
     </tbody>
 </table>
+</div>
+</div>
  <!–– END INTERNAL TABLE FOR INTERFACES --!>
             </td>
             <td>{{hostvars[network_switch]['ansible_net_api']}}</td>
