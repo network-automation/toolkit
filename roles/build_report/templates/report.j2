@@ -64,7 +64,7 @@ $("document").ready(function(){
 {% for interface in hostvars[network_switch]['ansible_network_resources']['interfaces'] %}
         <tr>
             <td>{{interface['name']}}</td>
-            <td>{{interface['description']default("none")}}}}</td>
+            <td>{{interface['description']|default("none")}}</td>
             <td>{{interface['duplex']|default("default")}}</td>
             <td>{{interface['enabled']}}</td>
             <td>{{interface['mtu']|default("default")}}</td>
