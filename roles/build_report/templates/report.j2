@@ -64,11 +64,11 @@ $("document").ready(function(){
 {% for interface in hostvars[network_switch]['ansible_network_resources']['interfaces'] %}
         <tr>
             <td>{{interface['name']}}</td>
-            <td>{% if interface['description'] is defined %} {{interface['description']}} {% endif %}</td>
-            <td>{{interface['duplex']|default("")}}</td>
+            <td>{{interface['description']default("none")}}}}</td>
+            <td>{{interface['duplex']|default("default")}}</td>
             <td>{{interface['enabled']}}</td>
-            <td>{{interface['mtu']|default("")}}</td>
-            <td>{{interface['speed']|default("")}}</td>
+            <td>{{interface['mtu']|default("default")}}</td>
+            <td>{{interface['speed']|default("default")}}</td>
         </tr>
 {% endfor %}
 {% endif %}
@@ -86,7 +86,15 @@ $("document").ready(function(){
 {% endfor %}
     </tbody>
 </table>
-<center><p>Created with</p><br><img src="webpage_logo.png" width="300"></center>
+<center><p>Created with</p><br><img src="webpage_logo.png" width="300">
+<p>The source code to create this report can be found at <a href="https://github.com/network-automation/tower_workshop">https://github.com/network-automation/tower_workshop</a></br>
+</center>
+If you are new to Ansible Automation checkout the following links:
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html">Getting Started</a"></li>
+<li><a href="https://ansible.com/workshops">Free hands-on workshops</a></li>
+<li><a href="youtube.com/ansibleautomation">Youtube Videos</a></li>
+</ul></p>
 
 </body>
 </html>
