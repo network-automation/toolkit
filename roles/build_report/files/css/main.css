@@ -82,6 +82,11 @@ span.highlight {
 
 #subtable {
   background: #ebebeb;
+  margin: 0px;
+}
+
+#subtable tbody tr td {
+  padding: 5px 5px 5px 5px;
 }
 
 .expandclass {
