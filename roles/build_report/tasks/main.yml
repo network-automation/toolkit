@@ -46,6 +46,7 @@
     dest: "{{ file_path }}/index.html"
 
 - name: copy CSS over
+  become: yes
   copy:
     src: "{{playbook_dir}}/css"
     dest: "{{ file_path }}"
