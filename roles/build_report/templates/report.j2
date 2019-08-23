@@ -27,6 +27,7 @@
     <thead>
         <tr>
             <th>Interface Name</th>
+            <th>Enabled</th>
         </tr>
     </thead>
     <tbody>
@@ -34,12 +35,13 @@
 {% for interface in hostvars[network_switch]['ansible_network_resources']['interfaces'] %}
         <tr>
             <td>{{interface['name']}}</td>
+            <td>{{interface['enabled']}}</td>
         </tr>
 {% endfor %}
 {% endif %}
     </tbody>
 </table>
-</table>
+ <!–– END INTERNAL TABLE FOR INTERFACES --!>
             </td>
             <td>{{hostvars[network_switch]['ansible_net_api']}}</td>
             <td>{{hostvars[network_switch]['ansible_net_system']}}</td>
