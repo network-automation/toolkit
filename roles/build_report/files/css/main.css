@@ -79,3 +79,7 @@ tbody tr:last-child td {
 span.highlight {
     background-color: yellow;
 }
+
+#subtable {
+  background: #ebebeb;
+}

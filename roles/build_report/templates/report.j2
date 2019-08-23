@@ -23,11 +23,15 @@
         <tr>
             <td>{{hostvars[network_switch]['ansible_net_hostname']}}
  <!–– INTERNAL TABLE FOR INTERFACES --!>
-<table>
+<table id="subtable">
     <thead>
         <tr>
             <th>Interface Name</th>
+            <th>Description</th>
+            <th>Duplex</th>
             <th>Enabled</th>
+            <th>MTU</th>
+            <th>speed</th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +39,11 @@
 {% for interface in hostvars[network_switch]['ansible_network_resources']['interfaces'] %}
         <tr>
             <td>{{interface['name']}}</td>
+            <td>{% if interface['description'] is defined %} {{interface['description']}} {% endif %}</td>
+            <td>{{interface['duplex']|default("")}}</td>
             <td>{{interface['enabled']}}</td>
+            <td>{{interface['mtu']}}</td>
+            <td>{{interface['speed']}}</td>
         </tr>
 {% endfor %}
 {% endif %}
