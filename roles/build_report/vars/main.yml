@@ -10,3 +10,7 @@ vendor:
   iosxr: *my_value
   junos: "Juniper"
   eos: "Arista"
+transport:
+  cliconf: "network_cli"
+  netconf: "netconf"
+  httpapi: "httpapi"

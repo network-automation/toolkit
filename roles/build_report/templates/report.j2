@@ -34,8 +34,8 @@ $("document").ready(function(){
             <th>Hostname</th>
             <th>Transport</th>
             <th>Platform</th>
-            <th>Serial Number</th>
             <th>Code Version</th>
+            <th>Serial Number</th>
         </tr>
     </thead>
     <tbody>
@@ -126,11 +126,12 @@ secondary
 </div>
  <!–– END INTERNAL TABLE FOR L3_INTERFACES --!>
             </td>
-            <td>{{hostvars[network_switch]['ansible_net_api']}}</td>
+{% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}
+            <td>{{ansible_connection}}</td>
 {% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}
             <td>{{vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system']}}</td>
-            <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
             <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
         </tr>
 {% endfor %}
     </tbody>
