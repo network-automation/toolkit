@@ -8,12 +8,6 @@
       include_role:
         name: read_interfaces
 
-    - name: print l3 interface role
-      debug:
-        msg:
-        - "Interface info for {{inventory_hostname}}"
-        - "{{ansible_network_resources.interfaces}}"
-
 - name: build report with facts
   hosts: ansible
   gather_facts: no

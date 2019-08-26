@@ -2,5 +2,4 @@
 - name: grab juniper junos info
   junos_facts:
     gather_subset: min
-    gather_network_resources: interfaces
-  register: stuff
+    gather_network_resources: "{{network_resources}}"
