@@ -100,7 +100,7 @@ $("document").ready(function(){
 {% for address in interface.ipv4 %}
 {{address['address']}}
 {% if address['secondary'] is defined %}
-{{address['secondary']}}
+secondary
 {% endif %}
 {% if loop.length > 1 and not loop.last %}<br>{% endif %}
 {% endfor %}
