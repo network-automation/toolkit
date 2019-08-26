@@ -102,9 +102,9 @@ $("document").ready(function(){
 {% if address['secondary'] is defined %}
 {{address['secondary']}}
 {% endif %}
+{% if loop.length > 1 and not loop.last %}<br>{% endif %}
 {% endfor %}
 {% endif %}
-{% if loop.length > 1 and not loop.last %}<br>{% endif %}
             </td>
 <!–– END IPv4 INTERNAL LOOP FOR L3_INTERFACES --!>
 <!–– INTERNAL IPv6 LOOP FOR L3_INTERFACES --!>
