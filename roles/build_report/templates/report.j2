@@ -78,30 +78,36 @@ $("document").ready(function(){
 </div>
 <!–– END INTERNAL TABLE FOR INTERFACES --!>
 <!–– INTERNAL TABLE FOR L3_INTERFACES --!>
-  <p class="expandclass">>Interfaces Facts - Click to see details</p>
+  <p class="expandclass">>Interfaces L3 Facts - Click to see details</p>
 </div>
 <div class="content">
 <table id="subtable">
     <thead>
         <tr>
             <th>Interface Name</th>
-            <th>Description</th>
-            <th>Duplex</th>
-            <th>Enabled</th>
-            <th>MTU</th>
-            <th>speed</th>
+            <th>IPv4</th>
+            <th>IPv6</th>
         </tr>
     </thead>
     <tbody>
-{% if hostvars[network_switch]['ansible_network_resources']['interfaces'] is defined %}
-{% for interface in hostvars[network_switch]['ansible_network_resources']['interfaces'] %}
+{% if hostvars[network_switch]['ansible_network_resources']['l3_interfaces'] is defined %}
+{% for interface in hostvars[network_switch]['ansible_network_resources']['l3_interfaces'] %}
         <tr>
             <td>{{interface['name']}}</td>
-            <td>{{interface['description']|default("none")}}</td>
-            <td>{{interface['duplex']|default("default")}}</td>
-            <td>{{interface['enabled']}}</td>
-            <td>{{interface['mtu']|default("default")}}</td>
-            <td>{{interface['speed']|default("default")}}</td>
+<!–– INTERNAL LOOP FOR L3_INTERFACES --!>
+            <td>
+{% for address in interface.ipv4 %}
+{{address['address']}}
+{% endfor %}
+            </td>
+<!–– END INTERNAL LOOP FOR L3_INTERFACES --!>
+<!–– INTERNAL LOOP FOR L3_INTERFACES --!>
+            <td>
+{% for v6address in interface.ipv6 %}
+{{v6address['address']}}
+{% endfor %}
+            </td>
+<!–– END INTERNAL LOOP FOR L3_INTERFACES --!>
         </tr>
 {% endfor %}
 {% endif %}
