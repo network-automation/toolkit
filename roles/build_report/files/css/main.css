@@ -89,7 +89,7 @@ span.highlight {
   margin: 0px;
 }
 
-#subtable tbody tr td {
+#subtable tbody tr td th {
   padding: 5px 5px 5px 5px;
 }
 

@@ -42,9 +42,8 @@ $("document").ready(function(){
 {% for network_switch in groups['routers']|sort %}
         <tr>
             <td>{{hostvars[network_switch]['ansible_net_hostname']}}
-<div class="expand">
 <!–– INTERNAL TABLE FOR INTERFACES --!>
-
+<div class="expand">
   <p class="expandclass">>Interfaces Facts - Click to see details</p>
 </div>
 <div class="content">
@@ -78,6 +77,7 @@ $("document").ready(function(){
 </div>
 <!–– END INTERNAL TABLE FOR INTERFACES --!>
 <!–– INTERNAL TABLE FOR L3_INTERFACES --!>
+<div class="expand">
   <p class="expandclass">>Interfaces L3 Facts - Click to see details</p>
 </div>
 <div class="content">
