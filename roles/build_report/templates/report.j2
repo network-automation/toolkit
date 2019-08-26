@@ -99,7 +99,9 @@ $("document").ready(function(){
 {% if interface.ipv4 is defined %}
 {% for address in interface.ipv4 %}
 {{address['address']}}
+{% if address['secondary'] is defined %}
 {{address['secondary']}}
+{% endif %}
 {% endfor %}
 {% endif %}
             </td>
