@@ -265,7 +265,7 @@
         tower_host: "{{tower_url}}"
         validate_certs: no
 
-    - name: create time job template
+    - name: create network report job template
       tower_job_template:
         name: "Network-Report"
         job_type: "run"
