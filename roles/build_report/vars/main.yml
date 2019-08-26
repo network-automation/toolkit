@@ -3,3 +3,10 @@ web_host: ansible
 web_port: 8888
 tower_user: admin
 tower_pass: ansible
+# multi key, same value lookup for cisco
+vendor:
+  ios: &my_value 'Cisco'
+  nxos: *my_value
+  iosxr: *my_value
+  junos: "Juniper"
+  eos: "Arista"
