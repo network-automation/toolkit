@@ -127,7 +127,7 @@ secondary
  <!–– END INTERNAL TABLE FOR L3_INTERFACES --!>
             </td>
 {% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}
-            <td>{{ansible_connection}}</td>
+            <td>{{transport[ansible_connection]}}</td>
 {% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}
             <td>{{vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system']}}</td>
             <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
