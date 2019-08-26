@@ -96,16 +96,20 @@ $("document").ready(function(){
             <td>{{interface['name']}}</td>
 <!–– INTERNAL LOOP FOR L3_INTERFACES --!>
             <td>
+{% if interface.ipv4 is defined %}
 {% for address in interface.ipv4 %}
 {{address['address']}}
 {% endfor %}
+{% endif %}
             </td>
 <!–– END INTERNAL LOOP FOR L3_INTERFACES --!>
 <!–– INTERNAL LOOP FOR L3_INTERFACES --!>
             <td>
+{% if interface.ipv6 is defined %}
 {% for v6address in interface.ipv6 %}
 {{v6address['address']}}
 {% endfor %}
+{% endif %}
             </td>
 <!–– END INTERNAL LOOP FOR L3_INTERFACES --!>
         </tr>
