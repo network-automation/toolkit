@@ -104,6 +104,7 @@ $("document").ready(function(){
 {% endif %}
 {% endfor %}
 {% endif %}
+{% if not loop.first %}<br>{% endif %}
             </td>
 <!–– END IPv4 INTERNAL LOOP FOR L3_INTERFACES --!>
 <!–– INTERNAL IPv6 LOOP FOR L3_INTERFACES --!>
