@@ -1,0 +1,6 @@
+l3_interface:
+  - ipv4:
+    - address: "{{interface_ipv4 | default(omit) }}"
+    ipv6:
+    - address: "{{interface_ipv6 | default(omit) }}"
+    name: "{{interface_name}}"
