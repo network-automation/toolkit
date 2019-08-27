@@ -13,10 +13,10 @@
     {
       "type": "text",
       "question_name": "Please set an IPv4 Address",
-      "question_description": "e.g. 192.168.1.1/24, it is OK to leave this blank if you are using IPv6 only",
+      "question_description": "e.g. 10.100.100.100/24, it is OK to leave this blank if you are using IPv6 only",
       "variable": "interface_ipv4",
       "required": false,
-      "default": "192.168.1.1/24"
+      "default": "10.100.100.100/24"
     },
     {
       "type": "text",
