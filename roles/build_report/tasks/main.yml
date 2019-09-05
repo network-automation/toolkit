@@ -19,20 +19,6 @@
     state: yes
     persistent: yes
 
-# - name: turn off isolated nodes if the webserver happens to be tower
-#   uri:
-#     url: "https://{{ansible_host}}/api/v2/settings/jobs/"
-#     user: "{{tower_user}}"
-#     password: "{{tower_pass}}"
-#     method: PATCH
-#     validate_certs: False
-#     force_basic_auth: yes
-#     body_format: json
-#     body: ' {"AWX_PROOT_ENABLED": false}'
-#     status_code:
-#       - 200
-#   when: lookup('env','USER') == 'awx'
-
 - name: start httpd
   become: yes
   service:
