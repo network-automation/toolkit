@@ -1,0 +1,5 @@
+#https://github.com/ansible/ansible/issues/61183
+- name: grab juniper junos info
+  junos_facts:
+    gather_subset: min
+    gather_network_resources: "{{network_resources}}"

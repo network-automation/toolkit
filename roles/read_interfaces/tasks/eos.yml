@@ -1,0 +1,4 @@
+- name: grab arista eos info
+  eos_facts:
+    gather_subset: min
+    gather_network_resources: "{{network_resources}}"

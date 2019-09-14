@@ -264,3 +264,16 @@
         tower_password: "{{admin_password}}"
         tower_host: "{{tower_url}}"
         validate_certs: no
+
+    - name: create network report job template
+      tower_job_template:
+        name: "Network-Report"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_read.yml"
+        credential: "Workshop Credential"
+        tower_username: "{{admin_username}}"
+        tower_password: "{{admin_password}}"
+        tower_host: "{{tower_url}}"
+        validate_certs: no
