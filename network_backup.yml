@@ -62,3 +62,6 @@
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{playbook_dir}}/network_setup/templates/backup.j2') }}"
         validate_certs: no
+        tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
+        tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+        tower_host: "{{ lookup('env', 'TOWER_HOST') }}"
