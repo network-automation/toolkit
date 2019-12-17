@@ -3,3 +3,4 @@ platform_uptime_command:
   eos: show version | i Uptime
   nxos: show version | grep uptime
   vyos: uptime
+  junos: show system uptime | grep up
