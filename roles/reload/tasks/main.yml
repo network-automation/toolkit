@@ -3,6 +3,9 @@
   - "{{ ansible_network_os }}.yml"
   - "unsupported_platform.yml"
 
+- name: reset the connection
+  meta: reset_connection
+
 - name: Wait for the network device to reload
   wait_for_connection:
     delay: 10
