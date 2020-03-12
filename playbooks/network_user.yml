@@ -1,0 +1,9 @@
+---
+- name: configure user on network devices
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+    - name: load user role
+      include_role:
+        name: user

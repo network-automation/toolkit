@@ -1,0 +1,10 @@
+---
+- name: configure l3 interface
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+
+    - name: load l3 interface role
+      include_role:
+        name: l3_interface

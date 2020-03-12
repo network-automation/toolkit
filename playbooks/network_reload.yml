@@ -1,0 +1,10 @@
+---
+- name: reboot network devices
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+
+    - name: use reload role
+      include_role:
+        name: reload

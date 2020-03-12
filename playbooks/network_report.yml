@@ -1,0 +1,19 @@
+---
+- name: convert interface to structured data
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+    - name: load read interfaces role
+      include_role:
+        name: read_interfaces
+
+- name: build report with facts
+  hosts: ansible
+  gather_facts: no
+
+  tasks:
+
+    - name: build a report
+      include_role:
+        name: build_report
