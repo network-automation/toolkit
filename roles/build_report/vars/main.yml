@@ -1,6 +1,6 @@
 file_path: /var/www/html/
 web_host: ansible
-web_port: 8080
+web_port: 8088
 tower_user: admin
 tower_pass: ansible
 # multi key, same value lookup for cisco
