@@ -1,0 +1,67 @@
+---
+- name: setup control node timestamp
+  hosts: ansible
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: create time stamp for play
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+
+    - name: create /backup directory on control node
+      file:
+        path: /backup
+        state: directory
+
+    - name: create timestamp directory
+      file:
+        path: "/backup/{{datetime}}"
+        state: directory
+
+- name: retrieve router configurations
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: backup configuration
+      include_role:
+        name: backup
+      when: ansible_network_os is defined
+
+    - name: SAVE CONFIGURATION LOCALLY
+      vars:
+        ansible_connection: ssh
+      copy:
+        src: "{{config_output.backup_path}}"
+        dest: "/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
+      delegate_to: ansible
+      when: config_output is defined
+      become: yes
+
+
+- name: backup router configurations
+  hosts: ansible
+  gather_facts: no
+  tasks:
+    - name: find backups
+      find:
+        paths: /backup
+        file_type: directory
+      register: backups
+      run_once: true
+      become: yes
+
+    - name: create restore job template
+      tower_job_template:
+        name: "Network-Restore"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "network_restore.yml"
+        credential: "Workshop Credential"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{playbook_dir}}/network_setup/templates/backup.j2') }}"
+        validate_certs: no
+        tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
+        tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+        tower_host: "{{ lookup('env', 'TOWER_HOST') }}"

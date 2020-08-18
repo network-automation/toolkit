@@ -1,0 +1,10 @@
+---
+- name: configure system properites
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+
+    - name: load system role
+      include_role:
+        name: system

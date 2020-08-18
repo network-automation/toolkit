@@ -1,0 +1,29 @@
+---
+- name: CONFIGURE NETWORK TIME
+  hosts: all
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    ntp_server: "216.239.35.0"
+
+  tasks:
+    - assert:
+        that:
+          - "ntp_server | ipaddr"
+        msg: "'ntp_server' must be a valid IPv4 address"
+
+    - name: CONFIGURE NTP
+      ios_config:
+        lines: "ntp server {{ntp_server}}"
+
+    - name: FETCH NTP STATUS
+      ios_command:
+        commands:
+          - show ntp config
+          - show ntp status
+      register: ntp_config
+
+    - name: DISPLAY NTP STATUS INTO TERMINAL WINDOW
+      debug:
+        msg: "{{ntp_config.stdout_lines}}"
