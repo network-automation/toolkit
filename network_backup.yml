@@ -34,7 +34,7 @@
       copy:
         src: "{{config_output.backup_path}}"
         dest: "/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
-      delegate_to: ansible
+      delegate_to: ansible-1
       when: config_output is defined
       become: yes
 
