@@ -40,7 +40,7 @@
 
 
 - name: backup router configurations
-  hosts: ansible
+  hosts: ansible-1
   gather_facts: no
   tasks:
     - name: find backups
