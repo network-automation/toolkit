@@ -1,6 +1,6 @@
 ---
 - name: setup control node timestamp
-  hosts: ansible
+  hosts: ansible-1
   gather_facts: no
   become: yes
   tasks:
