@@ -1,0 +1,24 @@
+---
+- name: cli command playbook
+  hosts: all
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+
+  tasks:
+    - name: show command
+      cli_command:
+        command: "delete flash:{{ tower_input | default('')}}"
+        check_all: True
+        prompt:
+          - "Delete filename"
+          - "Delete bootflash:"
+        answer:
+          - ''
+          - ''
+      when: ansible_network_os is defined
+
+      register: output
+
+    - debug:
+        msg: "{{ output.stdout_lines }}"
