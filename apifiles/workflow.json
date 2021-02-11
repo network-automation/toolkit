@@ -1,0 +1,85 @@
+[
+  {
+    "asset_type": "workflow",
+    "name": "Workshop workflow",
+    "organization": "Default",
+    "inventory": 2,
+    "asset_relation": {
+      "survey_spec": {},
+      "workflow_nodes": [
+        {
+          "name": "node0",
+          "identifier": "1f140f6b-3248-49bb-a2e7-c395fde3ff95",
+          "unified_job_type": "job",
+          "unified_job_name": "Backup network configuration",
+          "success_nodes": [
+            "node1",
+            "node2"
+          ],
+          "failure_nodes": [],
+          "always_nodes": []
+        },
+        {
+          "name": "node1",
+          "identifier": "292fff63-545d-4955-b4f7-59f134a3e708",
+          "unified_job_type": "job",
+          "unified_job_name": "Network-Time",
+          "success_nodes": [],
+          "failure_nodes": [
+            "node3"
+          ],
+          "always_nodes": []
+        },
+        {
+          "name": "node2",
+          "extra_data": {
+            "network_name": "ansible",
+            "network_configured_password": "ansible123",
+            "network_juniper_class": "super-user"
+          },
+          "identifier": "9ca1ee6b-1fdb-40a4-9699-8874f5ea4103",
+          "unified_job_type": "job",
+          "unified_job_name": "Network-User",
+          "success_nodes": [],
+          "failure_nodes": [
+            "node3"
+          ],
+          "always_nodes": []
+        },
+        {
+          "name": "node3",
+          "identifier": "55bde998-93a9-484d-b5ac-2dbda2c86e78",
+          "unified_job_type": "job",
+          "unified_job_name": "Restore network configuration",
+          "success_nodes": [],
+          "failure_nodes": [],
+          "always_nodes": []
+        }
+      ],
+      "schedules": [],
+      "labels": [],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Approve",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  }
+]

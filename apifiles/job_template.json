@@ -1,0 +1,489 @@
+[
+  {
+    "asset_type": "job_template",
+    "name": "Backup network configuration",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_backup.yml",
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Tower Credential",
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-Banner",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_banner.yml",
+    "survey_enabled": true,
+    "asset_relation": {
+      "survey_spec": {
+        "name": "",
+        "description": "",
+        "spec": [
+          {
+            "question_name": "Please enter the banner text",
+            "question_description": "Please type into the text field the desired banner",
+            "required": true,
+            "type": "textarea",
+            "variable": "net_banner",
+            "min": 0,
+            "max": 4096,
+            "default": "",
+            "choices": "",
+            "new_question": true
+          },
+          {
+            "question_name": "Please enter the banner type",
+            "question_description": "Please choose an option",
+            "required": true,
+            "type": "multiplechoice",
+            "variable": "net_type",
+            "min": null,
+            "max": null,
+            "default": "login",
+            "choices": "login\nmotd",
+            "new_question": true
+          }
+        ]
+      },
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-Commands",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_commands.yml",
+    "limit": "cisco",
+    "survey_enabled": true,
+    "asset_relation": {
+      "survey_spec": {
+        "description": "Restricted list of commands executable by operator",
+        "spec": [
+          {
+            "question_description": "Select a command you would like to execute",
+            "default": "show version",
+            "question_name": "Select a command you would like to execute",
+            "choices": [
+              "show ip interface brief",
+              "show interface description",
+              "show ip route",
+              "show version"
+            ],
+            "variable": "tower_input",
+            "required": true,
+            "type": "multiplechoice"
+          }
+        ],
+        "name": "Network Operator Commands"
+      },
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [
+            "network-operator"
+          ],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-Reload",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_reload.yml",
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-Report",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_report.yml",
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-Restore",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_restore.yml",
+    "survey_enabled": true,
+    "asset_relation": {
+      "survey_spec": {
+        "name": "Restore Survey",
+        "description": "Choose which date you want to restore to",
+        "spec": [
+          {
+            "type": "multiplechoice",
+            "question_name": "Rollback to which date?",
+            "question_description": "Rollback revision date, which date do you want to revert to?",
+            "variable": "rollback_date",
+            "choices": [
+              "2021-02-10-19-48",
+              "2021-02-10-20-13",
+              "2021-02-11-03-37"
+            ],
+            "required": true,
+            "default": "2021-02-10-19-48"
+          }
+        ]
+      },
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-System",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_system.yml",
+    "limit": "cisco",
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-Time",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_time.yml",
+    "limit": "cisco",
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Network-User",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_user.yml",
+    "survey_enabled": true,
+    "asset_relation": {
+      "survey_spec": {
+        "description": "Prompt for system propertires such as hostname",
+        "spec": [
+          {
+            "question_description": "this will set the username on the network device",
+            "default": "ansible",
+            "question_name": "Please enter the username",
+            "required": false,
+            "variable": "network_name",
+            "type": "text"
+          },
+          {
+            "question_description": "this is not required if using an SSH key",
+            "default": "ansible123",
+            "question_name": "Please enter the plain-text password",
+            "required": false,
+            "variable": "network_configured_password",
+            "type": "text"
+          },
+          {
+            "question_description": "this is not required, please leave blank to use plain-text password",
+            "default": "",
+            "question_name": "Please paste the SSH public key here",
+            "required": false,
+            "variable": "network_key",
+            "type": "textarea"
+          },
+          {
+            "question_description": "This argument accepts integer values in the range of 1 to 15",
+            "default": "",
+            "question_name": "Please enter a privilege level (for network OS that support it)",
+            "required": false,
+            "variable": "network_privilege",
+            "type": "text"
+          },
+          {
+            "question_description": "non-Juniper devices will ignore this field",
+            "min": null,
+            "default": "super-user",
+            "max": null,
+            "required": false,
+            "choices": "operator\nread-only\nsuper-user\nunauthorized",
+            "variable": "network_juniper_class",
+            "question_name": "Which login class? (Juniper only)",
+            "type": "multiplechoice"
+          }
+        ],
+        "name": "System Survey"
+      },
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Restore network configuration",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "network_restore.yml",
+    "limit": "rtr1",
+    "extra_vars": "---\nrollback_date: \"2021-02-10-20-13\"",
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Tower Credential",
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  }
+]
