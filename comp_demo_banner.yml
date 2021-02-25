@@ -1,0 +1,13 @@
+---
+- name: compliance check banner
+  hosts: all
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    motd_string: "Restricted Access Only punishable by sweat and tears"
+
+  tasks:
+    - name: CONFIGURE Banner MOTD
+      ios_config:
+        lines: "banner motd {{ motd_string }}"
