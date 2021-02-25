@@ -5,7 +5,7 @@
   gather_facts: no
 
   vars:
-    motd_string: "Restricted Access Only punishable by sweat and tears"
+    motd_string: '"Restricted Access Only punishable by sweat and tears"'
 
   tasks:
     - name: CONFIGURE Banner MOTD
