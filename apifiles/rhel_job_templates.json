@@ -1,0 +1,184 @@
+[
+  {
+    "asset_type": "job_template",
+    "name": "create index.html",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "rhel/apache/apache_role_install.yml",
+    "limit": "web",
+    "survey_enabled": true,
+    "become_enabled": true,
+    "asset_relation": {
+      "survey_spec": {
+        "name": "",
+        "description": "",
+        "spec": [
+          {
+            "question_name": "First Line",
+            "question_description": "",
+            "required": true,
+            "type": "text",
+            "variable": "first_line",
+            "min": 0,
+            "max": 1024,
+            "default": "",
+            "choices": "",
+            "new_question": true
+          },
+          {
+            "question_name": "Second Line",
+            "question_description": "",
+            "required": true,
+            "type": "text",
+            "variable": "second_line",
+            "min": 0,
+            "max": 1024,
+            "default": "",
+            "choices": "",
+            "new_question": true
+          }
+        ]
+      },
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Install Apache",
+    "inventory": "Workshop Inventory",
+    "project": "Workshop Project",
+    "playbook": "rhel/apache/apache_install.yml",
+    "limit": "web",
+    "become_enabled": true,
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Node.js Deploy",
+    "inventory": "Workshop Inventory",
+    "project": "webdev Git Repo",
+    "playbook": "rhel/webdev/install_node_app.yml",
+    "limit": "web",
+    "become_enabled": true,
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  },
+  {
+    "asset_type": "job_template",
+    "name": "Web App Deply",
+    "inventory": "Workshop Inventory",
+    "project": "Webops Git Repo",
+    "playbook": "rhel/webops/web_infrastructure.yml",
+    "limit": "web",
+    "become_enabled": true,
+    "asset_relation": {
+      "survey_spec": {},
+      "notification_templates_error": [],
+      "notification_templates_success": [],
+      "schedules": [],
+      "labels": [],
+      "credentials": [
+        "Workshop Credential"
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [
+            "admin"
+          ],
+          "team": []
+        },
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "asset_type": "workflow",
+    "name": "Deploy Webapp Server",
+    "organization": "Default",
+    "asset_relation": {
+      "survey_spec": {},
+      "workflow_nodes": [
+        {
+          "name": "node0",
+          "identifier": "d0bb8e4e-67d1-4165-9e0a-d93a8549109a",
+          "unified_job_type": "job",
+          "unified_job_name": "Web App Deply",
+          "success_nodes": [
+            "node1"
+          ],
+          "failure_nodes": [],
+          "always_nodes": []
+        },
+        {
+          "name": "node1",
+          "identifier": "439557db-e671-4d55-8556-4e1e81ca09df",
+          "unified_job_type": "job",
+          "unified_job_name": "Node.js Deploy",
+          "success_nodes": [],
+          "failure_nodes": [],
+          "always_nodes": []
+        }
+      ],
+      "schedules": [],
+      "labels": [],
+      "roles": [
+        {
+          "name": "Execute",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Approve",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Admin",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  }
+]

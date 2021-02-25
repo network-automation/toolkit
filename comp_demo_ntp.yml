@@ -1,0 +1,13 @@
+---
+- name: CONFIGURE NETWORK TIME
+  hosts: all
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    ntp_server: "8.8.8.8"
+
+  tasks:
+    - name: CONFIGURE NTP
+      ios_config:
+        lines: "ntp server {{ntp_server}}"
