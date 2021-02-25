@@ -1,0 +1,13 @@
+---
+- name: compliance check Local User
+  hosts: all
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    local_user: "ansiblelocal"
+    md5_hash: "$1$JRu/$j.ych48MjOmd1s0hYAqVD0"
+  tasks:
+    - name: CONFIGURE Local User
+      ios_config:
+        lines: "username {{ local_user }} privilege 15 secret 5 {{ md5_hash }}"

@@ -1,5 +1,5 @@
 ---
-- name: CONFIGURE NETWORK Name Server
+- name: compliance check NETWORK Name Server
   hosts: all
   connection: network_cli
   gather_facts: no
@@ -8,6 +8,6 @@
     dns_server: "8.8.8.8"
 
   tasks:
-    - name: CONFIGURE NTP
+    - name: CONFIGURE DNS
       ios_config:
         lines: "ip  name-server {{dns_server}}"

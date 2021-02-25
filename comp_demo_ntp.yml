@@ -1,5 +1,5 @@
 ---
-- name: CONFIGURE NETWORK TIME
+- name: Compliance Check NETWORK TIME
   hosts: all
   connection: network_cli
   gather_facts: no

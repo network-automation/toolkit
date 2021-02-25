@@ -1,0 +1,13 @@
+---
+- name: compliance check SNMP string
+  hosts: all
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    snmp_string: "ansible-demo"
+
+  tasks:
+    - name: CONFIGURE snmp-server string
+      ios_config:
+        lines: "snmp-server community {{snmp_string}} RO"
