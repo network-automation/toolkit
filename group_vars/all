@@ -1,0 +1,11 @@
+
+dns_servers:
+  - 8.8.8.8
+  - 8.8.4.4
+  - 1.1.1.1
+  - 9.9.9.9
+
+snmp_servers:
+  - snmpdemo1: RO
+  - snmpdemo2: RW
+  - snmpdemo3: RO

@@ -1,0 +1,115 @@
+[
+  {
+    "asset_type": "inventory",
+    "name": "Workshop Inventory",
+    "organization": "Default",
+    "asset_relation": {
+      "host": [],
+      "group": [
+        {
+          "name": "control",
+          "description": "imported",
+          "variables": "{}",
+          "sub_groups": [],
+          "hosts": [
+            "ansible-1"
+          ]
+        },
+        {
+          "name": "dc1",
+          "description": "imported",
+          "variables": "{}",
+          "sub_groups": [],
+          "hosts": [
+            "rtr1",
+            "rtr3"
+          ]
+        },
+        {
+          "name": "dc2",
+          "description": "imported",
+          "variables": "{}",
+          "sub_groups": [],
+          "hosts": [
+            "rtr2",
+            "rtr4"
+          ]
+        },
+        {
+          "name": "routers",
+          "description": "imported",
+          "variables": "{}",
+          "sub_groups": [
+            {
+              "name": "arista",
+              "description": "imported",
+              "variables": "{\"ansible_become\": \"true\", \"ansible_become_method\": \"enable\", \"ansible_connection\": \"network_cli\", \"ansible_network_os\": \"eos\", \"ansible_user\": \"ec2-user\"}",
+              "sub_groups": [],
+              "hosts": [
+                "rtr2",
+                "rtr4"
+              ]
+            },
+            {
+              "name": "cisco",
+              "description": "imported",
+              "variables": "{\"ansible_connection\": \"network_cli\", \"ansible_network_os\": \"ios\", \"ansible_user\": \"ec2-user\"}",
+              "sub_groups": [],
+              "hosts": [
+                "rtr1"
+              ]
+            },
+            {
+              "name": "juniper",
+              "description": "imported",
+              "variables": "{\"ansible_connection\": \"netconf\", \"ansible_network_os\": \"junos\", \"ansible_user\": \"ec2-user\"}",
+              "sub_groups": [],
+              "hosts": [
+                "rtr3"
+              ]
+            }
+          ],
+          "hosts": []
+        }
+      ],
+      "inventory_source": [
+        {
+          "name": " (Workshop Inventory - 8)",
+          "source": "file",
+          "source_path": "/home/student1/lab_inventory/hosts",
+          "schedules": []
+        }
+      ],
+      "roles": [
+        {
+          "name": "Admin",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Update",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Ad Hoc",
+          "user": [],
+          "team": []
+        },
+        {
+          "name": "Use",
+          "user": [],
+          "team": [
+            "Netadmin",
+            "Netops"
+          ]
+        },
+        {
+          "name": "Read",
+          "user": [],
+          "team": []
+        }
+      ]
+    }
+  }
+]
