@@ -1,5 +1,0 @@
-{% for dict_item in snmp_servers %}
-  {% for key,value in dict_item.items() %}
-snmp-server community {{ key }} {{ value }}
-  {% endfor %}
-{% endfor %}
