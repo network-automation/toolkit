@@ -5,4 +5,4 @@
   tasks:
     - name: configure device with config
       cli_config:
-        config: "{{ lookup('template', {{ ansible_network_os }}'_dns.j2') }}"
+        config: "{{ lookup('template', '{{ ansible_network_os }}_dns.j2') }}"
