@@ -1,0 +1,9 @@
+
+---
+- name: configure interface network devices
+  hosts: rtr1,rtr2
+  gather_facts: false
+  tasks:
+    - name: configure device with config
+      cli_config:
+        config: "{{ lookup('template', '{{ ansible_network_os }}_interface.j2') }}"
