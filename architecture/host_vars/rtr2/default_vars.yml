@@ -1,0 +1,4 @@
+
+interface: Loopback21
+ip: 192.168.221.1 255.255.255.255
+desc_int: This is example from host_vars rtr2 eos in Data Center
