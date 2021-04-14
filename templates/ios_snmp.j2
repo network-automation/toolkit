@@ -1,0 +1,3 @@
+{% for item in dns_servers %}
+ip snmp-server community {{ item }}
+{% endfor %}

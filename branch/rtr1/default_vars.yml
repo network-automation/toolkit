@@ -1,3 +1,0 @@
-interface: Loopback12
-ip: 192.168.212.1 255.255.255.255
-desc_int: This is example from host_vars rtr1 ios in Branch
