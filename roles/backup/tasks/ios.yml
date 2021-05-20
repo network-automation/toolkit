@@ -1,11 +1,11 @@
 # This task will backup the configuration
-- name: BACKUP THE CONFIG
-  ios_config:
+- name: backup the configuration
+  cisco.ios.ios_config:
     backup: yes
   register: config_output
 
 # This task removes the Current configuration... from the top of IOS routers show run
-- name: REMOVE NON CONFIG LINES - REGEXP
+- name: remove non config lines - regexp
   lineinfile:
     path: "{{config_output.backup_path}}"
     line: "Building configuration..."

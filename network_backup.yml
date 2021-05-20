@@ -28,7 +28,7 @@
         name: backup
       when: ansible_network_os is defined
 
-    - name: SAVE CONFIGURATION LOCALLY
+    - name: save configuration locally
       vars:
         ansible_connection: ssh
       copy:
@@ -52,7 +52,7 @@
       become: yes
 
     - name: create restore job template
-      tower_job_template:
+      awx.awx.tower_job_template:
         name: "Network-Restore"
         job_type: "run"
         inventory: "Workshop Inventory"

@@ -1,0 +1,39 @@
+---
+namespace: network-automation
+name: ansible_network_collection
+version: 1.0.0
+readme: README.md
+
+authors:
+  - Sean Cavanaugh <seanc@redhat.com> @IPvSean
+  - Ajay Chenampara @termlen0
+  - Gerald Dykeman @GeraldDykeman
+
+
+description: repository of demos to showcase Ansible features.
+
+license:
+  - GPL-3.0-or-later
+
+tags:
+  - network
+  - tower
+  - awx
+  - controller
+  - platform
+
+dependencies:
+  "cisco.ios": ">=2.2.0"
+  "arista.eos": ">=2.1.2"
+  "junipernetworks.junos": ">=2.2.0"
+  "ansible.utils": ">=2.2.0"
+
+build_ignore:
+  - network_setup
+  - '*.tar.gz'
+
+
+repository: http://github.com/network-automation/ansible_network_collection
+documentation: http://github.com/network-automation/ansible_network_collection
+homepage: http://github.com/network-automation/ansible_network_collection
+issues: https://github.com/network-automation/ansible_network_collection/issues
