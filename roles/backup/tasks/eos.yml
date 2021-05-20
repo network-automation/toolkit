@@ -1,4 +1,4 @@
 - name: BACKUP THE CONFIG
-  eos_config:
+  arista.eos.eos_config:
     backup: yes
   register: config_output
