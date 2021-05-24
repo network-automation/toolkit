@@ -5,7 +5,8 @@
 
   tasks:
     - name: load user role
-      vars: vlans
+      vars:
+        network_resource: vlans
       include_role:
         name: facts
 
