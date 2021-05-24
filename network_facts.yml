@@ -11,4 +11,4 @@
 
     - name: display VLAN facts
       debug:
-        msg: "{{ ansible_network_resources.vlans | default("not configured") }}"
+        msg: "{{ ansible_network_resources.vlans | default('not configured') }}"
