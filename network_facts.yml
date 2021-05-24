@@ -1,0 +1,14 @@
+---
+- name: configure user on network devices
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+    - name: load user role
+      vars: vlans
+      include_role:
+        name: facts
+
+    - name: display VLAN facts
+      debug:
+        msg: "{{ ansible_network_resources.vlans | default("not configured") }}"
