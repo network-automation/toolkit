@@ -1,5 +1,5 @@
 ---
 - name: gather junos facts
-  cisco.junos.facts:
+  junipernetworks.junos.facts:
     gather_subset: config
     gather_network_resources: "{{ network_resource | default('all') }}"
