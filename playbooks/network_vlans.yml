@@ -2,6 +2,9 @@
 - name: configure network VLANs
   hosts: all
   gather_facts: no
+  vars:
+    - vlan_state:  "{{ net_vlan_state | default('merged') }}"
+    - vlan_config: "{{ net_vlan_config | default(None) }}"
 
   tasks:
     # if using this role from the collection it would be network.toolkit.vlans
