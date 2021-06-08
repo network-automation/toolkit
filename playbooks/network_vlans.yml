@@ -10,7 +10,7 @@
     - name: assert that VLAN config was sent
       assert:
         that:
-          - net_vlan_config != None
+          - vlan_config != None
         fail_msg: "no 'vlan_config' was sent"
         success_msg: "all assertions passed"
 
