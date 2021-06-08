@@ -1,0 +1,5 @@
+---
+- name: configure Arista EOS vlans
+  arista.eos.vlans:
+    state: "{{ vlan_state }}"
+    config: "{{ vlan_config }}"

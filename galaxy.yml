@@ -1,7 +1,7 @@
 ---
-namespace: network-automation
-name: ansible_network_collection
-version: 1.0.0
+namespace: network
+name: toolkit
+version: 0.0.2
 readme: README.md
 
 authors:
@@ -10,7 +10,7 @@ authors:
   - Gerald Dykeman @GeraldDykeman
 
 
-description: repository of demos to showcase Ansible features.
+description: repository of demos to showcase Ansible Network Automation.
 
 license:
   - GPL-3.0-or-later
@@ -31,9 +31,10 @@ dependencies:
 build_ignore:
   - network_setup
   - '*.tar.gz'
+  - roles/l3_interface
 
 
-repository: http://github.com/network-automation/ansible_network_collection
-documentation: http://github.com/network-automation/ansible_network_collection
-homepage: http://github.com/network-automation/ansible_network_collection
-issues: https://github.com/network-automation/ansible_network_collection/issues
+repository: http://github.com/network-automation/toolkit
+documentation: http://github.com/network-automation/toolkit
+homepage: http://github.com/network-automation/toolkit
+issues: https://github.com/network-automation/toolkit/issues

@@ -1,0 +1,10 @@
+---
+- name: configure network VLANs
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: include correct role for network device type
+      include_role:
+        name: vlans
+      when: ansible_network_os is defined

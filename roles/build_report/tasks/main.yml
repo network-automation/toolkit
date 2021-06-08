@@ -1,11 +1,11 @@
 - name: install apache
-  become: yes
+  become: true
   yum:
     name: httpd
     state: present
 
 - name: change apache to specified port
-  become: yes
+  become: true
   lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^Listen '
@@ -13,33 +13,33 @@
     line: 'Listen {{web_port}}'
 
 - name: Set nis_enabled flag on and keep it persistent across reboots
-  become: yes
+  become: true
   seboolean:
     name: nis_enabled
-    state: yes
-    persistent: yes
+    state: true
+    persistent: true
 
 - name: start httpd
-  become: yes
+  become: true
   service:
     name: httpd
     state: started
 
 - name: create HTML report
-  become: yes
+  become: true
   template:
     src: report.j2
     dest: "{{ file_path }}/index.html"
 
 - name: copy CSS over
-  become: yes
+  become: true
   copy:
     src: "css"
     dest: "{{ file_path }}"
     directory_mode: true
 
 - name: copy CSS over
-  become: yes
+  become: true
   copy:
     src: "webpage_logo.png"
     dest: "{{ file_path }}"

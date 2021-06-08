@@ -1,4 +1,4 @@
-- name: load platform module for restore
+- name: configure specified vlans
   include_tasks: "{{ item }}"
   with_first_found:
     - "{{ role_path }}/tasks/{{ ansible_network_os }}.yml"

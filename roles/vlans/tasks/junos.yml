@@ -1,0 +1,5 @@
+---
+- name: configure Juniper Junos VLANs
+  junipernetworks.junos.vlans:
+    state: "{{ vlan_state }}"
+    config: "{{ vlan_config }}"
