@@ -11,7 +11,7 @@
       assert:
         that:
           - vlan_config != ''
-        fail_msg: "no 'vlan_config' was sent"
+        fail_msg: "no 'vlan_config' was sent, please send a valid configuration set as the variable net_vlan_config"
         success_msg: "all assertions passed"
 
     # if using this role from the collection it would be network.toolkit.vlans
