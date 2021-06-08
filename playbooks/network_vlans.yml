@@ -17,6 +17,11 @@
   #   vlan_id: 20
 
   tasks:
+    - name: transform vlan_config into dictionary if coming from controller
+      set_fact:
+        vlan_config: "{{ net_vlan_config | from_yaml }}"
+      when: net_vlan_config is mapping
+
     - name: assert that VLAN config was sent
       assert:
         that:
