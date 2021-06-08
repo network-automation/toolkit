@@ -20,7 +20,7 @@
     - name: transform vlan_config into dictionary if coming from controller
       set_fact:
         vlan_config: "{{ net_vlan_config | from_yaml }}"
-      when: net_vlan_config is mapping
+      when: ( vlan_config | type_debug != "dict" )
 
     - name: assert that VLAN config was sent
       assert:
