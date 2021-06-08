@@ -17,17 +17,17 @@
   #   vlan_id: 20
 
   tasks:
-    - name: transform vlan_config into dictionary if coming from controller
-      set_fact:
-        vlan_config: "{{ net_vlan_config | from_yaml }}"
-      when: vlan_config is string
-
     - name: assert that VLAN config was sent
       assert:
         that:
           - vlan_config != ''
         fail_msg: "no 'vlan_config' was sent, please send a valid configuration set as the variable net_vlan_config"
         success_msg: "all assertions passed"
+
+    - name: transform vlan_config into dictionary if coming from controller
+      set_fact:
+        vlan_config: "{{ net_vlan_config | from_yaml }}"
+      when: vlan_config is string
 
     # if using this role from the collection it would be network.toolkit.vlans
     - name: include correct role for network device type
