@@ -4,7 +4,8 @@
   gather_facts: no
 
   tasks:
+    # if using this role from the collection it would be network.toolkit.vlans
     - name: include correct role for network device type
       include_role:
-        name: "../vlans"
+        name: "../roles/vlans"
       when: ansible_network_os is defined
