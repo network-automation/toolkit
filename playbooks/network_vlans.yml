@@ -4,13 +4,13 @@
   gather_facts: no
   vars:
     - vlan_state:  "{{ net_vlan_state | default('merged') }}"
-    - vlan_config: "{{ net_vlan_config | default(None) }}"
+    - vlan_config: "{{ net_vlan_config | default('') }}"
 
   tasks:
     - name: assert that VLAN config was sent
       assert:
         that:
-          - vlan_config != None
+          - vlan_config != ''
         fail_msg: "no 'vlan_config' was sent"
         success_msg: "all assertions passed"
 
