@@ -6,5 +6,5 @@
   tasks:
     - name: include correct role for network device type
       include_role:
-        name: vlans
+        name: "../vlans"
       when: ansible_network_os is defined
