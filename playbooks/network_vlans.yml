@@ -7,6 +7,13 @@
     - vlan_config: "{{ net_vlan_config | default(None) }}"
 
   tasks:
+    - name: assert that VLAN config was sent
+      assert:
+        that:
+          - net_vlan_config != None
+        fail_msg: "no 'vlan_config' was sent"
+        success_msg: "all assertions passed"
+
     # if using this role from the collection it would be network.toolkit.vlans
     - name: include correct role for network device type
       include_role:
