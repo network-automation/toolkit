@@ -6,6 +6,16 @@
     - vlan_state:  "{{ net_vlan_state | default('merged') }}"
     - vlan_config: "{{ net_vlan_config | default('') }}"
 
+  # you would pass vlan_config like this:
+  # ---
+  # net_vlan_config:
+  # - name: desktops
+  #   vlan_id: 5
+  # - name: servers
+  #   vlan_id: 10
+  # - name: dmz
+  #   vlan_id: 20
+
   tasks:
     - name: assert that VLAN config was sent
       assert:
