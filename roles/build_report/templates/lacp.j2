@@ -18,7 +18,7 @@
 {% endfor %}
     </tbody>
 </table>
-{% elif hostvars[network_switch]['ansible_network_resources']['lacp'] is defined and hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length == 0 }
+{% elif hostvars[network_switch]['ansible_network_resources']['lacp'] is defined and hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length == 0 %}
 LACP is not configured on this device
 {% else %}
 No LACP info available
