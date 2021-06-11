@@ -3,6 +3,7 @@
   <p class="expandclass">> Interfaces - MTU/Duplex/Speed</p>
 </div>
 <div class="content">
+{% if hostvars[network_switch]['ansible_network_resources']['interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['interfaces'].keys()|length > 0  %}
 <table id="subtable">
     <thead>
         <tr>
@@ -15,7 +16,6 @@
         </tr>
     </thead>
     <tbody>
-{% if hostvars[network_switch]['ansible_network_resources']['interfaces'] is defined %}
 {% for interface in hostvars[network_switch]['ansible_network_resources']['interfaces'] %}
         <tr>
             <td>{{interface['name']}}</td>
@@ -26,9 +26,13 @@
             <td>{{interface['speed']|default("default")}}</td>
         </tr>
 {% endfor %}
-{% endif %}
     </tbody>
 </table>
+{% elif hostvars[network_switch]['ansible_network_resources']['interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['interfaces'].keys()|length == 0 %}
+No interfaces configured on this device
+{% else %}
+No Interface information available
+{% endif %}
 </div>
 </div>
 <!–– END INTERNAL TABLE FOR INTERFACES --!>

@@ -3,7 +3,7 @@
   <p class="expandclass">> VLANs</p>
 </div>
 <div class="content">
-{% if hostvars[network_switch]['ansible_network_resources']['vlans'] is defined %}
+{% if hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans'].keys()|length > 0 %}
 <table id="subtable">
     <thead>
         <tr>

@@ -3,6 +3,7 @@
   <p class="expandclass">> L2 Interfaces - Trunk/Access Ports</p>
 </div>
 <div class="content">
+{% if hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['l2_interfaces'].keys()|length > 0 %}
 <table id="subtable">
     <thead>
         <tr>
@@ -14,7 +15,6 @@
         </tr>
     </thead>
     <tbody>
-{% if hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined %}
 {% for l2_interface in hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] %}
         <tr>
             <td>{{l2_interface['name']}}</td>
