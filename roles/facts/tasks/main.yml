@@ -3,3 +3,7 @@
   with_first_found:
     - "{{ role_path }}/tasks/{{ ansible_network_os }}.yml"
     - "{{ role_path }}/tasks/unsupported_platform.yml"
+
+- name: display facts
+  debug:
+    var: ansible_network_resources
