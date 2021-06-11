@@ -1,0 +1,34 @@
+<!–– INTERNAL TABLE FOR VLANS --!>
+<div class="expand">
+  <p class="expandclass">>VLAN Facts - Click to see details</p>
+</div>
+<div class="content">
+<table id="subtable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Mode</th>
+            <th>Access VLAN</th>
+            <th>Trunk Native VLAN</th>
+            <th>Trunk Allowed VLANs</th>
+        </tr>
+    </thead>
+    <tbody>
+{% if hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined %}
+{% for l2_interface in hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] %}
+        <tr>
+            <td>{{l2_interface['name']}}</td>
+            <td>{{l2_interface['mode']|default("Not Configured")}}</td>
+            <td>{{l2_interface['access']['vlan']|default("Not Configured")}}</td>
+            <td>{{l2_interface['trunk']['native_vlan']|default("Not Configured")}}</td>
+            <td>{{l2_interface['trunk']['trunk_allowed_vlans']|default("Not Configured")}}</td>
+        </tr>
+{% endfor %}
+{% else %}
+No l2_interfaces information provided
+{% endif %}
+    </tbody>
+</table>
+</div>
+</div>
+<!–– END INTERNAL TABLE FOR VLANS --!>
