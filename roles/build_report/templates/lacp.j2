@@ -3,6 +3,7 @@
   <p class="expandclass">>LACP</p>
 </div>
 <div class="content">
+{% if hostvars[network_switch]['ansible_network_resources']['lacp'] is defined and hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length > 0  %}
 <table id="subtable">
     <thead>
         <tr>
@@ -10,16 +11,13 @@
         </tr>
     </thead>
     <tbody>
-{% if hostvars[network_switch]['ansible_network_resources']['lacp'] is defined and hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length > 0  %}
 {% for property in hostvars[network_switch]['ansible_network_resources']['lacp'] %}
         <tr>
             <td>{{property['system']['priority']}}</td>
         </tr>
 {% endfor %}
-{% elif hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length == 0 %}
-No LACP is configured on this device
 {% else %}
-LACP was not gathered for this network device
+No LACP info available
 {% endif %}
     </tbody>
 </table>
