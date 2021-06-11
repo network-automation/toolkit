@@ -20,11 +20,13 @@
             <td>{{vlan['state']|default("default")}}</td>
         </tr>
 {% endfor %}
-{% else %}
-No VLANs configured on this device
-{% endif %}
     </tbody>
 </table>
+{% elif hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans'].keys()|length == 0 %}
+VLANs are not configured on this device
+{% else %}
+No VLAN information available
+{% endif %}
 </div>
 </div>
 <!–– END INTERNAL TABLE FOR VLANS --!>

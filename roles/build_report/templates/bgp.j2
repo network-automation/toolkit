@@ -18,11 +18,13 @@
             <td>{{bgpinfo['router_id']|default("Not Configured")}}</td>
         </tr>
 {% endfor %}
-{% else %}
-No BGP configured on this device
-{% endif %}
     </tbody>
 </table>
+{% elif hostvars[network_switch]['ansible_network_resources']['bgp_global'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_global'].keys()|length == 0 %}
+BGP is not configured on this device
+{% else %}
+No BGP information available
+{% endif %}
 </div>
 </div>
 <!–– END INTERNAL TABLE FOR BGP --!>
