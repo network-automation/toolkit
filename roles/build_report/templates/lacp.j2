@@ -1,6 +1,6 @@
 <!–– INTERNAL TABLE FOR LACP --!>
 <div class="expand">
-  <p class="expandclass">>VLAN Facts - Click to see details</p>
+  <p class="expandclass">>LACP</p>
 </div>
 <div class="content">
 <table id="subtable">
@@ -10,14 +10,16 @@
         </tr>
     </thead>
     <tbody>
-{% if hostvars[network_switch]['ansible_network_resources']['lacp'] is defined %}
+{% if hostvars[network_switch]['ansible_network_resources']['lacp'] is defined and hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length > 0  %}
 {% for property in hostvars[network_switch]['ansible_network_resources']['lacp'] %}
         <tr>
             <td>{{property['system']['priority']}}</td>
         </tr>
 {% endfor %}
+{% elif hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length == 0 %}
+No LACP is configured on this device
 {% else %}
-No VLANs configured on this device
+LACP was not gathered for this network device
 {% endif %}
     </tbody>
 </table>
