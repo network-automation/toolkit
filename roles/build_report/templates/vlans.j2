@@ -3,7 +3,7 @@
   <p class="expandclass">> VLANs</p>
 </div>
 <div class="content">
-{% if hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans'].keys()|length > 0 %}
+{% if hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans']|length > 0 %}
 <table id="subtable">
     <thead>
         <tr>
@@ -22,7 +22,7 @@
 {% endfor %}
     </tbody>
 </table>
-{% elif hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans'].keys()|length == 0 %}
+{% elif hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans']|length == 0 %}
 VLANs are not configured on this device
 {% else %}
 No VLAN information available

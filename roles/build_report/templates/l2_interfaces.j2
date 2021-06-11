@@ -3,7 +3,7 @@
   <p class="expandclass">> L2 Interfaces - Trunk/Access Ports</p>
 </div>
 <div class="content">
-{% if hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['l2_interfaces'].keys()|length > 0 %}
+{% if hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['l2_interfaces']|length > 0 %}
 <table id="subtable">
     <thead>
         <tr>
@@ -24,7 +24,7 @@
             <td>{{l2_interface['trunk']['trunk_allowed_vlans']|default("Not Configured")}}</td>
         </tr>
 {% endfor %}
-{% elif hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['l2_interfaces'].keys()|length == 0 %}
+{% elif hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['l2_interfaces']|length == 0 %}
 L2 information is not configured on this device
 {% else %}
 No L2 information available
