@@ -1,0 +1,28 @@
+<!–– INTERNAL TABLE FOR VLANS --!>
+<div class="expand">
+  <p class="expandclass">>VLAN Facts - Click to see details</p>
+</div>
+<div class="content">
+<table id="subtable">
+    <thead>
+        <tr>
+            <th>vlan_id</th>
+            <th>Name</th>
+            <th>state</th>
+        </tr>
+    </thead>
+    <tbody>
+{% if hostvars[network_switch]['ansible_network_resources']['vlans'] is defined %}
+{% for vlan in hostvars[network_switch]['ansible_network_resources']['vlans'] %}
+        <tr>
+            <td>{{vlan['vlan_id']}}</td>
+            <td>{{vlan['name']|default("none")}}</td>
+            <td>{{vlan['state']|default("default")}}</td>
+        </tr>
+{% endfor %}
+{% endif %}
+    </tbody>
+</table>
+</div>
+</div>
+<!–– END INTERNAL TABLE FOR VLANS --!>
