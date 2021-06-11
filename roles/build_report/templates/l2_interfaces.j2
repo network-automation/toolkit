@@ -24,8 +24,10 @@
             <td>{{l2_interface['trunk']['trunk_allowed_vlans']|default("Not Configured")}}</td>
         </tr>
 {% endfor %}
+{% elif hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['l2_interfaces'].keys()|length == 0 %}
+L2 information is not configured on this device
 {% else %}
-No l2_interfaces information provided
+No L2 information available
 {% endif %}
     </tbody>
 </table>
