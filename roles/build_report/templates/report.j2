@@ -51,6 +51,7 @@ $("document").ready(function(){
 {% include 'l3_interfaces.j2' %}
 {% include 'lacp.j2' %}
 {% include 'bgp.j2' %}
+{% include 'ospf.j2' %}
 
             </td>
 {% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}
