@@ -39,6 +39,9 @@ h1 {
 
 body {
   background:#353a40;
+  padding: 0px;
+  margin: 0px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 table {
@@ -54,7 +57,6 @@ thead {
 }
 
 thead th {
-  font-family: 'Patua One', monospace;
   font-size:16px;
   font-weight:400;
   color:#fff;
@@ -74,7 +76,6 @@ thead th {
 }
 
 tbody tr td {
-  font-family: 'Open Sans', sans-serif;
   font-weight:400;
   color:#5f6062;
   font-size:13px;
