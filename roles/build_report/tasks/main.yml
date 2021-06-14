@@ -41,9 +41,12 @@
 - name: copy CSS over
   become: true
   copy:
-    src: "webpage_logo.png"
+    src: "{{ item }}"
     dest: "{{ file_path }}"
     directory_mode: true
+  loop:
+    - "webpage_logo.png"
+    - "redhat-ansible-logo.svg"
 
 - name: display link to inventory report
   debug:

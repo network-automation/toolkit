@@ -120,6 +120,8 @@ header {
   height: 88px;
 }
 
+header{background-color:#171717;color:#FDFDFB;width:170px;float:left;position:fixed;border:1px solid #000;-webkit-border-top-right-radius:4px;-webkit-border-bottom-right-radius:4px;-moz-border-radius-topright:4px;-moz-border-radius-bottomright:4px;border-top-right-radius:4px;border-bottom-right-radius:4px;padding:34px 25px 22px 50px;margin:30px 25px 0 0;-webkit-font-smoothing:antialiased}p.header{font-size:16px}h1.header{font-family:Arvo, sans-serif;font-size:30px;font-weight:300;line-height:1.3em;border-bottom:none;margin-top:0}h1.header,a.header,a.name,header a{color:#fff}a.header{text-decoration:underline}a.name{white-space:nowrap}header ul{list-style:none;padding:0}header li{list-style-type:none;width:132px;height:15px;margin-bottom:12px;line-height:1em;padding:6px 6px 6px 7px;background:#AF0011;background:-moz-linear-gradient(top, #AF0011 0%, #820011 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #f8f8f8), color-stop(100%, #ddd));
+
 .header-container {
   margin: 0 auto;
   width: 100%;
