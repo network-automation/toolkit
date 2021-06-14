@@ -12,10 +12,10 @@
         </tr>
     </thead>
     <tbody>
-{% for ospfinfo in hostvars[network_switch]['ansible_network_resources']['ospfv2'] %}
+{% for key,value in ansible_network_resources['ospfv2'].items() %}
         <tr>
-            <td>{{ospfinfo['processes'][0]['process_id']}}</td>
-            <td>{{ospfinfo['processes'][0]['router_id']|default("Not Configured")}}</td>
+            <td>{{ {{ value[0].process_id }} }}</td>
+            <td>{{ value[0].router_id|default("Not Configured")}}</td>
         </tr>
 {% endfor %}
     </tbody>
