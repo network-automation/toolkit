@@ -1,6 +1,6 @@
 ---
 - name: setup control node timestamp
-  hosts: ansible
+  hosts: localhost
   gather_facts: no
   become: yes
   tasks:
@@ -49,7 +49,7 @@
 
 
 - name: backup router configurations
-  hosts: ansible
+  hosts: localhost
   gather_facts: no
   tasks:
     - name: find backups
