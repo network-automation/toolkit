@@ -25,7 +25,7 @@
   tasks:
     - name: backup configuration
       include_role:
-        name: backup
+        name: "../roles/developer_report"
       when: ansible_network_os is defined
 
     - name: SAVE CONFIGURATION LOCALLY
