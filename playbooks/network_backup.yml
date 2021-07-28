@@ -28,13 +28,22 @@
         name: "../roles/backup"
       when: ansible_network_os is defined
 
+    # - name: save configuration locally
+    #   vars:
+    #     ansible_connection: ssh
+    #   copy:
+    #     src: "{{config_output.backup_path}}"
+    #     dest: "/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
+    #   delegate_to: ansible
+    #   when: config_output is defined
+    #   become: yes
     - name: save configuration locally
       vars:
         ansible_connection: ssh
-      copy:
-        src: "{{config_output.backup_path}}"
+      template:
+        src: "backup.j2"
         dest: "/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
-      delegate_to: ansible
+      delegate_to: localhost
       when: config_output is defined
       become: yes
 
