@@ -1,6 +1,6 @@
 ---
 - name: setup control node timestamp
-  hosts: localhost
+  hosts: ansible
   gather_facts: no
   become: yes
   tasks:
@@ -42,14 +42,14 @@
         ansible_connection: ssh
       template:
         src: "backup.j2"
-        dest: "/backup/{{hostvars['localhost'].datetime}}/{{inventory_hostname}}"
+        dest: "/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
       delegate_to: localhost
       when: config_output is defined
       become: yes
 
 
 - name: backup router configurations
-  hosts: localhost
+  hosts: ansible
   gather_facts: no
   tasks:
     - name: find backups
