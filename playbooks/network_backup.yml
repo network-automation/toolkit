@@ -42,7 +42,7 @@
         ansible_connection: ssh
       template:
         src: "backup.j2"
-        dest: "/backup/{{hostvars['ansible'].datetime}}/{{inventory_hostname}}"
+        dest: "/backup/{{hostvars['localhost'].datetime}}/{{inventory_hostname}}"
       delegate_to: localhost
       when: config_output is defined
       become: yes
