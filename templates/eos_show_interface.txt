@@ -1,0 +1,51 @@
+rtr2#show interfaces
+Ethernet1 is up, line protocol is up (connected)
+  Hardware is Ethernet, address is 022e.dbe8.1375 (bia 022e.dbe8.1375)
+  Internet address is 172.18.104.95/16
+  Broadcast address is 255.255.255.255
+  Address determined by DHCP
+  IP MTU 1500 bytes , BW 1000000 kbit
+  Full-duplex, 1Gb/s, auto negotiation: on, uni-link: n/a
+  Up 10 hours, 51 minutes, 55 seconds
+  Loopback Mode : None
+  3 link status changes since last clear
+  Last clearing of "show interface" counters never
+  5 minutes input rate 950 bps (0.0% with framing overhead), 1 packets/sec
+  5 minutes output rate 858 bps (0.0% with framing overhead), 1 packets/sec
+     19361 packets input, 2964452 bytes
+     Received 0 broadcasts, 0 multicast
+     0 runts, 0 giants
+     0 input errors, 0 CRC, 0 alignment, 0 symbol, 0 input discards
+     0 PAUSE input
+     23415 packets output, 3417622 bytes
+     Sent 0 broadcasts, 0 multicast
+     0 output errors, 0 collisions
+     0 late collision, 0 deferred, 0 output discards
+     0 PAUSE output
+Loopback0 is up, line protocol is up (connected)
+  Hardware is Loopback
+  Internet address is 192.168.2.2/32
+  Broadcast address is 255.255.255.255
+  IP MTU 65535 bytes
+  Up 10 hours, 51 minutes, 58 seconds
+Tunnel0 is up, line protocol is up (connected)
+  Hardware is Tunnel, address is ac12.685f.0800
+  Internet address is 10.101.101.2/24
+  Broadcast address is 255.255.255.255
+  Tunnel source 172.18.104.95, destination 172.18.104.54
+  Tunnel protocol/transport GRE/IP
+   Key disabled, sequencing disabled
+   Checksumming of packets disabled
+  Tunnel TTL 10, Hardware forwarding not supported
+  Tunnel TOS 0
+  Path MTU Discovery
+  Tunnel transport MTU 1394 bytes
+  Tunnel underlay VRF "default"
+  Up 10 hours, 51 minutes, 51 seconds
+rtr2#show inter lo0
+Loopback0 is up, line protocol is up (connected)
+  Hardware is Loopback
+  Internet address is 192.168.2.2/32
+  Broadcast address is 255.255.255.255
+  IP MTU 65535 bytes
+  Up 11 hours, 40 minutes, 10 seconds

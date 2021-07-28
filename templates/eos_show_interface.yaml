@@ -1,0 +1,16 @@
+---
+- example: Ethernet1 is up, line protocol is up (connected)
+  getval: '(?P<name>\S+) is (?P<oper_state>\S+), line protocol is (?P<proto_state>\S+)'
+  result:
+    "{{ name }}":
+      state:
+        operating: "{{ oper_state }}"
+        protocol: "{{ proto_state }}"
+  shared: true
+
+- example: "Hardware is Ethernet, address is 022e.dbe8.1375 (bia 022e.dbe8.1375)"
+  getval: '(\s+Hardware is (?P<hardware_type>\w+))(,\saddress is (?P<mac>\S+))?'
+  result:
+    "{{ name }}":
+      hardware: "{{ hardware_type }}"
+      mac_address: "{{ mac | default(None) }}"
