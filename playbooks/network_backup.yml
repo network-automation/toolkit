@@ -25,10 +25,10 @@
   tasks:
     - name: backup configuration
       include_role:
-        name: "../roles/developer_report"
+        name: "../roles/backup"
       when: ansible_network_os is defined
 
-    - name: SAVE CONFIGURATION LOCALLY
+    - name: save configuration locally
       vars:
         ansible_connection: ssh
       copy:
@@ -53,15 +53,12 @@
 
     - name: create restore job template
       ansible.controller.job_template:
-        name: "Network-Restore"
+        name: "Network Automation - Restore"
         job_type: "run"
-        inventory: "Workshop Inventory"
-        project: "Workshop Project"
-        playbook: "network_restore.yml"
-        credential: "Workshop Credential"
+        inventory: "{{ restore_inventory|default('Workshop Inventory') }}"
+        project: "{{ restore_project|default('Workshop Project') }}"
+        playbook: "{{ restores_playbook|default('network_restore.yml') }}"
+        credential: "{{ restore_credential|default('Workshop Credential') }}"
         survey_enabled: true
-        survey_spec: "{{ lookup('template', '{{playbook_dir}}/network_setup/templates/backup.j2') }}"
+        survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
         validate_certs: no
-        tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
-        tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
-        tower_host: "{{ lookup('env', 'TOWER_HOST') }}"
