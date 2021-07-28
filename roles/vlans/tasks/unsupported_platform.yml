@@ -1,0 +1,4 @@
+---
+- name: unsupported network platform for facts role
+  debug:
+    msg: "this is not supported for VLANs role; the {{ ansible_network_os }} does not have any specific information specified"

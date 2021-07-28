@@ -1,2 +1,5 @@
 - name: load platform module for restore
-  include_tasks: "{{ ansible_network_os }}.yml"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "{{ role_path }}/tasks/{{ ansible_network_os }}.yml"
+    - "{{ role_path }}/tasks/unsupported_platform.yml"

@@ -39,6 +39,9 @@ h1 {
 
 body {
   background:#353a40;
+  padding: 0px;
+  margin: 0px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 table {
@@ -54,7 +57,6 @@ thead {
 }
 
 thead th {
-  font-family: 'Patua One', monospace;
   font-size:16px;
   font-weight:400;
   color:#fff;
@@ -74,7 +76,6 @@ thead th {
 }
 
 tbody tr td {
-  font-family: 'Open Sans', sans-serif;
   font-weight:400;
   color:#5f6062;
   font-size:13px;
@@ -108,4 +109,48 @@ span.highlight {
 .content{
          display:none;
          margin: 10px;
+}
+
+header {
+  width: 100%;
+  position: initial;
+  float: initial;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  height: 88px;
+  background-color: #171717;
+}
+
+.header-container {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1170px;
+  padding: 0;
+  float: initial;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 137px;
+  border: 0;
+  margin: 0;
+  margin-left: 15px;
+}
+
+.header-link {
+  margin-left: 40px;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-family: 'Red Hat Text';
+  font-weight: 500;
+}
+
+.header-link:hover {
+  text-shadow: 0 0 0.02px white;
+  text-decoration: none;
 }

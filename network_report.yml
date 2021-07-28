@@ -1,15 +1,15 @@
 ---
 - name: convert interface to structured data
   hosts: routers
-  gather_facts: no
+  gather_facts: yes
 
   tasks:
     - name: load read interfaces role
       include_role:
-        name: read_interfaces
+        name: facts
 
 - name: build report with facts
-  hosts: ansible
+  hosts: ansible-1
   gather_facts: no
 
   tasks:
