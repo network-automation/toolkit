@@ -1,7 +1,10 @@
 # This task will backup the configuration
 - name: backup cisco ios configuration
-  cisco.ios.ios_config:
+  cisco.ios.config:
     backup: true
+    backup_options:
+      filename: backup.cfg
+      dir_path: /tmp
   register: config_output
 
 # - name: retrieve configuration
