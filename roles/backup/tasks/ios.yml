@@ -5,17 +5,11 @@
     backup_options:
       filename: backup.cfg
       dir_path: /tmp
-  register: config_output    
-
-# - name: retrieve configuration
-#   cisco.ios.command:
-#     commands:
-#       - show running-config
-#   register: config_output
+  register: config_output
 
 # This task removes the Current configuration... from the top of IOS routers show run
-# - name: remove non config lines - regexp
-#   lineinfile:
-#     path: "{{ config_output.backup_path }}"
-#     line: "Building configuration..."
-#     state: absent
+- name: remove non config lines - regexp
+  lineinfile:
+    path: "{{ config_output.backup_path }}"
+    line: "Building configuration..."
+    state: absent
