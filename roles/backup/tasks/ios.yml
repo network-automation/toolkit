@@ -3,15 +3,9 @@
   cisco.ios.config:
     backup: true
     backup_options:
-      dir_path: /tmp/
-      filename: "{{ inventory_hostname }}.txt"
+      filename: backup.cfg
+      dir_path: /tmp
   register: config_output
-
-# - name: retrieve configuration
-#   cisco.ios.command:
-#     commands:
-#       - show running-config
-#   register: config_output
 
 # This task removes the Current configuration... from the top of IOS routers show run
 - name: remove non config lines - regexp
