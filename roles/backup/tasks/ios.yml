@@ -2,10 +2,10 @@
 - name: backup cisco ios configuration
   cisco.ios.config:
     backup: true
+    backup_options:
+      filename: backup.cfg
+      dir_path: /tmp
   register: config_output    
-    # backup_options:
-    #   filename: backup.cfg
-    #   dir_path: /tmp
 
 # - name: retrieve configuration
 #   cisco.ios.command:
