@@ -8,7 +8,7 @@
   register: config_output
 
 - name: backup cisco ios configuration
-  command: "cat {{ config_output }}"
+  command: "cat {{ config_output.backup_path }}"
 
 # This task removes the Current configuration... from the top of IOS routers show run
 - name: remove non config lines - regexp
