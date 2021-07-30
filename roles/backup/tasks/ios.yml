@@ -3,16 +3,9 @@
   cisco.ios.config:
     backup: true
     backup_options:
-      filename: backup.cfg
-      dir_path: /home/runner/
+      dir_path: /tmp/
+      filename: "{{ ansible_hostname }}"
   register: config_output
-
-- name: debug it
-  debug:
-    var: config_output.backup_path
-
-- name: cat the file
-  command: "cat {{ config_output.backup_path }}"
 
 # This task removes the Current configuration... from the top of IOS routers show run
 - name: remove non config lines - regexp
@@ -21,6 +14,3 @@
     line: "Building configuration..."
     state: absent
   delegate_to: localhost
-
-- name: cat the file again
-  command: "cat {{ config_output.backup_path }}"
