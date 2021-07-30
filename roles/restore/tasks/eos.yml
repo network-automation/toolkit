@@ -2,7 +2,7 @@
     msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}"
 
 - name: restore the config
-  eos_config:
+  arista.eos.config:
     replace: config
     src: "/backup/{{rollback_date}}/{{inventory_hostname}}"
 
