@@ -9,14 +9,10 @@
         name: "../roles/backup"
       when: ansible_network_os is defined
 
-- name: backup router configurations
-  hosts: backup-server
-  gather_facts: no
-  tasks:
     - name: create time stamp for play
       set_fact:
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
-      delegate_to: localhost
+      delegate_to: backup-server
 
     - name: save configuration locally
       copy:
@@ -24,6 +20,7 @@
         dest: "/backup/{{datetime}}/"
       when: config_output is defined
       become: yes
+      delegate_to: backup-server
 
     # - name: find backups
     #   find:
