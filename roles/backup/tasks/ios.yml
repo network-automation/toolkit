@@ -11,7 +11,7 @@
   debug:
     var: config_output.backup_path
 
-- name: backup cisco ios configuration
+- name: cat the file
   command: "cat {{ config_output.backup_path }}"
 
 # This task removes the Current configuration... from the top of IOS routers show run
@@ -21,3 +21,6 @@
     line: "Building configuration..."
     state: absent
   delegate_to: localhost
+
+- name: cat the file again
+  command: "cat {{ config_output.backup_path }}"
