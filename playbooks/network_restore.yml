@@ -1,10 +1,10 @@
 ---
 - name: restore router configurations
-  hosts: routers
+  hosts: network
   gather_facts: no
 
   tasks:
 
     - name: load restore role
       include_role:
-        name: restore
+        name: "../roles/restore"
