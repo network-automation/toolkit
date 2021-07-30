@@ -10,5 +10,5 @@
     backup: true
     backup_options:
       dir_path: /tmp/
-      filename: "{{ ansible_hostname }}"      
+      filename: "{{ inventory_hostname }}"      
   register: config_output
