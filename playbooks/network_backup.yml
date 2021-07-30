@@ -13,10 +13,12 @@
       set_fact:
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
       delegate_to: backup-server
+      delegate_facts: true
+      run_once: true
 
-    - name: save configuration locally
+    - name: save configuration to backup server
       copy:
-        src: "{{config_output.backup_path}}"
+        src: "{{ config_output.backup_path }}"
         dest: "/backup/{{datetime}}/"
       when: config_output is defined
       become: yes
