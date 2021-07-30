@@ -4,7 +4,7 @@
     backup: true
     backup_options:
       dir_path: /tmp/
-      filename: "{{ ansible_hostname }}"
+      filename: "{{ inventory_hostname }}"
   register: config_output
 
 # This task removes the Current configuration... from the top of IOS routers show run
