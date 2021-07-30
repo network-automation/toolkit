@@ -24,22 +24,25 @@
       become: yes
       delegate_to: backup-server
 
-    # - name: find backups
-    #   find:
-    #     paths: /backup
-    #     file_type: directory
-    #   register: backups
-    #   run_once: true
-    #   become: yes
-    #
-    # - name: create restore job template
-    #   ansible.controller.job_template:
-    #     name: "Network Automation - Restore"
-    #     job_type: "run"
-    #     inventory: "{{ restore_inventory|default('Workshop Inventory') }}"
-    #     project: "{{ restore_project|default('Workshop Project') }}"
-    #     playbook: "{{ restores_playbook|default('network_restore.yml') }}"
-    #     credential: "{{ restore_credential|default('Workshop Credential') }}"
-    #     survey_enabled: true
-    #     survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
-    #     validate_certs: no
+    - name: find backups
+      find:
+        paths: /backup
+        file_type: directory
+      register: backups
+      run_once: true
+      become: yes
+      delegate_to: backup-server
+      delegate_facts: true
+
+    - name: create restore job template
+      ansible.controller.job_template:
+        name: "Network Automation - Restore"
+        job_type: "run"
+        inventory: "{{ restore_inventory|default('Workshop Inventory') }}"
+        project: "{{ restore_project|default('Workshop Project') }}"
+        playbook: "{{ restores_playbook|default('network_restore.yml') }}"
+        credential: "{{ restore_credential|default('Workshop Credential') }}"
+        survey_enabled: true
+        survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
+        validate_certs: no
+      run_once: true
