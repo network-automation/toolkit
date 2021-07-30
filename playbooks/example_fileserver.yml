@@ -1,0 +1,17 @@
+---
+- name: setup control node timestamp
+  hosts: ansible
+  gather_facts: no
+  become: yes
+  tasks:
+
+
+    - name: create /backup directory on control node
+      file:
+        path: /backup
+        state: directory
+
+    - name: create timestamp directory
+      file:
+        path: "/backup/{{datetime}}"
+        state: directory

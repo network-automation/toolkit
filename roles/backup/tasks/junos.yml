@@ -8,4 +8,7 @@
     ansible_connection: netconf
   junipernetworks.junos.junos_config:
     backup: true
+    backup_options:
+      dir_path: /tmp/
+      filename: "{{ ansible_hostname }}"      
   register: config_output

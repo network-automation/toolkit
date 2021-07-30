@@ -1,4 +1,7 @@
 - name: backup arista configuration
   arista.eos.eos_config:
     backup: true
+    backup_options:
+      dir_path: /tmp/
+      filename: "{{ ansible_hostname }}"      
   register: config_output
