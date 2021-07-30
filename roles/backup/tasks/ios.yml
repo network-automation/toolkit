@@ -7,6 +7,10 @@
       dir_path: /tmp
   register: config_output
 
+- name: debug it
+  debug:
+    var: config_output.backup_path
+    
 - name: backup cisco ios configuration
   command: "cat {{ config_output.backup_path }}"
 
