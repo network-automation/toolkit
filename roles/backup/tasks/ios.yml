@@ -4,7 +4,7 @@
     backup: true
     backup_options:
       filename: backup.cfg
-      dir_path: /tmp
+      dir_path: /runner/project/
   register: config_output
 
 - name: debug it
