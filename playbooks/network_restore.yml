@@ -8,6 +8,7 @@
       ansible.builtin.fetch:
         src: "/backup/{{rollback_date}}/{{inventory_hostname}}.txt"
         dest: "/tmp/{{rollback_date}}/"
+        flat: true
       delegate_to: backup-server
       when: ansible_network_os is defined
 
