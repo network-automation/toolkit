@@ -4,7 +4,7 @@
 - shell: ls /tmp
 - shell: "ls /tmp/{{ rollback_date }}"
 - shell: "ls -la /tmp/{{ rollback_date }}"
-
+- shell: "ls -la /tmp/{{ rollback_date }}/cisco"
 
 - name: restore the config
   cisco.ios.config:
