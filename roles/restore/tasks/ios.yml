@@ -1,6 +1,11 @@
 - debug:
     msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}.txt"
 
+- shell: ls /tmp
+- shell: "ls /tmp/{{ rollback_date }}"
+- shell: "ls -la /tmp/{{ rollback_date }}"
+
+
 - name: restore the config
   cisco.ios.config:
     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
