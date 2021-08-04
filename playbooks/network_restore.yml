@@ -9,6 +9,7 @@
         src: "/backup/{{rollback_date}}/{{inventory_hostname}}"
         dest: "/backup/{{rollback_date}}/{{inventory_hostname}}"
       delegate_to: backup-server
+      when: ansible_network_os is defined
 
     - name: load restore role
       include_role:
