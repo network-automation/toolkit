@@ -4,6 +4,16 @@
   gather_facts: no
 
   tasks:
+    # fail with good error for Automation controller user
+    - name: determine that both AAP and Machine credentials are set
+      assert:
+        that:
+          - "lookup('env', 'CONTROLLER_USERNAME') is defined"
+        fail_msg: >
+          This Job requires two credentials
+          Red Hat Ansible Automation Platform credential is not set
+          Please assign correct credentials to the Job Template
+
     - name: backup configuration
       include_role:
         name: "../roles/backup"
