@@ -8,7 +8,7 @@
     - name: determine that both AAP and Machine credentials are set
       assert:
         that:
-          - "lookup('env', 'CONTROLLER_USERNAME') ! ==''"
+          - "lookup('env', 'CONTROLLER_USERNAME') !=''"
         fail_msg: >
           This Job requires two credentials
           Red Hat Ansible Automation Platform credential is not set
