@@ -52,7 +52,7 @@
       become: yes
 
     - name: create restore job template
-      awx.awx.tower_job_template:
+      tower_job_template:
         name: "Network-Restore"
         job_type: "run"
         inventory: "Workshop Inventory"
