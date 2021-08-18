@@ -1,6 +1,6 @@
 # This task will backup the configuration
 - name: backup cisco ios configuration
-  cisco.ios.ios_config:
+  ios_config:
     backup: true
   register: config_output
 
