@@ -6,6 +6,6 @@
 - name: backup junos configuration
   vars:
     ansible_connection: netconf
-  junipernetworks.junos.junos_config:
+  junos_config:
     backup: true
   register: config_output
