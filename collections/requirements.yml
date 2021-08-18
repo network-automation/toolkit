@@ -2,5 +2,5 @@
 collections:
 - cisco.ios
 - arista.eos
-- junipernetworks.junos.facts
+- junipernetworks.junos
 - awx.awx
