@@ -1,7 +1,5 @@
 ---
 - name: gather juniper junos facts
-  collections:
-    - junipernetworks.junos
   vars:
     ansible_connection: netconf
   junipernetworks.junos.facts:
