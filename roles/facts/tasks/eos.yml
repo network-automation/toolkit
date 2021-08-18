@@ -1,7 +1,4 @@
 ---
-collections:
-  - arista.eos
-
 - name: gather arista eos facts
   arista.eos.facts:
     gather_subset: config

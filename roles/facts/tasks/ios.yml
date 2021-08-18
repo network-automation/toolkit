@@ -1,7 +1,4 @@
 ---
-collections:
-  - cisco.ios
-
 - name: gather cisco ios facts
   cisco.ios.facts:
     gather_subset: config
