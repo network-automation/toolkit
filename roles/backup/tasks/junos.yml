@@ -1,4 +1,4 @@
-- name: ensuire netconf is running
+- name: ensure netconf is running
   vars:
     ansible_connection: network_cli
   junos_netconf:
