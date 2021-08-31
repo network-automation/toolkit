@@ -9,4 +9,4 @@
         - network_banner:  "{{ net_banner | default(None) }}"
         - banner_type: "{{ net_type | default('login') }}"
       include_role:
-        name: ../banner
+        name: "../roles/banner"

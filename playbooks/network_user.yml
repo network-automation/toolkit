@@ -6,4 +6,4 @@
   tasks:
     - name: load user role
       include_role:
-        name: user
+        name: "../roles/user"

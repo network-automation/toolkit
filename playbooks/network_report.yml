@@ -16,4 +16,4 @@
 
     - name: build a report
       include_role:
-        name: build_report
+        name: "../roles/build_report"
