@@ -42,6 +42,7 @@ $("document").ready(function(){
     </thead>
     <tbody>
 {% for network_switch in groups['routers']|sort %}
+{% if hostvars[network_switch].ansible_facts.network_resources is defined %}
         <tr>
             <td><p class="hostname">{{ hostvars[network_switch].ansible_net_hostname }}</p>
 {% include 'vlans.j2' %}
@@ -61,6 +62,7 @@ $("document").ready(function(){
             <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
             <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
         </tr>
+{% end if %}
 {% endfor %}
     </tbody>
 </table>
