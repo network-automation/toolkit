@@ -43,15 +43,15 @@ $("document").ready(function(){
     <tbody>
 {% for network_switch in groups['routers']|sort %}
         <tr>
-            <td><p class="hostname">{{hostvars[network_switch]['ansible_net_hostname']}}</p>
-<!-- {% include 'vlans.j2' %}
+            <td><p class="hostname">{{ hostvars[network_switch]['ansible_net_hostname'] }}</p>
+{% include 'vlans.j2' %}
 {% include 'interfaces.j2' %}
 {% include 'lldp_interfaces.j2' %}
 {% include 'l2_interfaces.j2' %}
 {% include 'l3_interfaces.j2' %}
 {% include 'lacp.j2' %}
 {% include 'bgp.j2' %}
-{% include 'ospf.j2' %} -->
+{% include 'ospf.j2' %}
 
             </td>
 {% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}

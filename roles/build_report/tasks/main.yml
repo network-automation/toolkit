@@ -2,6 +2,14 @@
   debug:
     msg: "{{hostvars['rtr1']}}"
 
+- name: print to terminal
+  debug:
+    msg: "{{ hostvars['rtr1'].ansible_net_hostname }}"
+
+- name: print to terminal again
+  debug:
+    msg: "{{ groups['routers'] }}"
+
 - name: install apache
   become: true
   yum:
