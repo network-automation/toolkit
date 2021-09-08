@@ -158,3 +158,9 @@ header {
 table.net_info td {
     padding: 5px;
 }
+
+p.expandclass:hover {
+    text-decoration: underline;
+    color: #EE0000;
+    cursor: pointer;
+}
