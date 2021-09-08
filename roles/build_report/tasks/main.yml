@@ -4,6 +4,10 @@
 
 - name: print to terminal
   debug:
+    msg: "{{hostvars['rtr2']}}"
+
+- name: print to terminal
+  debug:
     msg: "{{ hostvars['rtr1'].ansible_net_hostname }}"
 
 - name: print to terminal again
