@@ -44,7 +44,9 @@ $("document").ready(function(){
 {% for network_switch in groups['routers']|sort %}
 {% if hostvars[network_switch].ansible_facts.network_resources is defined %}
         <tr>
-            <td><p class="hostname">{{ hostvars[network_switch].ansible_net_hostname }}</p>
+            <td>
+              <div id="net_info_div">
+              <p class="hostname">{{ hostvars[network_switch].ansible_net_hostname }}</p>
               <p class="net_info">Transport</p><p class="sub_net_info">:{% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}{{ transport[ansible_connection] }}
               <p class="net_info">Platform</p><p class="sub_net_info">:{% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}{{ vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system'] }}</p>
               <p class="net_info">Code Version</p><p class="sub_net_info">:{{ hostvars[network_switch]['ansible_net_version'] }}</p>
@@ -57,7 +59,7 @@ $("document").ready(function(){
 {% include 'lacp.j2' %}
 {% include 'bgp.j2' %}
 {% include 'ospf.j2' %}
-
+            </div>
             </td>
 
             <td></td>
