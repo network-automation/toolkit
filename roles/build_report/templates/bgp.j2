@@ -14,7 +14,7 @@
     <tbody>
 {% for bgpinfo in hostvars[network_switch]['ansible_network_resources']['bgp_global'] %}
         <tr>
-            <td>{{bgpinfo['as_number']}}</td>
+            <td>{% if bgpinfo['as_number'] is defined %}{{ bgpinfo['as_number'] }}{% else %}AS number not configured {% endif %}</td>
             <td>{{bgpinfo['router_id']|default("Not Configured")}}</td>
         </tr>
 {% endfor %}
