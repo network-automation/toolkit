@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+$("document").ready(function(){
+  $click =  $('.expandclass');   // Click selector
+
+
+  $click.click(function () {
+
+    $clicked = $(this);
+    $expand = $(this).parent('.expand').next();  // Expand and collapse content selector
+
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $expand.slideToggle(500, function () {
+            //execute this after slideToggle is done
+            //change text of expand based on visibility of content div
+        });
+
+    });
+});
+</script>
+</head>
+<body>
+  {% include 'header.j2' %}
+<section>
+<center>
+<h1>Ansible Network Automation Example Report</h1>
+</center>
+<table>
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>Transport</th>
+            <th>Platform</th>
+            <th>Code Version</th>
+            <th>Serial Number</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for network_switch in groups['routers']|sort %}
+{% if hostvars[network_switch].ansible_facts.network_resources is defined %}
+        <tr>
+            <td><p class="hostname">{{ hostvars[network_switch].ansible_net_hostname }}</p>
+{% include 'vlans.j2' %}
+{% include 'interfaces.j2' %}
+{% include 'lldp_interfaces.j2' %}
+{% include 'l2_interfaces.j2' %}
+{% include 'l3_interfaces.j2' %}
+{% include 'lacp.j2' %}
+{% include 'bgp.j2' %}
+{% include 'ospf.j2' %}
+
+            </td>
+{% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}
+            <td>{{transport[ansible_connection]}}</td>
+{% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}
+            <td>{{vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
+        </tr>
+{% endif %}
+{% endfor %}
+    </tbody>
+</table>
+<center><p>Created with</p><br><img src="webpage_logo.png" width="300">
+<p>The source code to create this report can be found at <a href="https://github.com/network-automation/toolkit">https://github.com/network-automation/toolkit</a></br><br>
+If you are new to Ansible Automation check out the following links:<br>
+<a href="https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html">Getting Started</a"><br>
+<a target="_new" href="https://ansible.com/workshops">Free hands-on workshops</a><br>
+<a href="https://youtube.com/ansibleautomation">Youtube Videos</a><br>
+</p>
+</center>
+</section>
+</body>
+</html>
