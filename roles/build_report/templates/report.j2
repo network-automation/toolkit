@@ -33,11 +33,11 @@ $("document").ready(function(){
 <table>
     <thead>
         <tr>
+            <th>Network Device</th>
             <th>Interfaces</th>
             <th>VLANs</th>
             <th>Routing</th>
-            <th>Code Version</th>
-            <th>Serial Number</th>
+            <th>Future</th>
         </tr>
     </thead>
     <tbody>
@@ -63,24 +63,28 @@ $("document").ready(function(){
                 </tr>
                 <tr>
                   <td>Serial Number</td>
-                  <td class="sub_net_info">{ hostvars[network_switch]['ansible_net_serialnum'] }}</td>
+                  <td class="sub_net_info">{{ hostvars[network_switch]['ansible_net_serialnum'] }}</td>
                 </tr>
               </tbody>
               </table>
               </div>
 
-{% include 'interfaces.j2' %}
-{% include 'lldp_interfaces.j2' %}
-{% include 'l2_interfaces.j2' %}
-{% include 'l3_interfaces.j2' %}
-{% include 'lacp.j2' %}
-{% include 'bgp.j2' %}
-{% include 'ospf.j2' %}
+
+
             </td>
 
-            <td></td>
+            <td>
+            {% include 'interfaces.j2' %}
+            {% include 'lldp_interfaces.j2' %}
+            {% include 'l2_interfaces.j2' %}
+            {% include 'l3_interfaces.j2' %}
+            {% include 'lacp.j2' %}
+            </td>
             <td>{% include 'vlans.j2' %}</td>
-            <td></td>
+            <td>
+            {% include 'bgp.j2' %}
+            {% include 'ospf.j2' %}
+            </td>
             <td></td>
         </tr>
 {% endif %}

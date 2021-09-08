@@ -154,3 +154,7 @@ header {
   text-shadow: 0 0 0.02px white;
   text-decoration: none;
 }
+
+table.net_info td {
+    padding: 5px;
+}
