@@ -6,7 +6,7 @@
   tasks:
     - name: load read interfaces role
       include_role:
-        name: facts
+        name: "../roles/banner"
 
 - name: build report with facts
   hosts: ansible-1
