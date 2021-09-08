@@ -1,3 +1,7 @@
+- name: print to terminal
+  debug:
+    msg: "{{hostvars['rtr1']}}"
+
 - name: install apache
   become: true
   yum:
