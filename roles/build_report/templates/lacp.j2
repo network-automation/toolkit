@@ -13,7 +13,7 @@
     <tbody>
 {% for property in hostvars[network_switch]['ansible_network_resources']['lacp'] %}
         <tr>
-            <td>{% if property['system'] is defined %} }{{property['system']['priority']}}{% elif %}LACP not configured {% endif %}</td>
+            <td>{% if property['system'] is defined %} }{{property['system']['priority']}}{% else %}LACP not configured {% endif %}</td>
         </tr>
 {% endfor %}
     </tbody>
