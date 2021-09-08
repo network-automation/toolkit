@@ -4,4 +4,4 @@
     ansible_connection: netconf
   junipernetworks.junos.facts:
     gather_subset: config
-    gather_network_resources: "{{ network_resource | default('all') }}"
+    gather_network_resources: "{{ network_resource | default('!vlans') }}"
