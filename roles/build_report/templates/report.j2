@@ -58,6 +58,14 @@ collapsible: true
                   <td>Serial Number</td>
                   <td class="sub_net_info">{{ hostvars[network_switch]['ansible_net_serialnum'] }}</td>
                 </tr>
+                <tr>
+                  <td>Mgmt IP</td>
+                  <td class="sub_net_info">{{ hostvars[network_switch]['ansible_host'] }}</td>
+                </tr>
+                <tr>
+                  <td>Ansible groups</td>
+                  <td class="sub_net_info">{% for group in hostvars[network_switch]['group_names'] %}{{ group }} {% endfor %}</td>
+                </tr>
               </tbody>
               </table>
 
