@@ -33,9 +33,9 @@ $("document").ready(function(){
 <table>
     <thead>
         <tr>
-            <th>Interfaces</th>
-            <th>VLANs</th>
-            <th>Routing</th>
+            <th>Hostname</th>
+            <th>Transport</th>
+            <th>Platform</th>
             <th>Code Version</th>
             <th>Serial Number</th>
         </tr>
@@ -45,10 +45,6 @@ $("document").ready(function(){
 {% if hostvars[network_switch].ansible_facts.network_resources is defined %}
         <tr>
             <td><p class="hostname">{{ hostvars[network_switch].ansible_net_hostname }}</p>
-              <p class="net_info">Transport</p><p class="sub_net_info">:{% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}{{ transport[ansible_connection] }}
-              <p class="net_info">Platform</p><p class="sub_net_info">:{% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}{{ vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system'] }}</p>
-              <p class="net_info">Code Version</p><p class="sub_net_info">:{{ hostvars[network_switch]['ansible_net_version'] }}</p>
-              <p class="net_info">Serial Number</p>  <p class="sub_net_info">:{{ hostvars[network_switch]['ansible_net_serialnum'] }}</p>
 {% include 'vlans.j2' %}
 {% include 'interfaces.j2' %}
 {% include 'lldp_interfaces.j2' %}
@@ -59,11 +55,12 @@ $("document").ready(function(){
 {% include 'ospf.j2' %}
 
             </td>
-
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+{% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}
+            <td>{{transport[ansible_connection]}}</td>
+{% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}
+            <td>{{vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
         </tr>
 {% endif %}
 {% endfor %}
