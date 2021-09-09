@@ -98,6 +98,10 @@ tbody tr:last-child td {
   }
 }
 
+td {
+  vertical-align: top;
+}
+
 span.highlight {
     background-color: yellow;
 }
