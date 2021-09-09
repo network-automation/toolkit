@@ -52,6 +52,7 @@ table {
   background:#fff;
   @include border-radius(5px);
   @include box-shadow(0px 0px 5px rgba(0,0,0,0.3));
+  min-width: 1366px;
 }
 
 .main_net_table {
