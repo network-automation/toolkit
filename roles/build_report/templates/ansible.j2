@@ -1,7 +1,7 @@
 <!–– INTERNAL TABLE FOR Ansible --!>
 <div id="accordion">
 <div>
-<h3>BGP Global Info</h3>
+<h3>Ansible Automation Info</h3>
 <div id="net_content">
 <table class="net_info">
 <tbody>
@@ -22,7 +22,7 @@
     <td class="sub_net_info">{% for group in hostvars[network_switch]['group_names'] %}{{ group }} {% endfor %}</td>
   </tr>
   <tr>
-    <td>Ansible groups</td>
+    <td>Ansible core version</td>
     <td class="sub_net_info">{% for group in hostvars[network_switch]['ansible_version']['full'] %}{{ group }} {% endfor %}</td>
   </tr>
   <tr>

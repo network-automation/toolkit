@@ -2,6 +2,8 @@ p.hostname {
   color: #000000;
   font-weight: bolder;
   font-size: large;
+  margin: auto;
+  width: 50%;  
 }
 
 #subtable {
@@ -175,10 +177,15 @@ p.expandclass:hover {
 }
 
 .summary_info {
-  max-width:100px
+  max-width:200px
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
     border: 1px solid #5F0000;
     background: #EE0000;
+}
+
+div#net_content {
+    padding: 0px;
+    height: auto !important;
 }
