@@ -18,6 +18,10 @@ $("document").ready(function(){
         $expand.slideToggle(500, function () {
             //execute this after slideToggle is done
             //change text of expand based on visibility of content div
+            $expand.text(function () {
+            //change text based on condition
+              return $content.is(":visible") ? "▶" : "▼";
+            });
         });
 
     });
