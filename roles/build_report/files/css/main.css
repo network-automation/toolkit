@@ -51,6 +51,9 @@ table {
   @include border-radius(5px);
   margin:50px auto;
   @include box-shadow(0px 0px 5px rgba(0,0,0,0.3));
+}
+
+.main_net_table {
   min-width: 1366px;
 }
 
