@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="css/main.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -26,17 +26,16 @@ collapsible: true
     <thead>
         <tr>
             <th>Network Device</th>
-            <th>Interfaces</th>
-            <th>VLANs</th>
-            <th>Routing</th>
-            <th>Future</th>
+            <th>Layer 1</th>
+            <th>Layer 2 - VLANs</th>
+            <th>Layer 3 - Routing</th>
         </tr>
     </thead>
     <tbody>
 {% for network_switch in groups['routers']|sort %}
 {% if hostvars[network_switch].ansible_facts.network_resources is defined %}
         <tr>
-            <td>
+            <td class="summary_info">
               <p class="hostname">{{ hostvars[network_switch].ansible_net_hostname }}</p>
               <div id="net_info_div">
               <table class="net_info">
@@ -79,18 +78,19 @@ collapsible: true
 
             <td>
             {% include 'interfaces.j2' %}
-            {% include 'lldp_interfaces.j2' %}
-            {% include 'l2_interfaces.j2' %}
-            {% include 'l3_interfaces.j2' %}
             {% include 'lacp.j2' %}
             </td>
-            <td>{% include 'vlans.j2' %}</td>
             <td>
+            {% include 'vlans.j2' %}
+            {% include 'lldp_interfaces.j2' %}
+            {% include 'l2_interfaces.j2' %}
+            </td>
+            <td>
+            {% include 'l3_interfaces.j2' %}
             {% include 'static.j2' %}
             {% include 'bgp.j2' %}
             {% include 'ospf.j2' %}
             </td>
-            <td></td>
         </tr>
 {% endif %}
 {% endfor %}
