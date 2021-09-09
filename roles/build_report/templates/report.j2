@@ -18,15 +18,21 @@ $("document").ready(function(){
         $expand.slideToggle(500, function () {
             //execute this after slideToggle is done
             //change text of expand based on visibility of content div
-            $expand.text(function () {
-            //change text based on condition
-              return $content.is(":visible") ? "▶" : "▼";
-            });
         });
 
     });
 });
 </script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script>
+ $( function() {
+   $( "#accordion" ).accordion({
+     collapsible: true
+   });
+ } );
+ </script>
 </head>
 <body>
   {% include 'header.j2' %}
@@ -98,6 +104,7 @@ $("document").ready(function(){
             </td>
             <td>{% include 'vlans.j2' %}</td>
             <td>
+            {% include 'static.j2' %}
             {% include 'bgp.j2' %}
             {% include 'ospf.j2' %}
             </td>
