@@ -1,4 +1,5 @@
 <!–– INTERNAL TABLE FOR Static Routes --!>
+<div id="accordion">
 <h3>Static Routes</h3>
 <div id="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['static_routes'] is defined and hostvars[network_switch]['ansible_network_resources']['static_routes']|length > 0 %}
@@ -38,5 +39,6 @@ Static Routes are not configured on this device
 {% else %}
 No Static Route information available
 {% endif %}
+</div>
 </div>
 <!–– END INTERNAL TABLE FOR Static Routes --!>

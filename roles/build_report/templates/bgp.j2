@@ -1,8 +1,7 @@
 <!–– INTERNAL TABLE FOR BGP --!>
-<div class="expand">
-  <p class="expandclass">> BGP Global Info</p>
-</div>
-<div class="content">
+<div id="accordion">
+<h3>BGP Global Info</h3>
+<div id="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['bgp_global'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_global']|length > 0 %}
 <table id="subtable">
     <thead>

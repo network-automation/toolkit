@@ -3,30 +3,10 @@
 <head>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>
-$("document").ready(function(){
-  $click =  $('.expandclass');   // Click selector
-
-
-  $click.click(function () {
-
-    $clicked = $(this);
-    $expand = $(this).parent('.expand').next();  // Expand and collapse content selector
-
-        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-        $expand.slideToggle(500, function () {
-            //execute this after slideToggle is done
-            //change text of expand based on visibility of content div
-        });
-
-    });
-});
-</script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- <script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
  $( function() {
    $( "#accordion" ).accordion({
      collapsible: true
@@ -104,7 +84,7 @@ $("document").ready(function(){
             </td>
             <td>{% include 'vlans.j2' %}</td>
             <td>
-            {% include 'static.j2' %}              
+            {% include 'static.j2' %}
             {% include 'bgp.j2' %}
             {% include 'ospf.j2' %}
             </td>
