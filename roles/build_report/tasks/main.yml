@@ -1,9 +1,9 @@
 ---
-- name: install apache
-  become: true
-  yum:
-    name: httpd
-    state: present
+# - name: install apache
+#   become: true
+#   yum:
+#     name: httpd
+#     state: present
 
 - name: change apache to specified port
   become: true
