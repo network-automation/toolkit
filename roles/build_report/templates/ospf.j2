@@ -1,5 +1,6 @@
 <!–– INTERNAL TABLE FOR OSPF --!>
 <div id="accordion">
+<div>
 <h3>OSPF Global Info</h3>
 <div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['ospfv2'] is defined and hostvars[network_switch]['ansible_network_resources']['ospfv2']|length > 0 %}
@@ -26,4 +27,5 @@ No OSPF information available
 {% endif %}
 </div>
 </div>
+<div>
 <!–– END INTERNAL TABLE FOR OSPF --!>
