@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-{% for net_route in hostvars[network_switch]['ansible_network_resources']['static_routes']| %}
+{% for net_route in hostvars[network_switch]['ansible_network_resources']['static_routes'] %}
 <tr>
     <td>{{ net_route['vrf']|default("N/A") }}</td>
 
