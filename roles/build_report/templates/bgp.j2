@@ -13,9 +13,9 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{ hostvars.network_switch.ansible_facts.ansible_network_resources.bgp_global.as_number|default("Not Configured") }}
+            <td>{{ hostvars[network_switch].ansible_facts.ansible_network_resources.bgp_global.as_number|default("Not Configured") }}
 </td>
-            <td>{{ hostvars.network_switch.ansible_facts.ansible_network_resources.bgp_global.bgp.router_id.address|default("Not Configured") }}</td>
+            <td>{{ hostvars[network_switch].ansible_facts.ansible_network_resources.bgp_global.bgp.router_id.address|default("Not Configured") }}</td>
         </tr>
     </tbody>
 </table>
@@ -28,3 +28,4 @@ No BGP information available
 </div>
 </div>
 <!–– END INTERNAL TABLE FOR BGP --!>
+ansible_facts.ansible_network_resources.bgp_global.as_number"
