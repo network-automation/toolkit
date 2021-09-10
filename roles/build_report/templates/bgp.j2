@@ -15,9 +15,9 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{ hostvars[network_switch].ansible_facts.ansible_network_resources.bgp_global.as_number|default("Not Configured") }}
+            <td>{{ hostvars[network_switch].ansible_network_resources.bgp_global['as_number']|default("Not Configured") }}
 </td>
-            <td>{{ hostvars[network_switch].ansible_facts.ansible_network_resources.bgp_global.bgp.router_id.address|default("Not Configured") }}</td>
+            <td>{{ hostvars[network_switch].ansible_network_resources.bgp_global.bgp['router_id']['address']|default("Not Configured") }}</td>
             <td>{{ hostvars[network_switch].ansible_network_resources.bgp_global}}</td>
         </tr>
     </tbody>
