@@ -193,3 +193,7 @@ img.router_image {
     padding: 0px 10px 0px 10px;
     width: 50px;
 }
+
+table.net_info {
+    width: 100%;
+}
