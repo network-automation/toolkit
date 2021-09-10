@@ -197,3 +197,7 @@ img.router_image {
 table.net_info {
     width: 100%;
 }
+
+p.internal_label {
+    color: #000000;
+}
