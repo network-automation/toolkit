@@ -22,7 +22,7 @@
 {% if hostvars[network_switch]['ansible_network_resources']['bgp_global'][
 'neighbor'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_global'][
 'neighbor']|length > 0 %}
-<p>Neighbor</p>
+<p class="internal_label">BGP Neighbors</p>
 <table id="subtable">
     <thead>
         <tr>

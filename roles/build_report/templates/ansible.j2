@@ -23,11 +23,15 @@
   </tr>
   <tr>
     <td>Ansible core version</td>
-    <td class="sub_net_info">{% for group in hostvars[network_switch]['ansible_version']['full'] %}{{ group }} {% endfor %}</td>
+    <td class="sub_net_info">{% for group in hostvars[network_switch]['ansible_version']['string']|default("Unknown") %}{{ group }} {% endfor %}</td>
   </tr>
   <tr>
     <td>Ansible Python</td>
-    <td class="sub_net_info">{{ hostvars[network_switch]['ansible_playbook_python'] }} </td>
+    <td class="sub_net_info">{{ hostvars[network_switch]['ansible_playbook_python']|default("Unknown") }} </td>
+  </tr>
+  <tr>
+    <td>Python version</td>
+    <td class="sub_net_info">{{ hostvars[network_switch]['ansible_net_python_version']|default("Unknown") }} </td>
   </tr>
 </tbody>
 </table>
