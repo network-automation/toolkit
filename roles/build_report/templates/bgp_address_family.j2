@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for bgp_network in address_family %}
+    {% for bgp_network in address_family['network'] %}
         <tr>
             <td>{{ bgp_network['address']|default("Not Configured") }}</td>
             <td>{{ bgp_network['mask']|default("Not Configured") }}</td>
