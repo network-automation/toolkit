@@ -33,9 +33,6 @@
         </tr>
     </thead>
     <tbody>
-    {% if hostvars[network_switch]['ansible_network_resources']['bgp_global'][
-    'neighbor'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_global'][
-    'neighbor']|length > 0 %}
     {% for bgp_neighbor in hostvars[network_switch].ansible_network_resources.bgp_global.neighbor %}
         <tr>
             <td>{{ bgp_neighbor['address']|default("Not Configured") }}</td>
