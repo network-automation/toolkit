@@ -26,7 +26,7 @@
 </table>
 {% endfor %}
 
-{% elif hostvars[network_switch]['ansible_network_resources']['bgp_address_family'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_address_family']['address_family']||length == 0 %}
+{% elif hostvars[network_switch]['ansible_network_resources']['bgp_address_family'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_address_family']['address_family']|length == 0 %}
 no BGP address-family is not configured on this device
 {% else %}
 No BGP information available
