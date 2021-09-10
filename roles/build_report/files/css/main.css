@@ -55,7 +55,6 @@ table {
 }
 
 .main_net_table {
-  min-width: 1366px;
   margin:50px auto;
 }
 
@@ -187,4 +186,10 @@ p.expandclass:hover {
 div#net_content {
     padding: 0px;
     height: auto !important;
+}
+
+img.router_image {
+    vertical-align: middle;
+    padding: 0px 10px 0px 10px;
+    width: 50px;
 }

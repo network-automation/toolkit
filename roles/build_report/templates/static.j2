@@ -2,7 +2,7 @@
 <div id="accordion">
 <div>
 <h3>Static Routes</h3>
-<div id="net_content">
+<div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['static_routes'] is defined and hostvars[network_switch]['ansible_network_resources']['static_routes']|length > 0 %}
 <table id="subtable">
     <thead>

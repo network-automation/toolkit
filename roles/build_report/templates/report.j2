@@ -27,8 +27,8 @@ collapsible: true
         <tr>
             <th>Network Device</th>
             <th>Layer 1</th>
-            <th>Layer 2 - VLANs</th>
-            <th>Layer 3 - Routing</th>
+            <th>Layer 2</th>
+            <th>Layer 3</th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +36,9 @@ collapsible: true
 {% if hostvars[network_switch].ansible_facts.network_resources is defined %}
         <tr>
             <td class="summary_info">
-              <p class="hostname">{{ hostvars[network_switch].ansible_net_hostname }}</p>
+              <div id="hostname">
+              <p class="hostname"><img class="router_image" src="router.png">{{ hostvars[network_switch].ansible_net_hostname }}</p>
+            </div>
               <div id="net_info_div">
               <table class="net_info">
               <tbody>
