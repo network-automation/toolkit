@@ -20,7 +20,7 @@
             <td>
 {% if interface.ipv4 is defined %}
 {% for address in interface.ipv4 %}
-{{address['address']}}
+{{ address['address']|default("Not Configured") }}
 {% if address['secondary'] is defined %}
 secondary
 {% endif %}
@@ -33,7 +33,7 @@ secondary
             <td>
 {% if interface.ipv6 is defined %}
 {% for v6address in interface.ipv6 %}
-{{v6address['address']}}
+{{v6address['address']|default("Not Configured") }}
 {% if loop.length > 1 and not loop.last %}<br>{% endif %}
 {% endfor %}
 {% endif %}
