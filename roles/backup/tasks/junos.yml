@@ -10,5 +10,5 @@
     backup: true
     backup_options:
       dir_path: /tmp/
-      filename: "{{ inventory_hostname }}"      
+      filename: "{{ inventory_hostname }}.txt"
   register: config_output
