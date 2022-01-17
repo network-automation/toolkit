@@ -4,7 +4,7 @@
 - name: restore the config
   arista.eos.eos_config:
     replace: config
-    src: "/backup/{{rollback_date}}/{{inventory_hostname}}"
+    src: "/backup/{{rollback_date}}/{{inventory_hostname}}.txt"
 
 - name: print to terminal window
   debug:
