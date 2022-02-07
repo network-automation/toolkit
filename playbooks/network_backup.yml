@@ -37,7 +37,9 @@
       ansible.builtin.file:
         path: /backup/
         state: directory
-    
+      delegate_to: backup-server
+      run_once: true
+
     - name: save configuration to backup server
       copy:
         src: "{{ config_output.backup_path }}"
