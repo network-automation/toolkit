@@ -10,7 +10,7 @@
 # This task removes the Current configuration... from the top of IOS routers show run
 - name: remove non config lines - regexp
   lineinfile:
-    path: "{{ config_output.backup_path }}.txt"
+    path: "{{ config_output.backup_path }}"
     line: "Building configuration..."
     state: absent
   delegate_to: localhost

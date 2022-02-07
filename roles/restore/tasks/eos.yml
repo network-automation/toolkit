@@ -1,11 +1,11 @@
 - debug:
-    msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}"
+    msg: "restoring from /backup/{{ rollback_date }}/{{ inventory_hostname }}.txt"
 
 - name: restore the config
-  arista.eos.config:
+  arista.eos.eos_config:
     replace: config
-    src: "/backup/{{rollback_date}}/{{inventory_hostname}}"
+    src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
 
 - name: print to terminal window
   debug:
-    msg: "Restore is complete for device {{inventory_hostname}} is set to {{rollback_date}} timestamp"
+    msg: "Restore is complete for device {{ inventory_hostname }} is set to {{ rollback_date }} timestamp"

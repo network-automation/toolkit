@@ -62,6 +62,7 @@
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
         validate_certs: no
+        execution_environment: "Default execution environment"
       run_once: true
 
     # - name: create restore job template
