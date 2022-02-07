@@ -78,16 +78,3 @@
         validate_certs: no
         execution_environment: "Default execution environment"
       run_once: true
-
-    # - name: create restore job template
-    #   ansible.controller.job_template:
-    #     name: "Network Automation - Restore"
-    #     job_type: "run"
-    #     inventory: "{{ restore_inventory|default('Workshop Inventory') }}"
-    #     project: "{{ restore_project|default('Workshop Project') }}"
-    #     playbook: "{{ restores_playbook|default('network_restore.yml') }}"
-    #     credential: "{{ restore_credential|default('Workshop Credential') }}"
-    #     survey_enabled: true
-    #     survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
-    #     validate_certs: no
-    #   run_once: true
