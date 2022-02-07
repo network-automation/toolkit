@@ -6,6 +6,9 @@
 - name: backup junos configuration
   vars:
     ansible_connection: netconf
-  junos_config:
+  junipernetworks.junos.junos_config:
     backup: true
+    backup_options:
+      dir_path: /tmp/
+      filename: "{{ inventory_hostname }}.txt"
   register: config_output

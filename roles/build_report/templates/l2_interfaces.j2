@@ -1,8 +1,8 @@
 <!–– INTERNAL TABLE FOR l2_interfaces --!>
-<div class="expand">
-  <p class="expandclass">> L2 Interfaces - Trunk/Access Ports</p>
-</div>
-<div class="content">
+<div id="accordion">
+<div>
+<h3>L2 Interfaces - Trunk/Access Ports</h3>
+<div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['l2_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['l2_interfaces']|length > 0 %}
 <table id="subtable">
     <thead>
@@ -31,6 +31,7 @@ L2 information is not configured on this device
 {% else %}
 No L2 information available
 {% endif %}
+</div>
 </div>
 </div>
 <!–– END INTERNAL TABLE FOR l2_interfaces --!>

@@ -2,11 +2,14 @@ p.hostname {
   color: #000000;
   font-weight: bolder;
   font-size: large;
+  margin: auto;
+  width: 50%;
 }
 
 #subtable {
   background: #ebebeb;
   margin: 0px;
+  width: 100%;
 }
 
 #subtable tbody tr td {
@@ -48,8 +51,11 @@ table {
   border-collapse: separate;
   background:#fff;
   @include border-radius(5px);
-  margin:50px auto;
   @include box-shadow(0px 0px 5px rgba(0,0,0,0.3));
+}
+
+.main_net_table {
+  margin:50px auto;
 }
 
 thead {
@@ -96,6 +102,10 @@ tbody tr:last-child td {
   &:last-child {
     @include border-bottom-right-radius(5px);
   }
+}
+
+td {
+  vertical-align: top;
 }
 
 span.highlight {
@@ -153,4 +163,41 @@ header {
 .header-link:hover {
   text-shadow: 0 0 0.02px white;
   text-decoration: none;
+}
+
+table.net_info td {
+    padding: 5px;
+}
+
+p.expandclass:hover {
+    text-decoration: underline;
+    color: #EE0000;
+    cursor: pointer;
+}
+
+.summary_info {
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #5F0000;
+    background: #EE0000;
+}
+
+div#net_content {
+    padding: 0px;
+    height: auto !important;
+}
+
+img.router_image {
+    vertical-align: middle;
+    padding: 0px 10px 10px 10px;
+    width: 50px;
+}
+
+table.net_info {
+    width: 100%;
+}
+
+p.internal_label {
+    color: #000000;
 }

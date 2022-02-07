@@ -7,4 +7,4 @@
 
     - name: load system role
       include_role:
-        name: system
+        name: "../roles/system"

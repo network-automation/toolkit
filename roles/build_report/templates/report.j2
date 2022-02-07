@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-$("document").ready(function(){
-  $click =  $('.expandclass');   // Click selector
-
-
-  $click.click(function () {
-
-    $clicked = $(this);
-    $expand = $(this).parent('.expand').next();  // Expand and collapse content selector
-
-        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-        $expand.slideToggle(500, function () {
-            //execute this after slideToggle is done
-            //change text of expand based on visibility of content div
-        });
-
-    });
+$(function() {
+$( "#accordion > div" ).accordion({
+    header: "h3",
+    active: false,
+collapsible: true
+});
 });
 </script>
 </head>
@@ -30,37 +22,71 @@ $("document").ready(function(){
 <center>
 <h1>Ansible Network Automation Example Report</h1>
 </center>
-<table>
+<table class="main_net_table">
     <thead>
         <tr>
-            <th>Hostname</th>
-            <th>Transport</th>
-            <th>Platform</th>
-            <th>Code Version</th>
-            <th>Serial Number</th>
+            <th>Network Device</th>
+            <th>Layer 1</th>
+            <th>Layer 2</th>
+            <th>Layer 3</th>
         </tr>
     </thead>
     <tbody>
 {% for network_switch in groups['routers']|sort %}
+{% if hostvars[network_switch].ansible_facts.network_resources is defined %}
         <tr>
-            <td><p class="hostname">{{hostvars[network_switch]['ansible_net_hostname']}}</p>
-{% include 'vlans.j2' %}
-{% include 'interfaces.j2' %}
-{% include 'lldp_interfaces.j2' %}
-{% include 'l2_interfaces.j2' %}
-{% include 'l3_interfaces.j2' %}
-{% include 'lacp.j2' %}
-{% include 'bgp.j2' %}
-{% include 'ospf.j2' %}
+            <td class="summary_info">
+              <div id="hostname">
+              <p class="hostname"><img class="router_image" src="router.png">{{ hostvars[network_switch].ansible_net_hostname }}</p>
+            </div>
+              <div id="net_info_div">
+              <table class="net_info">
+              <tbody>
+                <tr>
+                  <td>Platform</td>
+                  <td class="sub_net_info">{% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}{{ vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system'] }}</td>
+                </tr>
+                <tr>
+                  <td>Code Version</td>
+                  <td class="sub_net_info">{{ hostvars[network_switch]['ansible_net_version'] }}</td>
+                </tr>
+                <tr>
+                  <td>Model</td>
+                  <td class="sub_net_info">{{ hostvars[network_switch]['ansible_net_model'] }}</td>
+                </tr>
+                <tr>
+                  <td>Serial Number</td>
+                  <td class="sub_net_info">{{ hostvars[network_switch]['ansible_net_serialnum'] }}</td>
+                </tr>
+              </tbody>
+              </table>
+
+
+            {% include 'ansible.j2' %}
+          </div>
+
+
 
             </td>
-{% set ansible_connection = hostvars[network_switch]['ansible_net_api'] %}
-            <td>{{transport[ansible_connection]}}</td>
-{% set ansible_network_os = hostvars[network_switch]['ansible_net_system'] %}
-            <td>{{vendor[ansible_network_os]}} {{hostvars[network_switch]['ansible_net_system']}}</td>
-            <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
-            <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
+
+            <td>
+            {% include 'interfaces.j2' %}
+            </td>
+            <td>
+            {% include 'vlans.j2' %}
+            {% include 'lldp_interfaces.j2' %}
+            {% include 'l2_interfaces.j2' %}
+            </td>
+            <td>
+            {% include 'l3_interfaces.j2' %}
+            {% include 'lacp.j2' %}
+            {% include 'static.j2' %}
+            {% include 'bgp.j2' %}
+            {% include 'bgp_address_family.j2' %}
+            {% include 'ospf.j2' %}
+            </td>
         </tr>
+{% endif %}
 {% endfor %}
     </tbody>
 </table>

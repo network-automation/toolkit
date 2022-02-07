@@ -1,3 +1,4 @@
+---
 - name: install apache
   become: true
   yum:
@@ -31,14 +32,14 @@
     src: report.j2
     dest: "{{ file_path }}/index.html"
 
-- name: copy CSS directory over
+- name: copy CSS over
   become: true
   copy:
     src: "css"
     dest: "{{ file_path }}"
     directory_mode: true
 
-- name: copy several files over
+- name: copy CSS over
   become: true
   copy:
     src: "{{ item }}"
@@ -47,6 +48,8 @@
   loop:
     - "webpage_logo.png"
     - "redhat-ansible-logo.svg"
+    - "router.png"
+
 
 - name: display link to inventory report
   debug:

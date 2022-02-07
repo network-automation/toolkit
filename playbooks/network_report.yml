@@ -6,7 +6,7 @@
   tasks:
     - name: load read interfaces role
       include_role:
-        name: facts
+        name: "../roles/facts"
 
 - name: build report with facts
   hosts: ansible-1
@@ -16,4 +16,4 @@
 
     - name: build a report
       include_role:
-        name: build_report
+        name: "../roles/build_report"

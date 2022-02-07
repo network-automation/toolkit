@@ -1,5 +1,5 @@
 ---
 - name: gather cisco ios facts
-  ios_facts:
+  cisco.ios.facts:
     gather_subset: config
-    gather_network_resources: "!vlans"
+    gather_network_resources: "{{ network_resource | default('!vlans') }}"

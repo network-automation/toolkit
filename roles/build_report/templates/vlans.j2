@@ -1,8 +1,8 @@
 <!–– INTERNAL TABLE FOR VLANS --!>
-<div class="expand">
-  <p class="expandclass">> VLANs</p>
-</div>
-<div class="content">
+<div id="accordion">
+<div>
+<h3>VLANs</h3>
+<div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans']|length > 0 %}
 <table id="subtable">
     <thead>
@@ -27,6 +27,7 @@ VLANs are not configured on this device
 {% else %}
 No VLAN information available
 {% endif %}
+</div>
 </div>
 </div>
 <!–– END INTERNAL TABLE FOR VLANS --!>
