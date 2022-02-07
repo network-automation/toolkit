@@ -33,6 +33,11 @@
       delegate_facts: true
       run_once: true
 
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /backup/
+        state: directory
+    
     - name: save configuration to backup server
       copy:
         src: "{{ config_output.backup_path }}"
