@@ -41,6 +41,7 @@
       run_once: true
 
     - name: Create a directory if it does not exist
+      become: true
       ansible.builtin.file:
         path: /backup/
         state: directory
