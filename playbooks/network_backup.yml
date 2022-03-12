@@ -1,11 +1,12 @@
 ---
-- name: retrieve network configurations
+- name: asdf
   hosts: backup-server
   gather_facts: no
   tasks:
-    - name: Create a directory if it does not exist
+    - name: do the ls-la
       shell: "ls -la"
       register: output
+
     - name: debug
       debug:
         msg: "{{ output }}"
