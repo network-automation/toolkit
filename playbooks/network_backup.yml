@@ -1,5 +1,16 @@
 ---
 - name: retrieve network configurations
+  hosts: backup-server
+  gather_facts: no
+  tasks:
+
+    - name: Create a directory if it does not exist
+      become: true
+      file:
+        path: /backup/
+        state: directory
+
+- name: retrieve network configurations
   hosts: network
   gather_facts: no
 
@@ -13,6 +24,7 @@
           - "This Job requires two credentials"
           - "Red Hat Ansible Automation Platform credential is not set"
           - "Please assign correct credentials to the Job Template"
+
 
     - name: determine that both AAP and Machine credentials are set
       debug:
@@ -38,14 +50,6 @@
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
       delegate_to: backup-server
       delegate_facts: true
-      run_once: true
-
-    - name: Create a directory if it does not exist
-      become: true
-      ansible.builtin.file:
-        path: /backup/
-        state: directory
-      delegate_to: backup-server
       run_once: true
 
     - name: save configuration to backup server
