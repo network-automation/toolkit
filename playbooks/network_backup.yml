@@ -38,6 +38,7 @@
         path: /backup/
         state: directory
       delegate_to: backup-server
+      become: true
       run_once: true
 
     - name: save configuration to backup server
