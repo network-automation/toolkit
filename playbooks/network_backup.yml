@@ -38,6 +38,7 @@
         path: /backup/
         state: directory
       delegate_to: backup-server
+      become: true
       run_once: true
 
     - name: save configuration to backup server
@@ -45,7 +46,7 @@
         src: "{{ config_output.backup_path }}"
         dest: "/backup/{{hostvars['backup-server'].datetime}}/"
       when: config_output is defined
-      become: yes
+      become: true
       delegate_to: backup-server
 
     - name: find backups
@@ -54,7 +55,7 @@
         file_type: directory
       register: backups
       run_once: true
-      become: yes
+      become: true
       delegate_to: backup-server
       delegate_facts: true
 

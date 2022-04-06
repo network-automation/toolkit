@@ -58,6 +58,10 @@ table {
   margin:50px auto;
 }
 
+.main_net_table {
+  margin:50px auto;
+}
+
 thead {
   @include border-radius(5px);
 }
