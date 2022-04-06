@@ -21,13 +21,6 @@
           - "{{ lookup('env', 'CONTROLLER_PASSWORD') }}"
           - "{{ lookup('env', 'CONTROLLER_HOST') }}"
 
-    - name: determine that both AAP and Machine credentials are set
-      debug:
-        msg:
-          - "{{ lookup('env', 'CONTROLLER_USERNAME') }}"
-          - "{{ lookup('env', 'CONTROLLER_PASSWORD') }}"
-          - "{{ lookup('env', 'CONTROLLER_HOST') }}"
-
     - name: backup configuration
       include_role:
         name: "../roles/backup"
