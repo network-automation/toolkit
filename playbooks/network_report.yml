@@ -1,6 +1,6 @@
 ---
 - name: convert interface to structured data
-  hosts: routers
+  hosts: network
   gather_facts: no
 
   tasks:
