@@ -19,7 +19,8 @@
 {% for net_route in hostvars[network_switch]['ansible_network_resources']['static_routes'] %}
 <tr>
     <td>{{ net_route['vrf']|default("N/A") }}</td>
-{% for address_family in net_route.address_families|default([]) %}
+
+{% for address_family in net_route.address_families %}
 <td>{{ address_family['afi'] }}</td>
 {% for routes in address_family['routes'] %}
 <td>{{ routes['dest'] }}</td>
