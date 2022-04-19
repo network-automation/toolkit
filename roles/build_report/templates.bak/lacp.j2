@@ -1,4 +1,6 @@
 <!-- INTERNAL TABLE FOR LACP -->
+<div id="accordion">
+<div>
 <h3>LACP</h3>
 <div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['lacp'] is defined and hostvars[network_switch]['ansible_network_resources']['lacp'].keys()|length > 0  %}
@@ -21,5 +23,7 @@ LACP is not configured on this device
 {% else %}
 No LACP information available
 {% endif %}
+</div>
+</div>
 </div>
 <!-- END INTERNAL TABLE FOR LACP -->

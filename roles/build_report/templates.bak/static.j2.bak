@@ -1,4 +1,6 @@
-<!-- INTERNAL TABLE FOR Static Routes -->
+<!–– INTERNAL TABLE FOR Static Routes --!>
+<div id="accordion">
+<div>
 <h3>Static Routes</h3>
 <div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['static_routes'] is defined and hostvars[network_switch]['ansible_network_resources']['static_routes']|length > 0 %}
@@ -17,7 +19,8 @@
 {% for net_route in hostvars[network_switch]['ansible_network_resources']['static_routes'] %}
 <tr>
     <td>{{ net_route['vrf']|default("N/A") }}</td>
-{% for address_family in net_route.address_families|default([]) %}
+
+{% for address_family in net_route.address_families %}
 <td>{{ address_family['afi'] }}</td>
 {% for routes in address_family['routes'] %}
 <td>{{ routes['dest'] }}</td>
@@ -38,4 +41,6 @@ Static Routes are not configured on this device
 No Static Route information available
 {% endif %}
 </div>
-<!-- END INTERNAL TABLE FOR Static Routes -->
+</div>
+</div>
+<!–– END INTERNAL TABLE FOR Static Routes --!>
