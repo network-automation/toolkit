@@ -1,4 +1,6 @@
 <!-- INTERNAL TABLE FOR lldp_interfaces -->
+<div id="accordion">
+<div>
 <h3>LLDP Interfaces</h3>
 <div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'].keys()|length > 0 %}
@@ -25,5 +27,7 @@ LLDP is not configured on this device
 {% else %}
 No LLDP information available
 {% endif %}
+</div>
+</div>
 </div>
 <!-- END INTERNAL TABLE FOR lldp_interfaces -->
