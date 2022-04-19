@@ -1,4 +1,6 @@
 <!-- INTERNAL TABLE FOR INTERFACES -->
+<div id="accordion">
+<div>
 <h3>Interfaces - MTU/Duplex/Speed</h3>
 <div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['interfaces']|length > 0  %}
@@ -31,5 +33,7 @@ No interfaces configured on this device
 {% else %}
 No Interface information available
 {% endif %}
+</div>
+</div>
 </div>
 <!-- END INTERNAL TABLE FOR INTERFACES -->
