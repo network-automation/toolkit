@@ -85,9 +85,16 @@ collapsible: true
             </td>
             <td>
             {% include 'vlans.j2' %}
+            {% include 'lldp_interfaces.j2' %}
+            {% include 'l2_interfaces.j2' %}
             </td>
             <td>
             {% include 'l3_interfaces.j2' %}
+            {% include 'lacp.j2' %}
+            {% include 'static.j2' %}
+            {% include 'bgp.j2' %}
+            {% include 'bgp_address_family.j2' %}
+            {% include 'ospf.j2' %}
             </td>
         </tr>
 {% endif %}
