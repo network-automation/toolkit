@@ -1,6 +1,6 @@
 ---
 - name: set router banners
-  hosts: routers
+  hosts: network
   gather_facts: no
 
   tasks:
