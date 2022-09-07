@@ -11,7 +11,7 @@
     - name: copy file over to flash on network device
       ansible.netcommon.net_put:
         src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
-        dest: "flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
+        # dest: "flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
 
     - name: overwrite startup config and reboot
       cisco.ios.ios_command:
