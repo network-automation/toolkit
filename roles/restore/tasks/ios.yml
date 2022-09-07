@@ -18,8 +18,12 @@
     #   ansible.builtin.command: "scp -o StrictHostKeyChecking=no -i {{ ansible_ssh_private_key_file }} /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
     #   delegate_to: localhost
 
+    # - name: copy file over to flash on network device
+    #   ansible.builtin.command: "scp -o StrictHostKeyChecking=no -i {{ playbook_dir }}/tmp/ssh_key }} /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
+    #   delegate_to: localhost
+
     - name: copy file over to flash on network device
-      ansible.builtin.command: "scp -o StrictHostKeyChecking=no -i {{ playbook_dir }}/tmp/ssh_key }} /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
+      ansible.builtin.command: "scp -o StrictHostKeyChecking=no /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
       delegate_to: localhost
 
     - name: overwrite startup config and reboot
