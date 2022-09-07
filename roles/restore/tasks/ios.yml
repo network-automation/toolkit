@@ -16,6 +16,9 @@
     - name: copy file over to flash on network device
       ansible.builtin.command: "scp /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
       delegate_to: localhost
+      environment:
+        ANSIBLE_SSH_HOST_KEY_CHECKING: false
+
 
     - name: overwrite startup config and reboot
       cisco.ios.ios_command:
