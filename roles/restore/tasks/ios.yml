@@ -28,8 +28,8 @@
       meta: reset_connection
 
     - name: Wait for the network device to reload
-    wait_for_connection:
-      delay: 20
+      wait_for_connection:
+        delay: 20
   when: restore_mode == "overwrite"
 
 - name: print to terminal window
