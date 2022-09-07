@@ -1,9 +1,36 @@
 - debug:
     msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}.txt"
 
-- name: restore the config
+- name: restore the config with merge config
   cisco.ios.config:
     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
+  when: restore_mode | default('merge') == "merge"
+
+- name: overwrite the config, this will reboot cisco IOS device
+  block: doing full ios_config overwrite
+    - name: copy file over to flash on network device
+      ansible.netcommon.net_put:
+        src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
+        dest: "flash:/{{ rollback_date }}-{{ inventory_hostname }}.txt"
+
+    - name: overwrite startup config and reboot
+      cisco.ios.ios_command:
+        commands:
+          - command: 'copy flash:/{{ rollback_date }}-{{ inventory_hostname }}.txt startup-config'
+          - command: 'reload'
+            prompt:
+              - Save?
+              - confirm
+            answer:
+             - y
+             - y
+    - name: reset the connection
+      meta: reset_connection
+
+    - name: Wait for the network device to reload
+    wait_for_connection:
+      delay: 20
+  when: restore_mode == "overwrite"
 
 - name: print to terminal window
   debug:
