@@ -34,4 +34,4 @@
 
 - name: print to terminal window
   debug:
-    msg: "Restore is complete for device {{ inventory_hostname }} is set to {{ rollback_date }} timestamp"
+    msg: "Restore is complete for device {{ inventory_hostname }} is set to {{ rollback_date }} timestamp, restored with restore_mode {{ restore_mode | default('merge') }} "
