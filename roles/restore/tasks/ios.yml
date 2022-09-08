@@ -21,12 +21,12 @@
     # - name: copy file over to flash on network device
     #   ansible.builtin.command: "scp -o StrictHostKeyChecking=no -i {{ playbook_dir }}/tmp/ssh_key }} /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
     #   delegate_to: localhost
-    - name: Pause for 30 minutes
-      ansible.builtin.pause:
-        minutes: 30
+    # - name: Pause for 30 minutes
+    #   ansible.builtin.pause:
+    #     minutes: 30
 
     - name: copy file over to flash on network device
-      ansible.builtin.command: "scp -o StrictHostKeyChecking=no /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
+      ansible.builtin.command: "scp -o StrictHostKeyChecking=no /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ ansible_user }}@{{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
       delegate_to: localhost
 
     - name: overwrite startup config and reboot
