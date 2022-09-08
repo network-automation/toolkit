@@ -23,12 +23,14 @@
 
     - name: reboot machine
       cisco.ios.ios_command:
+      become: true
         commands:
           - command: 'reload'
             prompt:
               - Proceed
             answer:
-              - "\r"
+              - "y"
+      ignore_errors: true
 
     - name: Wait for the network device to reload
       wait_for:
