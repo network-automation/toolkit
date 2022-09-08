@@ -41,15 +41,22 @@
             prompt:
               - Save?
               - confirm
+              - Proceed
             answer:
              - y
              - y
+             - "\r"
     - name: reset the connection
       meta: reset_connection
 
     - name: Wait for the network device to reload
-      wait_for_connection:
-        delay: 20
+      wait_for:
+        host: "{{ ansible_host }}"
+        delay: 40
+        timeout: 600
+        port: 22
+      vars:
+        ansible_connection: local
   when: restore_mode | default('merge') == "overwrite"
 
 - name: print to terminal window
