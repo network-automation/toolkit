@@ -1,10 +1,49 @@
 - debug:
     msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}.txt"
 
-- name: restore the config
+- name: restore the config with merge config
   cisco.ios.config:
     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
+  when: restore_mode | default('merge') == "merge"
+
+- name: overwrite the config, this will reboot cisco IOS device
+  block:
+    - name: copy file over to flash on network device
+      ansible.builtin.command: "scp -o StrictHostKeyChecking=no /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt {{ ansible_user }}@{{ inventory_hostname }}:flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
+      delegate_to: localhost
+
+    - name: overwrite startup config
+      cisco.ios.ios_command:
+        commands:
+          - command: 'copy flash://{{ rollback_date }}-{{ inventory_hostname }}.txt startup-config'
+            prompt:
+              - Destination filename
+            answer:
+              - "\r"
+
+    - name: reboot machine
+      cisco.ios.ios_command:
+        commands:
+          - command: 'reload'
+            prompt:
+              - Proceed
+            answer:
+              - "y"
+      ignore_errors: true
+
+    - name: Wait for the network device to reload
+      wait_for:
+        host: "{{ ansible_host }}"
+        delay: 40
+        timeout: 600
+        port: 22
+      vars:
+        ansible_connection: local
+
+    - name: reset the connection
+      meta: reset_connection
+  when: restore_mode | default('merge') == "overwrite"
 
 - name: print to terminal window
   debug:
-    msg: "Restore is complete for device {{ inventory_hostname }} is set to {{ rollback_date }} timestamp"
+    msg: "Restore is complete for device {{ inventory_hostname }} is set to {{ rollback_date }} timestamp, restored with restore_mode {{ restore_mode | default('merge') }} "
