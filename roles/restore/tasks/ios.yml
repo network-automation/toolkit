@@ -33,6 +33,10 @@
       cisco.ios.ios_command:
         commands:
           - command: 'copy flash://{{ rollback_date }}-{{ inventory_hostname }}.txt startup-config'
+            prompt:
+              - Destination filename [startup-config]?
+            answer:
+             - y
           - command: 'reload'
             prompt:
               - Save?
