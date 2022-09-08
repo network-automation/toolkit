@@ -19,7 +19,7 @@
             prompt:
               - Destination filename
             answer:
-             - y
+              - "\r"
 
     - name: reboot machine
       cisco.ios.ios_command:
@@ -28,7 +28,7 @@
             prompt:
               - Proceed
             answer:
-             - "\r"
+              - "\r"
 
     - name: Wait for the network device to reload
       wait_for:
