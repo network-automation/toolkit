@@ -34,7 +34,7 @@
         commands:
           - command: 'copy flash://{{ rollback_date }}-{{ inventory_hostname }}.txt startup-config'
             prompt:
-              - Destination filename [startup-config]?
+              - Destination filename
             answer:
              - y
           - command: 'reload'
