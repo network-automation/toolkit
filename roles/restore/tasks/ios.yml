@@ -23,7 +23,6 @@
 
     - name: reboot machine
       cisco.ios.ios_command:
-      become: true
         commands:
           - command: 'reload'
             prompt:
