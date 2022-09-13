@@ -2,7 +2,7 @@
     msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}.txt"
 
 - name: Include task list in play
-  ansible.builtin.include: "ios/{{ restore_mode | default('merge') }}.yml"
+  ansible.builtin.include_tasks: "ios/{{ restore_mode | default('merge') }}.yml"
 
 - name: print to terminal window
   debug:
