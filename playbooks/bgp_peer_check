@@ -1,0 +1,17 @@
+---
+- name: get bgp status
+  hosts: cisco
+  gather_facts: false
+  connection: local
+  tasks:
+   - name: Save your show command to register
+     ios_command:
+      commands: 'show ip bgp summary'
+     register: output
+  #Save contents to disk
+#   - name: Copy output to file
+#     copy:
+#        content="{{ output.stdout | replace('\\n', '\n') }}" #
+        #Change destination/direcotry 
+ #       dest=/home/hawar/mac_add/{{ ansible_net_hostname }}_{{ inventory_hostname }}.txt
+#End of codes
