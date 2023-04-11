@@ -7,7 +7,7 @@
 <tbody>
   <tr>
     <td>Ansible user</td>
-    <td class="sub_net_info">{{ hostvars[network_switch]['ansible_user'] }}</td>
+    <td class="sub_net_info">{{ hostvars[network_switch]['ansible_user'] | default("Unknown") }}</td>
   </tr>
   <tr>
     <td>Transport</td>
@@ -15,7 +15,7 @@
   </tr>
   <tr>
     <td>Ansible Mgmt IP</td>
-    <td class="sub_net_info">{{ hostvars[network_switch]['ansible_host'] }}</td>
+    <td class="sub_net_info">{{ hostvars[network_switch]['ansible_host']|default("Unknown") }}</td>
   </tr>
   <tr>
     <td>Ansible groups</td>
