@@ -1,16 +1,18 @@
 ---
-- name: cli command playbook
+- name: CLI command playbook
   hosts: all
-  gather_facts: no
+  gather_facts: false
   vars:
     ansible_connection: network_cli
 
   tasks:
-    - name: show command
-      cli_command:
-        command: "{{ tower_input | default('')}}"
+    - name: Specified command is run
+      ansible.netcommon.cli_command:
+        command: "{{ survey_input | default('show version') }}"
       when: ansible_network_os is defined
       register: output
 
-    - debug:
+    - name: Return results to terminal
+      ansible.builtin.debug:
         msg: "{{ output.stdout_lines }}"
+      when: ansible_network_os is defined
