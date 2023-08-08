@@ -1,0 +1,31 @@
+<!-- INTERNAL TABLE FOR OSPF -->
+<div id="accordion">
+<div>
+<h3>OSPF Global Info</h3>
+<div class="net_content">
+{% if hostvars[network_switch]['ansible_network_resources']['ospfv2'] is defined and hostvars[network_switch]['ansible_network_resources']['ospfv2']|length > 0 %}
+<table id="subtable">
+    <thead>
+        <tr>
+            <th>Process ID</th>
+            <th>Router ID</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for key,value in hostvars[network_switch]['ansible_network_resources']['ospfv2'].items() %}
+        <tr>
+            <td>{{ value[0].process_id }}</td>
+            <td>{{ value[0].router_id|default("Not Configured") }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% elif hostvars[network_switch]['ansible_network_resources']['ospfv2'] is defined and hostvars[network_switch]['ansible_network_resources']['ospfv2']|length == 0 %}
+OSPF is not configured on this device
+{% else %}
+No OSPF information available
+{% endif %}
+</div>
+</div>
+</div>
+<!-- END INTERNAL TABLE FOR OSPF -->

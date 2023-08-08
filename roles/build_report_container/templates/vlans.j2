@@ -1,0 +1,33 @@
+<!-- INTERNAL TABLE FOR VLANS -->
+<div id="accordion">
+<div>
+<h3>VLANs</h3>
+<div class="net_content">
+{% if hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans']|length > 0 %}
+<table id="subtable">
+    <thead>
+        <tr>
+            <th>vlan_id</th>
+            <th>Name</th>
+            <th>state</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for vlan in hostvars[network_switch]['ansible_network_resources']['vlans'] %}
+        <tr>
+            <td>{{vlan['vlan_id']}}</td>
+            <td>{{vlan['name']|default("none")}}</td>
+            <td>{{vlan['state']|default("default")}}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% elif hostvars[network_switch]['ansible_network_resources']['vlans'] is defined and hostvars[network_switch]['ansible_network_resources']['vlans']|length == 0 %}
+VLANs are not configured on this device
+{% else %}
+No VLAN information available
+{% endif %}
+</div>
+</div>
+</div>
+<!-- END INTERNAL TABLE FOR VLANS -->

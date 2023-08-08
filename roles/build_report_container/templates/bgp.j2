@@ -1,0 +1,52 @@
+<!-- INTERNAL TABLE FOR BGP -->
+<div id="accordion">
+<div>
+<h3>BGP Global Info</h3>
+<div class="net_content">
+{% if hostvars[network_switch]['ansible_network_resources']['bgp_global'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_global']|length > 0 %}
+<table id="subtable">
+    <thead>
+        <tr>
+            <th>ASN</th>
+            <th>Router ID</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ hostvars[network_switch].ansible_network_resources.bgp_global['as_number']|default("Not Configured") }}</td>
+            <td>{{ hostvars[network_switch].ansible_network_resources.bgp_global.bgp['router_id']['address']|default("Not Configured") }}</td>
+        </tr>
+    </tbody>
+</table>
+{% if hostvars[network_switch]['ansible_network_resources']['bgp_global'][
+'neighbor'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_global'][
+'neighbor']|length > 0 %}
+<p class="internal_label">BGP Neighbors</p>
+<table id="subtable">
+    <thead>
+        <tr>
+            <th>Address</th>
+            <th>Remote AS</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    {% for bgp_neighbor in hostvars[network_switch].ansible_network_resources.bgp_global.neighbor %}
+        <tr>
+            <td>{{ bgp_neighbor['address']|default("Not Configured") }}</td>
+            <td>{{ bgp_neighbor['remote_as']|default("Not Configured") }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% elif hostvars[network_switch]['ansible_network_resources']['bgp_global'] is defined and hostvars[network_switch]['ansible_network_resources']['bgp_global']|length == 0 %}
+BGP is not configured on this device
+{% else %}
+No BGP information available
+{% endif %}
+</div>
+</div>
+</div>
+<!-- END INTERNAL TABLE FOR BGP -->

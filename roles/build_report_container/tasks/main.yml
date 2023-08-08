@@ -1,0 +1,64 @@
+---
+- name: Set nis_enabled flag on and keep it persistent across reboots
+  become: true
+  ansible.posix.seboolean:
+    name: nis_enabled
+    state: true
+    persistent: true
+    
+- name: Creates directory
+  ansible.builtin.file:
+    path: "{{ file_path }}"
+    state: directory
+    mode: "775"
+    recurse: yes
+
+- name: Ensure Nginx container is running
+  containers.podman.podman_container:
+    name: nginx_container
+    image: docker.io/nginx:stable-alpine3.17-slim
+    state: started 
+    ports:
+      - "{{ web_port }}:80"
+    volumes:
+      - "{{ file_path }}:/usr/share/nginx/html:Z"
+    recreate: true
+
+- name: Create HTML report
+  become: true
+  ansible.builtin.template:
+    src: report.j2
+    dest: "{{ file_path }}/index.html"
+    mode: "644"
+
+- name: Copy CSS over
+  become: true
+  ansible.builtin.copy:
+    src: "css"
+    dest: "{{ file_path }}"
+    directory_mode: true
+    mode: "644"
+
+- name: Copy CSS over
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ file_path }}"
+    directory_mode: true
+    mode: "644"
+  loop:
+    - "webpage_logo.png"
+    - "redhat-ansible-logo.svg"
+    - "router.png"
+
+- name: retrieve public IP address
+  ansible.builtin.command: curl https://ifconfig.me
+  register: public_ip_report
+  ignore_errors: true
+
+- name: display link to inventory report
+  debug:
+    msg:
+      - "Please go to http://{{ public_ip_report.stdout | default(ansible_fqdn) }}:{{ web_port }}"
+      - "or just refresh the Dynamic Report tab"
+      - "at the top of your window if you using Instruqt labs!"
