@@ -1,5 +1,5 @@
 ---
-- name: gather arista eos facts
-  arista.eos.facts:
+- name: Gather arista eos facts
+  arista.eos.eos_facts:
     gather_subset: config
     gather_network_resources: "{{ network_resource | default('!bgp_global,!bgp_address_family') }}"

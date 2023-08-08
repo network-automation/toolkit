@@ -1,19 +1,19 @@
 ---
-- name: convert interface to structured data
+- name: Retrieve facts for network infrastructure
   hosts: network
-  gather_facts: no
+  gather_facts: false
 
   tasks:
-    - name: load read interfaces role
-      include_role:
+    - name: Load read interfaces role
+      ansible.builtin.include_role:
         name: "../roles/facts"
 
-- name: build report with facts
+- name: Build report with facts
   hosts: ansible-1
-  gather_facts: no
+  gather_facts: false
 
   tasks:
 
-    - name: build a report
-      include_role:
+    - name: Build a report
+      ansible.builtin.include_role:
         name: "../roles/build_report"

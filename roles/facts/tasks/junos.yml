@@ -1,6 +1,6 @@
 ---
-- name: gather juniper junos facts
+- name: Gather juniper junos facts
   vars:
     ansible_connection: netconf
-  junipernetworks.junos.facts:
-    gather_network_resources: "{{ network_resource | default('!vlans,!bgp_global,!bgp_address_family,!ospf_interfaces,!ospf,!ospfv3' ) }}"
+  junipernetworks.junos.junos_facts:
+    gather_network_resources: "{{ network_resource | default('!vlans,!bgp_global,!bgp_address_family,!ospf_interfaces,!ospf,!ospfv3') }}"

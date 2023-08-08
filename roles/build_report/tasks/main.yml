@@ -1,56 +1,58 @@
 ---
-- name: install apache
+- name: Install apache
   become: true
-  yum:
+  ansible.builtin.yum:
     name: httpd
     state: present
 
-- name: change apache to specified port
+- name: Change apache to specified port
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^Listen '
     insertafter: '^#Listen '
-    line: 'Listen {{web_port}}'
+    line: 'Listen {{ web_port }}'
 
 - name: Set nis_enabled flag on and keep it persistent across reboots
   become: true
-  seboolean:
+  ansible.posix.seboolean:
     name: nis_enabled
     state: true
     persistent: true
 
-- name: start httpd
+- name: Start httpd
   become: true
-  service:
+  ansible.builtin.service:
     name: httpd
     state: started
 
-- name: create HTML report
+- name: Create HTML report
   become: true
-  template:
+  ansible.builtin.template:
     src: report.j2
     dest: "{{ file_path }}/index.html"
+    mode: "644"
 
-- name: copy CSS over
+- name: Copy CSS over
   become: true
-  copy:
+  ansible.builtin.copy:
     src: "css"
     dest: "{{ file_path }}"
     directory_mode: true
+    mode: "644"
 
-- name: copy CSS over
+- name: Copy CSS over
   become: true
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ file_path }}"
     directory_mode: true
+    mode: "644"
   loop:
     - "webpage_logo.png"
     - "redhat-ansible-logo.svg"
     - "router.png"
 
-
-- name: display link to inventory report
-  debug:
-    msg: "Please go to http://{{hostvars[web_host].ansible_host}}:{{web_port}}"
+- name: Display link to inventory report
+  ansible.builtin.debug:
+    msg: "Please go to http://{{ hostvars[web_host].ansible_host }}:{{ web_port }}"
