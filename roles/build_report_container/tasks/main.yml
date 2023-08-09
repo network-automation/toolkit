@@ -1,9 +1,13 @@
 ---
-- name: Set nis_enabled flag on and keep it persistent across reboots
-  ansible.posix.seboolean:
-    name: nis_enabled
-    state: true
-    persistent: true
+- name: permissive SELinux
+  ansible.posix.selinux:
+    state: permissive
+
+# - name: Set nis_enabled flag on and keep it persistent across reboots
+#   ansible.posix.seboolean:
+#     name: nis_enabled
+#     state: true
+#     persistent: true
     
 - name: Creates directory
   ansible.builtin.file:
