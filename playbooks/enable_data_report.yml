@@ -9,7 +9,7 @@
         selinux_fcontexts:
           - {target: '/data/report(/.*)?', setype: 'httpd_sys_content_t', state: 'present'}
       include_role:
-        name: linux-system-roles.selinux
+        name: redhat.rhel_system_roles.selinux
 
     # - name: Enable /data/report for SELinux
     #   community.general.sefcontext:
