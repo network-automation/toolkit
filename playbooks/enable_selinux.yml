@@ -7,3 +7,4 @@
     - name: set SELinux
       ansible.posix.selinux:
         state: enforcing
+        policy: targeted
