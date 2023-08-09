@@ -4,20 +4,20 @@
     path: "{{ file_path }}"
     state: directory
     mode: "775"
-    recurse: yes
+    recurse: true
 
 - name: Include selinux role
   vars:
     selinux_fcontexts:
       - {target: '{{ file_path }}(/.*)?', setype: 'httpd_sys_content_t', state: 'present'}
-  include_role:
+  ansible.builtin.include_role:
     name: fedora.linux_system_roles.selinux
 
 - name: Ensure Nginx container is running
   containers.podman.podman_container:
     name: nginx_container
     image: docker.io/nginx:stable-alpine3.17-slim
-    state: started 
+    state: started
     ports:
       - "{{ web_port }}:80"
     volumes:
@@ -48,14 +48,12 @@
     - "redhat-ansible-logo.svg"
     - "router.png"
 
-- name: retrieve public IP address
+- name: Retrieve public IP address
   ansible.builtin.command: curl https://ifconfig.me
   register: public_ip_report
   ignore_errors: true
 
 - name: display link to inventory report
-  debug:
+  ansible.builtin.debug:
     msg:
       - "Please go to http://{{ public_ip_report.stdout | default(ansible_fqdn) }}:{{ web_port }}"
-      - "or just refresh the Dynamic Report tab"
-      - "at the top of your window if you using Instruqt labs!"
