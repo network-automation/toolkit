@@ -1,20 +1,17 @@
 ---
-- name: set SELinux
-  ansible.posix.selinux:
-    state: disabled
-
-# - name: Set nis_enabled flag on and keep it persistent across reboots
-#   ansible.posix.seboolean:
-#     name: nis_enabled
-#     state: true
-#     persistent: true
-    
 - name: Creates directory
   ansible.builtin.file:
     path: "{{ file_path }}"
     state: directory
     mode: "775"
     recurse: yes
+
+- name: Include selinux role
+  vars:
+    selinux_fcontexts:
+      - {target: '{{ file_path }}(/.*)?', setype: 'httpd_sys_content_t', state: 'present'}
+  include_role:
+    name: fedora.linux_system_roles.selinux
 
 - name: Ensure Nginx container is running
   containers.podman.podman_container:
