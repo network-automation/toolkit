@@ -1,0 +1,11 @@
+---
+- hosts: ansible-1
+  gather_facts: false
+  become: true
+  tasks:
+
+    - name: Enable /data/report for SELinux
+      community.general.sefcontext:
+        target: /data/report
+        state: absent
+        setype: httpd_sys_content_t
