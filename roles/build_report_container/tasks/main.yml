@@ -1,7 +1,7 @@
 ---
 - name: set SELinux
   ansible.posix.selinux:
-    state: disable
+    state: disabled
 
 # - name: Set nis_enabled flag on and keep it persistent across reboots
 #   ansible.posix.seboolean:
