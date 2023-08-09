@@ -1,6 +1,5 @@
 ---
 - name: Set nis_enabled flag on and keep it persistent across reboots
-  become: true
   ansible.posix.seboolean:
     name: nis_enabled
     state: true
@@ -25,22 +24,19 @@
     recreate: true
 
 - name: Create HTML report
-  become: true
   ansible.builtin.template:
     src: report.j2
     dest: "{{ file_path }}/index.html"
     mode: "644"
 
 - name: Copy CSS over
-  become: true
   ansible.builtin.copy:
     src: "css"
     dest: "{{ file_path }}"
     directory_mode: true
-    mode: "644"
+    mode: "775"
 
 - name: Copy CSS over
-  become: true
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ file_path }}"
