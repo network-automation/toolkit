@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  become: true
+  tasks:
+
+    - name: set SELinux
+      ansible.posix.selinux:
+        state: disabled
