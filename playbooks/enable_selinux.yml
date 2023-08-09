@@ -1,7 +1,6 @@
 ---
-- hosts: localhost
+- hosts: ansible-1
   gather_facts: false
-  connection: local
   become: true
   tasks:
 
