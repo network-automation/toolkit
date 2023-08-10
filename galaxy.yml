@@ -7,8 +7,6 @@ readme: README.md
 authors:
   - Sean Cavanaugh <seanc@redhat.com> @IPvSean
   - Ajay Chenampara @termlen0
-  - Gerald Dykeman @GeraldDykeman
-
 
 description: repository of demos to showcase Ansible Network Automation.
 

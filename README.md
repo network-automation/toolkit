@@ -1,9 +1,16 @@
 # Red Hat Ansible Automation Platform - Network Tool Kit
 
-More info coming soon....
+This is an Ansible Content Collection focused on the network automation domain.  It contains roles and playbooks to help people quickly adopt some network automation use-cases with Ansible Automation Platform.
 
+## Install
 
-# Ansible Network Automation Workshop
+You can install this Ansible content with ansible-galaxy
+
+```
+ansible-galaxy collection install network.toolkit
+```
+
+## Ansible Network Automation Workshop
 
 This Ansible Network Collection is used in conjunction with the Ansible Network Automation Workshop.  The workshops are instructor-led exercises to teach Ansible Automation.
 
@@ -22,3 +29,7 @@ Please refer to rollowing links for more information and perscriptive exercises:
 - [network.toolkit.restore](roles/restore/README.md)
 - [network.toolkit.system](roles/system/README.md)
 - [network.toolkit.user](roles/user/README.md)
+
+# License
+
+[GNU General Public License v3.0 or later](LICENSE)
