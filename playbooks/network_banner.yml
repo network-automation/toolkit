@@ -1,12 +1,12 @@
 ---
-- name: set router banners
+- name: Set router banners
   hosts: network
-  gather_facts: no
+  gather_facts: false
 
   tasks:
-    - name: load banner onto network device
+    - name: Load banner onto network device
       vars:
-        - network_banner:  "{{ net_banner | default(None) }}"
+        - network_banner: "{{ net_banner | default(None) }}"
         - banner_type: "{{ net_type | default('login') }}"
-      include_role:
+      ansible.builtin.include_role:
         name: "../roles/banner"

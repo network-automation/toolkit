@@ -6,7 +6,7 @@ To use this multi-platform network automation user role:
 
 ```
 - name: load user role
-  include_role:
+  ansible.builtin.include_role:
     name: user
 ```
 
@@ -20,6 +20,6 @@ To use this multi-platform network automation user role:
 
   tasks:
     - name: load user role
-      include_role:
+      ansible.builtin.include_role:
         name: user
 ```

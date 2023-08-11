@@ -1,4 +1,4 @@
 ---
-- name: restore the config with merge config
-  cisco.ios.config:
+- name: Restore the config with merge config
+  cisco.ios.ios_config:
     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"

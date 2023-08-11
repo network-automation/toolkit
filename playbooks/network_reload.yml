@@ -1,10 +1,9 @@
 ---
-- name: reboot network devices
+- name: Reboot network devices
   hosts: routers
-  gather_facts: no
+  gather_facts: false
 
   tasks:
-
-    - name: use reload role
-      include_role:
+    - name: Use reload role
+      ansible.builtin.include_role:
         name: "../roles/reload"

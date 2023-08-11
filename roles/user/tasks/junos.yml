@@ -1,25 +1,25 @@
-- name: LOAD USERNAME AND KEY PROPERTIES ONTO DEVICE
-  junos_user:
+- name: Load username and key properties onto device
+  junipernetworks.junos.junos_user:
     name: "{{network_name | default(omit, True) }}"
     ssh_key: "{{network_key | default(omit, True) }}"
   when: network_key is defined and network_key
 
-- name: CHANGE PASSWORD FOR JUNIPER DEVICE
+- name: Change passwrod for Juniper JUNOS
   vars:
     ansible_connection: network_cli
-  cli_command:
-    command: "{{item}}"
+  ansible.netcommon.cli_command:
+    command: "{{ item }}"
     prompt:
       - "New password"
       - "Retype new password"
     answer:
-      - "{{network_configured_password}}"
-      - "{{network_configured_password}}"
+      - "{{ network_configured_password }}"
+      - "{{ network_configured_password }}"
     check_all: True
   loop:
     - "configure"
     - "rollback"
-    - "set system login user {{network_name}} authentication plain-text-password"
-    - "set system login user {{network_name}} class {{network_juniper_class}}"
+    - "set system login user {{ network_name }} authentication plain-text-password"
+    - "set system login user {{ network_name }} class {{ network_juniper_class }}"
     - "commit"
   when: network_configured_password is defined and network_configured_password

@@ -1,5 +1,5 @@
 ---
-- name: ADD THE EOS BANNER
-  eos_banner:
+- name: Add the Arista EOS banner
+  arista.eos.eos_banner:
     text: "{{ network_banner }}"
     banner: "{{ banner_type }}"

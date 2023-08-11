@@ -1,12 +1,12 @@
 ---
-- name: retrieve network configurations
+- name: Retrieve network configurations
   hosts: network
-  gather_facts: no
+  gather_facts: false
 
   tasks:
     # fail with good error for Automation controller user
-    - name: determine that both AAP and Machine credentials are set
-      assert:
+    - name: Determine that both AAP and Machine credentials are set
+      ansible.builtin.assert:
         that:
           - "lookup('env', 'CONTROLLER_USERNAME') !=''"
         fail_msg:
@@ -14,21 +14,21 @@
           - "Red Hat Ansible Automation Platform credential is not set"
           - "Please assign correct credentials to the Job Template"
 
-    - name: determine that both AAP and Machine credentials are set
-      debug:
+    - name: Determine that both AAP and Machine credentials are set
+      ansible.builtin.debug:
         msg:
           - "{{ lookup('env', 'CONTROLLER_USERNAME') }}"
           - "{{ lookup('env', 'CONTROLLER_PASSWORD') }}"
           - "{{ lookup('env', 'CONTROLLER_HOST') }}"
 
-    - name: backup configuration
-      include_role:
+    - name: Backup configuration
+      ansible.builtin.include_role:
         name: "../roles/backup"
       when: ansible_network_os is defined
 
-    - name: create time stamp for play
-      set_fact:
-        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+    - name: Create time stamp for play
+      ansible.builtin.set_fact:
+        datetime: "{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M') }}"
       delegate_to: backup-server
       delegate_facts: true
       run_once: true
@@ -37,20 +37,22 @@
       ansible.builtin.file:
         path: /backup/
         state: directory
+        mode: "755"
       delegate_to: backup-server
       become: true
       run_once: true
 
-    - name: save configuration to backup server
-      copy:
+    - name: Save configuration to backup server
+      ansible.builtin.copy:
         src: "{{ config_output.backup_path }}"
-        dest: "/backup/{{hostvars['backup-server'].datetime}}/"
+        dest: "/backup/{{ hostvars['backup-server'].datetime }}/"
+        mode: "644"
       when: config_output is defined
       become: true
       delegate_to: backup-server
 
-    - name: find backups
-      find:
+    - name: Find backups
+      ansible.builtin.find:
         paths: /backup
         file_type: directory
       register: backups
@@ -59,16 +61,16 @@
       delegate_to: backup-server
       delegate_facts: true
 
-    - name: create restore job template
+    - name: Create restore job template
       ansible.controller.job_template:
         name: "Network Automation - Restore"
         job_type: "run"
-        inventory: "{{ restore_inventory|default('Network Inventory') }}"
-        project: "{{ restore_project|default('Network Toolkit') }}"
-        playbook: "{{ restores_playbook|default('playbooks/network_restore.yml') }}"
-        credential: "{{ restore_credential|default('Network Credential') }}"
+        inventory: "{{ restore_inventory | default('Network Inventory') }}"
+        project: "{{ restore_project | default('Network Toolkit') }}"
+        playbook: "{{ restores_playbook | default('playbooks/network_restore.yml') }}"
+        credential: "{{ restore_credential | default('Network Credential') }}"
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{ playbook_dir }}/../network_setup/templates/backup.j2') }}"
-        validate_certs: no
+        validate_certs: false
         execution_environment: "Default execution environment"
       run_once: true

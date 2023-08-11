@@ -1,29 +1,30 @@
 ---
-- name: CONFIGURE NETWORK TIME
+- name: Configure network time
   hosts: all
   connection: network_cli
-  gather_facts: no
+  gather_facts: false
 
   vars:
     ntp_server: "216.239.35.0"
 
   tasks:
-    - assert:
+    - name: Assert that NTP must be a valid IPv4 address
+      ansible.builtin.assert:
         that:
           - "ntp_server | ipaddr"
         msg: "'ntp_server' must be a valid IPv4 address"
 
-    - name: CONFIGURE NTP
-      ios_config:
-        lines: "ntp server {{ntp_server}}"
+    - name: Configure NTP
+      cisco.ios.ios_config:
+        lines: "ntp server {{ ntp_server }}"
 
-    - name: FETCH NTP STATUS
-      ios_command:
+    - name: Fetch NTP status
+      cisco.ios.ios_command:
         commands:
           - show ntp config
           - show ntp status
       register: ntp_config
 
-    - name: DISPLAY NTP STATUS INTO TERMINAL WINDOW
-      debug:
-        msg: "{{ntp_config.stdout_lines}}"
+    - name: Display NTP Status into terminal window
+      ansible.builtin.debug:
+        msg: "{{ ntp_config.stdout_lines }}"

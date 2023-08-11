@@ -1,10 +1,10 @@
 ---
-- name: reboot juniper device
+- name: Reboot juniper device
   vars:
     ansible_connection: network_cli
-  cli_command:
+  ansible.netcommon.cli_command:
     command: request system reboot
     prompt:
       - Reboot the system?
     answer:
-     - y
+      - y

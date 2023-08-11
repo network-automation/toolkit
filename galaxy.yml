@@ -1,7 +1,7 @@
 ---
 namespace: network
 name: toolkit
-version: 0.0.2
+version: 1.0.0
 readme: README.md
 
 authors:
@@ -14,11 +14,8 @@ license:
   - GPL-3.0-or-later
 
 tags:
-  - network
-  - tower
-  - awx
-  - controller
-  - platform
+  - networking
+  - tools
 
 dependencies:
   "cisco.ios": ">=2.2.0"

@@ -1,4 +1,4 @@
 ---
-- name: unsupported network platform for backup role
-  debug:
+- name: Unsupported network platform for backup role
+  ansible.builtin.debug:
     msg: "this is not supported for backup role; the {{ ansible_network_os }} does not have any specific information specified"

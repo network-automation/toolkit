@@ -1,10 +1,10 @@
 ---
-- name: configure system properites
+- name: Configure system properites
   hosts: routers
-  gather_facts: no
+  gather_facts: false
 
   tasks:
 
-    - name: load system role
-      include_role:
+    - name: Load system role
+      ansible.builtin.include_role:
         name: "../roles/system"

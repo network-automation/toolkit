@@ -1,22 +1,23 @@
-- include: "{{ item }}"
+- name: Load corresponding network platform
+  ansible.builtin.include_tasks: "{{ item }}"
   with_first_found:
-  - "{{ ansible_network_os }}.yml"
-  - "unsupported_platform.yml"
+    - "{{ ansible_network_os }}.yml"
+    - "unsupported_platform.yml"
 
-- name: reset the connection
-  meta: reset_connection
+- name: Reset the connection
+  ansible.builtin.meta: reset_connection
 
 - name: Wait for the network device to reload
-  wait_for_connection:
+  ansible.builtin.wait_for_connection:
     delay: 10
 
 - name: Get the device uptime
   vars:
     ansible_connection: network_cli
-  cli_command:
+  ansible.netcommon.cli_command:
     command: "{{ platform_uptime_command[ansible_network_os] }}"
   register: output
 
 - name: Show the device uptime
-  debug:
-    msg: "{{ output['stdout_lines'][0]}}"
+  ansible.builtin.debug:
+    msg: "{{ output['stdout_lines'][0] }}"

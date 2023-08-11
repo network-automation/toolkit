@@ -1,5 +1,5 @@
 ---
-- name: add the junos banner
-  junos_banner:
+- name: Add the Juniper JUNOS banner
+  junipernetworks.junos.junos_banner:
     text: "{{ network_banner }}"
     banner: "{{ banner_type }}"

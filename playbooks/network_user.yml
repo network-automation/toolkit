@@ -1,9 +1,9 @@
 ---
-- name: configure user on network devices
+- name: Configure user on network devices
   hosts: routers
-  gather_facts: no
+  gather_facts: false
 
   tasks:
-    - name: load user role
-      include_role:
+    - name: Load network user role
+      ansible.builtin.include_role:
         name: "../roles/user"

@@ -1,6 +1,6 @@
 # This task will backup the configuration
-- name: backup cisco ios configuration
-  cisco.ios.config:
+- name: Backup cisco ios configuration
+  cisco.ios.ios_config:
     backup: true
     backup_options:
       dir_path: /tmp/
@@ -8,8 +8,8 @@
   register: config_output
 
 # This task removes the Current configuration... from the top of IOS routers show run
-- name: remove non config lines - regexp
-  lineinfile:
+- name: Remove non config lines - regexp
+  ansible.builtin.lineinfile:
     path: "{{ config_output.backup_path }}"
     line: "Building configuration..."
     state: absent

@@ -1,5 +1,5 @@
 ---
-- name: ADD THE IOS BANNER
-  ios_banner:
+- name: Add the Cisco IOS Banner
+  cisco.ios.ios_banner:
     text: "{{ network_banner }}"
     banner: "{{ banner_type }}"

@@ -1,4 +1,4 @@
 ---
-- name: unsupported network platform for restore role
-  debug:
+- name: Unsupported network platform for restore role
+  ansible.builtin.debug:
     msg: "this is not supported for store role; the {{ ansible_network_os }} does not have any specific information specified"

@@ -1,4 +1,4 @@
-- name: backup arista configuration
+- name: Backup arista configuration
   arista.eos.eos_config:
     backup: true
     backup_options:

@@ -1,2 +1,3 @@
-- fail:
+- name: Fail if we don't support the network platform in this role
+  ansible.builtin.fail:
     msg: "{{ ansible_network_os }} is unsupported and unimplemented at this time"

@@ -1,0 +1,5 @@
+exclude_paths:
+  - network_setup/
+
+skip_list:
+  - role-name[path] # https://issues.redhat.com/browse/AAPRFE-735
