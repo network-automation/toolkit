@@ -1,18 +1,18 @@
 ---
-- name: restore router configurations
+- name: Restore router configurations
   hosts: network
-  gather_facts: no
+  gather_facts: false
 
   tasks:
-    - name: retreive configuration from backup-server to execution environment
+    - name: Retreive configuration from backup-server to execution environment
       ansible.builtin.fetch:
-        src: "/backup/{{rollback_date}}/{{inventory_hostname}}.txt"
-        dest: "/tmp/{{rollback_date}}/"
+        src: "/backup/{{ rollback_date }}/{{ inventory_hostname }}.txt"
+        dest: "/tmp/{{ rollback_date }}/"
         flat: true
       delegate_to: backup-server
       when: ansible_network_os is defined
 
-    - name: load restore role
-      include_role:
+    - name: Load restore role
+      ansible.builtin.include_role:
         name: "../roles/restore"
       when: ansible_network_os is defined

@@ -1,10 +1,10 @@
 ---
-- name: configure l3 interface
+- name: Configure l3 interface
   hosts: routers
-  gather_facts: no
+  gather_facts: false
 
   tasks:
 
-    - name: load l3 interface role
-      include_role:
+    - name: Load l3 interface role
+      ansible.builtin.include_role:
         name: ../roles/l3_interface

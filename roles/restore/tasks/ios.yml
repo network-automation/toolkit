@@ -1,6 +1,6 @@
 - name: Restore selected backup
   ansible.builtin.debug:
-    msg: "restoring from /backup/{{rollback_date}}/{{inventory_hostname}}.txt"
+    msg: "restoring from /backup/{{ rollback_date }}/{{ inventory_hostname }}.txt"
 
 - name: Include task list in play
   ansible.builtin.include_tasks: "ios/{{ restore_mode | default('overwrite') }}.yml"

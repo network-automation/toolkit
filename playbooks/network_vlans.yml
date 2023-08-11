@@ -1,9 +1,9 @@
 ---
-- name: configure network VLANs
+- name: Configure network VLANs
   hosts: all
-  gather_facts: no
+  gather_facts: false
   vars:
-    - vlan_state:  "{{ net_vlan_state | default('merged') }}"
+    - vlan_state: "{{ net_vlan_state | default('merged') }}"
     - vlan_config: "{{ net_vlan_config | default('') }}"
 
   # you would pass vlan_config like this:
@@ -17,20 +17,20 @@
   #   vlan_id: 20
 
   tasks:
-    - name: assert that VLAN config was sent
-      assert:
+    - name: Assert that VLAN config was sent
+      ansible.builtin.assert:
         that:
           - vlan_config != ''
         fail_msg: "no 'vlan_config' was sent, please send a valid configuration set as the variable net_vlan_config"
         success_msg: "all assertions passed"
 
-    - name: transform vlan_config into dictionary if coming from controller
-      set_fact:
+    - name: Transform vlan_config into dictionary if coming from controller
+      ansible.builtin.set_fact:
         vlan_config: "{{ net_vlan_config | from_yaml }}"
       when: vlan_config is string
 
     # if using this role from the collection it would be network.toolkit.vlans
-    - name: include correct role for network device type
-      include_role:
+    - name: Include correct role for network device type
+      ansible.builtin.include_role:
         name: "../roles/vlans"
       when: ansible_network_os is defined

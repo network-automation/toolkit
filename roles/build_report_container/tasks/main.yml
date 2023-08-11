@@ -53,7 +53,7 @@
   register: public_ip_report
   ignore_errors: true
 
-- name: display link to inventory report
+- name: Display link to inventory report
   ansible.builtin.debug:
     msg:
       - "Please go to http://{{ public_ip_report.stdout | default(ansible_fqdn) }}:{{ web_port }}"
