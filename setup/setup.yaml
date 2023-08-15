@@ -1,0 +1,72 @@
+---
+# controller_hosts:
+#   - name: "backup-server"
+#     description: "this server is where we backup network configuration"
+#     inventory: "Workshop Inventory"
+#     variables:
+#       note: in production these passwords would be encrypted in vault
+#       ansible_user: "ec2-user"
+#       ansible_password: "{{ admin_password }}"
+#       ansible_host: "{{ ansible_host }}"
+controller_projects:
+  - name: "Network Toolkit Project"
+    organization: "Default"
+    scm_type: git
+    scm_url: "https://github.com/network-automation/toolkit"
+controller_execution_environments:
+  - name: "Network Toolkit EE"
+    image: "quay.io/acme_corp/network-ee"
+    pull: missing
+controller_templates:
+  - name: "Network Toolkit - Commands"
+    description: "adhoc cisco commands"
+    job_type: "run"
+    ask_inventory_on_launch: true
+    project: "Network Toolkit Project"
+    playbook: "playbooks/network_commands.yml"
+    ask_credential_on_launch: true
+    survey_enabled: true
+    survey: "{{ lookup('template', 'survey_spec.json') }}"
+    execution_environment: "Network Toolkit EE"
+  - name: "Network Toolkit - Reload"
+    job_type: "run"
+    ask_inventory_on_launch: true
+    project: "Network Toolkit Project"
+    playbook: "playbooks/network_reload.yml"
+    ask_credential_on_launch: true
+    execution_environment: "Network Toolkit EE"
+  - name: "Network Toolkit - User"
+    job_type: "run"
+    ask_inventory_on_launch: true
+    project: "Network Toolkit Project"
+    playbook: "playbooks/network_user.yml"
+    ask_credential_on_launch: true
+    state: "present"
+    survey_enabled: true
+    survey: "{{ lookup('template', 'user.json') }}"
+    execution_environment: "Network Toolkit EE"
+  - name: "Network Toolkit - Time"
+    job_type: "run"
+    ask_inventory_on_launch: true
+    project: "Network Toolkit Project"
+    playbook: "playbooks/network_time.yml"
+    ask_credential_on_launch: true
+    survey_enabled: true
+    survey: "{{ lookup('template', 'network_time.json') }}"
+    execution_environment: "Network Toolkit EE"
+  - name: "Network Toolkit - Report"
+    job_type: "run"
+    ask_inventory_on_launch: true
+    project: "Network Toolkit Project"
+    playbook: "playbooks/network_report.yml"
+    ask_credential_on_launch: true
+    execution_environment: "Network Toolkit EE"
+  - name: "Network Toolkit - Network-System"
+    job_type: "run"
+    ask_inventory_on_launch: true
+    project: "Network Toolkit Project"
+    playbook: "playbooks/network_system.yml"
+    ask_credential_on_launch: true
+    survey_enabled: true
+    survey: "{{ lookup('template', 'system.json') }}"
+    execution_environment: "Network Toolkit EE"

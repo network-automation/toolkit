@@ -1,0 +1,13 @@
+---
+- name: Playbook to configure ansible controller post installation
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Retrieve vars fomr setup.yaml
+      ansible.builtin.include_vars:
+        file: setup.yaml
+
+    - name: Call dispatch role
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.dispatch
