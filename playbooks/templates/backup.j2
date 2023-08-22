@@ -1,1 +1,23 @@
-{{ config_output }}
+{
+  "name": "Restore Survey",
+  "description": "Choose which date you want to restore to",
+  "spec": [
+    {
+      "type": "multiplechoice",
+      "question_name": "Rollback to which date?",
+      "question_description": "Rollback revision date, which date do you want to revert to?",
+      "variable": "rollback_date",
+      "choices": [
+{% for file in backups.files %}
+{% if loop.last %}
+        "{{file.path.split('/')[-1]}}"
+{% else %}
+        "{{file.path.split('/')[-1]}}",
+{% endif %}
+{% endfor %}
+      ],
+      "required": true,
+      "default": "{{backups.files[0].path.split('/')[-1]}}"
+    }
+  ]
+}
