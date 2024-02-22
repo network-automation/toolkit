@@ -1,5 +1,9 @@
 <!-- INTERNAL TABLE FOR Static Routes -->
-{% set static_routes = hostvars[network_switch]['ansible_network_resources']['static_routes'] %}
+{% if hostvars[network_switch]['ansible_network_resources']['static_routes'] is defined %}
+  {% set static_routes = hostvars[network_switch]['ansible_network_resources']['static_routes'] %}
+{% else %}
+  {% set static_routes = None %}
+{% endif %}
 <div id="accordion">
 <div>
 <h3>Static Routes</h3>
