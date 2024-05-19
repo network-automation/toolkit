@@ -12,3 +12,8 @@
       dir_path: /tmp/
       filename: "{{ inventory_hostname }}.txt"
   register: config_output
+- name: Show the backup in debug message
+  ansible.builtin.debug:
+     msg: "backup  {{ config_output }}"
+    
+    
