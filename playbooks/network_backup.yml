@@ -61,22 +61,8 @@
       delegate_to: backup-server
       delegate_facts: true
 
-    # - name: Create restore job template
-    #   ansible.controller.job_template:
-    #     name: "Network Automation - Restore"
-    #     job_type: "run"
-    #     inventory: "{{ restore_inventory | default('Network Inventory') }}"
-    #     project: "{{ restore_project | default('Network Toolkit') }}"
-    #     playbook: "{{ restores_playbook | default('playbooks/network_restore.yml') }}"
-    #     credential: "{{ restore_credential | default('Network Credential') }}"
-    #     survey_enabled: true
-    #     survey_spec: "{{ lookup('template', '{{ playbook_dir }}/templates/backup.j2') }}"
-    #     validate_certs: false
-    #     execution_environment: "Default execution environment"
-    #   run_once: true
-
     - name: Create restore job template
-      ansible.platform.job_template:
+      ansible.controller.job_template:
         name: "Network Automation - Restore"
         job_type: "run"
         inventory: "{{ restore_inventory | default('Network Inventory') }}"
