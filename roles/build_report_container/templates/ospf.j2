@@ -9,17 +9,60 @@
         <tr>
             <th>Process ID</th>
             <th>Router ID</th>
+            <th>Areas</th>
         </tr>
     </thead>
     <tbody>
-{% for key,value in hostvars[network_switch]['ansible_network_resources']['ospfv2'].items() %}
+{% for ospf_process in hostvars[network_switch]['ansible_network_resources']['ospfv2'] %}
         <tr>
-            <td>{{ value[0].process_id }}</td>
-            <td>{{ value[0].router_id|default("Not Configured") }}</td>
+            <td>{{ ospf_process.process_id|default("Not Configured") }}</td>
+            <td>{{ ospf_process.router_id|default("Not Configured") }}</td>
+            <td>
+                {% if ospf_process.areas is defined and ospf_process.areas|length > 0 %}
+                    {% for area in ospf_process.areas %}
+                        Area: {{ area.area_id }}
+                        {% if not loop.last %}<br>{% endif %}
+                    {% endfor %}
+                {% else %}
+                    Not Configured
+                {% endif %}
+            </td>
         </tr>
 {% endfor %}
     </tbody>
 </table>
+
+<!-- OSPF Interfaces -->
+{% if hostvars[network_switch]['ansible_network_resources']['ospfv2'] is defined and hostvars[network_switch]['ansible_network_resources']['ospfv2']|length > 0 %}
+    {% for ospf_process in hostvars[network_switch]['ansible_network_resources']['ospfv2'] %}
+        {% if ospf_process.areas is defined and ospf_process.areas|length > 0 %}
+            <p class="internal_label">OSPF Interfaces</p>
+            <table id="subtable">
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Interface</th>
+                        <th>Passive</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for area in ospf_process.areas %}
+                    {% if area.interfaces is defined and area.interfaces|length > 0 %}
+                        {% for interface in area.interfaces %}
+                        <tr>
+                            <td>{{ area.area_id }}</td>
+                            <td>{{ interface.name }}</td>
+                            <td>{{ interface.passive|default(false) }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 {% elif hostvars[network_switch]['ansible_network_resources']['ospfv2'] is defined and hostvars[network_switch]['ansible_network_resources']['ospfv2']|length == 0 %}
 OSPF is not configured on this device
 {% else %}
