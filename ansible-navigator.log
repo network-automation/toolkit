@@ -1,0 +1,60 @@
+2025-01-07T17:15:13.305170+00:00 ERROR 'ansible_navigator.actions.images._parse' Unable to extract introspection from stdout
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-01-07T17:15:13.310143+00:00 ERROR 'ansible_navigator.actions.images._parse' Image introspection failed (parsed), the return value was: Traceback (most recent call last):
+  File "/Users/sean/.cache/ansible-navigator/image_introspect.py", line 16, in <module>
+    from typing import TypeAlias
+ImportError: cannot import name 'TypeAlias' from 'typing' (/usr/lib64/python3.9/typing.py)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-01-07T17:15:31.237618+00:00 ERROR 'ansible_navigator.actions.images._parse' Unable to extract introspection from stdout
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-01-07T17:15:31.239087+00:00 ERROR 'ansible_navigator.actions.images._parse' Image introspection failed (parsed), the return value was: Traceback (most recent call last):
+  File "/Users/sean/.cache/ansible-navigator/image_introspect.py", line 16, in <module>
+    from typing import TypeAlias
+ImportError: cannot import name 'TypeAlias' from 'typing' (/usr/lib64/python3.9/typing.py)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-01-07T17:17:24.718515+00:00 ERROR 'ansible_navigator.actions.images._parse' Unable to extract introspection from stdout
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-01-07T17:17:24.722272+00:00 ERROR 'ansible_navigator.actions.images._parse' Image introspection failed (parsed), the return value was: Traceback (most recent call last):
+  File "/Users/sean/.cache/ansible-navigator/image_introspect.py", line 16, in <module>
+    from typing import TypeAlias
+ImportError: cannot import name 'TypeAlias' from 'typing' (/usr/lib64/python3.9/typing.py)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-01-07T17:24:57.087419+00:00 ERROR 'ansible_navigator.actions.images._parse' Unable to extract introspection from stdout
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2025-01-07T17:24:57.091932+00:00 ERROR 'ansible_navigator.actions.images._parse' Image introspection failed (parsed), the return value was: Traceback (most recent call last):
+  File "/Users/sean/.cache/ansible-navigator/image_introspect.py", line 16, in <module>
+    from typing import TypeAlias
+ImportError: cannot import name 'TypeAlias' from 'typing' (/usr/lib64/python3.9/typing.py)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/ansible_navigator/actions/images.py", line 537, in _parse
+    _warnings, json_str = output.split("{", 1)
+    ^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
