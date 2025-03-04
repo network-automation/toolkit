@@ -3,29 +3,47 @@
 <div>
 <h3>LLDP Interfaces</h3>
 <div class="net_content">
-{% if hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'].keys()|length > 0 %}
-<table id="subtable">
-    <thead>
-        <tr>
-            <th>vlan_id</th>
-            <th>Name</th>
-            <th>state</th>
-        </tr>
-    </thead>
-    <tbody>
-{% for interface in hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] %}
-        <tr>
-            <td>{{interface['name']}}</td>
-            <td>{{interface['receive']|default("Not Configured")}}</td>
-            <td>{{interface['transmit']|default("Not Configured")}}</td>
-        </tr>
-{% endfor %}
-    </tbody>
-</table>
-{% elif hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'].keys()|length == 0 %}
-LLDP is not configured on this device
+{% if hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] is defined %}
+    {% if hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] is mapping %}
+        {% set lldp_interfaces_length = hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'].keys()|list|length %}
+    {% else %}
+        {% set lldp_interfaces_length = hostvars[network_switch]['ansible_network_resources']['lldp_interfaces']|length %}
+    {% endif %}
+
+    {% if lldp_interfaces_length > 0 %}
+        <table id="subtable">
+            <thead>
+                <tr>
+                    <th>Interface</th>
+                    <th>Receive</th>
+                    <th>Transmit</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] is mapping %}
+                {% for interface_name, interface_config in hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'].items() %}
+                    <tr>
+                        <td>{{ interface_name }}</td>
+                        <td>{{ interface_config.receive|default("Not Configured") }}</td>
+                        <td>{{ interface_config.transmit|default("Not Configured") }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                {% for interface in hostvars[network_switch]['ansible_network_resources']['lldp_interfaces'] %}
+                    <tr>
+                        <td>{{ interface.name }}</td>
+                        <td>{{ interface.receive|default("Not Configured") }}</td>
+                        <td>{{ interface.transmit|default("Not Configured") }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    {% else %}
+        LLDP is not configured on this device
+    {% endif %}
 {% else %}
-No LLDP information available
+    No LLDP information available
 {% endif %}
 </div>
 </div>
