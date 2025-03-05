@@ -1,6 +1,6 @@
 ---
 - name: Retrieve network configurations
-  hosts: network
+  hosts: all
   gather_facts: false
 
   tasks:
