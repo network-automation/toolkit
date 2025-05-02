@@ -9,7 +9,7 @@
 #   run_once: true
 
 - name: Copy file over to flash on network device
-  ansible.netcommon.netput:
+  ansible.netcommon.net_put:
     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
     dest: "flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
 
