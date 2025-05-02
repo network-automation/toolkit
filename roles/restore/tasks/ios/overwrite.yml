@@ -7,7 +7,6 @@
     {{ ansible_user }}@{{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
   delegate_to: localhost
   run_once: true
-  when: ansible_network_os is defined
 
 # - name: Copy file over to flash on network device
 #   ansible.netcommon.net_put:
