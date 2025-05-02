@@ -24,7 +24,6 @@
 - name: Overwrite startup config - overwrite
   environment:
     ANSIBLE_LIBSSH_PUBLICKEY_ALGORITHMS: ssh-rsa
-  ansible.builtin.command: echo "Setting environment for ssh-rsa"
   cisco.ios.ios_command:
     commands:
       - command: 'configure replace flash://{{ rollback_date }}-{{ inventory_hostname }}.txt force'
