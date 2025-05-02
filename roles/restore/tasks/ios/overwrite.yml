@@ -5,10 +5,8 @@
     scp -O -o StrictHostKeyChecking=no
     /backup/{{ rollback_date }}/{{ inventory_hostname }}.txt
     {{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
-  delegate_to: localhost
   run_once: true
-  environment:
-    SSH_AUTH_SOCK: ""
+  delegate_to: backup-server
 
 # - name: Copy file over to flash on network device
 #   ansible.builtin.shell: >
