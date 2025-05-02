@@ -21,11 +21,6 @@
 #     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
 #     dest: "flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
 
-- name: Overwrite startup config - archive
-  cisco.ios.ios_config:
-    lines:
-      - 'archive'
-
 - name: Overwrite startup config - overwrite
   cisco.ios.ios_command:
     commands:
