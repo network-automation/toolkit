@@ -72,5 +72,5 @@
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{ playbook_dir }}/templates/backup.j2') }}"
         validate_certs: false
-        execution_environment: "Default execution environment"
+        execution_environment: "network workshop execution environment"
       run_once: true
