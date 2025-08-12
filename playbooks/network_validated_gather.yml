@@ -3,10 +3,12 @@
   hosts: network
   gather_facts: false
   tasks:
-    - name: Invoke gather role to collect all network device information
+    - name: Invoke gather role
       ansible.builtin.include_role:
         name: network.inventory_reports.gather
       vars:
         format: json
         resources:
-          - "vlans"
+          - "interfaces"
+          - "l2_interfaces"
+          - "l3_interfaces"
