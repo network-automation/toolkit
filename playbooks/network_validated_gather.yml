@@ -8,5 +8,5 @@
         name: network.inventory_reports.gather
       vars:
         format: json
-        resources:
-          - "all"
+        # resources:
+        #   - "all"
