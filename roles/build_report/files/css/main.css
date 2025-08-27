@@ -205,3 +205,44 @@ table.net_info {
 p.internal_label {
     color: #000000;
 }
+
+/* Interface operational status styling */
+.status-up {
+    color: #28a745;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(40, 167, 69, 0.3);
+}
+
+.status-down {
+    color: #dc3545;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(220, 53, 69, 0.3);
+}
+
+.status-unknown {
+    color: #6c757d;
+    font-style: italic;
+    font-weight: normal;
+}
+
+/* Enhanced table responsiveness for additional column */
+#subtable {
+    table-layout: auto;
+    word-wrap: break-word;
+}
+
+#subtable th, #subtable td {
+    min-width: 80px;
+    text-align: center;
+}
+
+#subtable th:first-child, #subtable td:first-child {
+    text-align: left;
+    min-width: 120px;
+}
+
+/* Status column specific styling */
+#subtable th:nth-child(5), #subtable td:nth-child(5) {
+    min-width: 90px;
+    text-align: center;
+}
