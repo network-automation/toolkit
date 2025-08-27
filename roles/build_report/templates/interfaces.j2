@@ -1,7 +1,7 @@
 <!-- INTERNAL TABLE FOR INTERFACES -->
 <div id="accordion">
 <div>
-<h3>Interfaces - MTU/Duplex/Speed</h3>
+<h3>Interfaces - MTU/Duplex/Speed/Status</h3>
 <div class="net_content">
 {% if hostvars[network_switch]['ansible_network_resources']['interfaces'] is defined and hostvars[network_switch]['ansible_network_resources']['interfaces']|length > 0  %}
 <table id="subtable">
@@ -10,7 +10,8 @@
             <th>Interface Name</th>
             <th>Description</th>
             <th>Duplex</th>
-            <th>Enabled</th>
+            <th>Admin Status</th>
+            <th>Oper Status</th>
             <th>MTU</th>
             <th>Speed</th>
         </tr>
@@ -21,7 +22,21 @@
             <td>{{interface['name']}}</td>
             <td>{{interface['description']|default("none")}}</td>
             <td>{{interface['duplex']|default("default")}}</td>
-            <td>{{interface['enabled']}}</td>
+            <td>{{interface['enabled']|default("unknown")}}</td>
+            <td>
+              {% set oper_status = interface.get('oper_status', interface.get('line_protocol', interface.get('line_protocol_status', interface.get('admin_state', 'unknown')))) %}
+              {% if oper_status|lower == 'up' %}
+                <span class="status-up">UP</span>
+              {% elif oper_status|lower == 'down' %}
+                <span class="status-down">DOWN</span>
+              {% elif oper_status == true or oper_status|lower == 'enabled' %}
+                <span class="status-up">UP</span>
+              {% elif oper_status == false or oper_status|lower == 'disabled' %}
+                <span class="status-down">DOWN</span>
+              {% else %}
+                <span class="status-unknown">{{ oper_status|upper }}</span>
+              {% endif %}
+            </td>
             <td>{{interface['mtu']|default("default")}}</td>
             <td>{{interface['speed']|default("default")}}</td>
         </tr>
