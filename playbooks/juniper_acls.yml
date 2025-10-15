@@ -10,11 +10,11 @@
         config:
           - afi: ipv4
             acls:
-              - name: allow_ssh_acl
+              - name: "{{ ansible_configured_acl | default('ansible_configured_acl') }}"
                 aces:
-                  - name: ssh_rule
+                  - name: "{{ ansible_configured_term | default('ansible_configured_term') }}"
                     source:
                       port_protocol:
-                        eq: ssh
+                        eq: {{ ansible_configured_protocol | default('ssh') }}
                     protocol: tcp
         state: merged
