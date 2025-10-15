@@ -13,7 +13,7 @@
               - name: "{{ ansible_configured_acl | default('ansible_configured_acl') }}"
                 aces:
                   - name: "{{ ansible_configured_term | default('ansible_configured_term') }}"
-                    source:
+                    destination:
                       port_protocol:
                         eq: "{{ ansible_configured_protocol | default('ssh') }}"
                     protocol: tcp
