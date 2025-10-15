@@ -15,6 +15,6 @@
                   - name: "{{ ansible_configured_term | default('ansible_configured_term') }}"
                     source:
                       port_protocol:
-                        eq: {{ ansible_configured_protocol | default('ssh') }}
+                        eq: "{{ ansible_configured_protocol | default('ssh') }}"
                     protocol: tcp
         state: merged
