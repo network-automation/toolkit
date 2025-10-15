@@ -17,4 +17,5 @@
                       port_protocol:
                         eq: "{{ ansible_configured_protocol | default('ssh') }}"
                     protocol: tcp
+                    grant: "{{ ansible_grant_status | default('permit') }}"
         state: merged
