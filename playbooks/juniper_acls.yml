@@ -27,7 +27,7 @@
                     protocol: tcp
                     grant: "{{ ansible_grant_status | default('permit') }}"
         state: replaced
-        register: acl_output
+      register: acl_output
 
     - name: Print the ACL output
       ansible.builtin.debug:
