@@ -2,6 +2,8 @@
 - name: Restore router configurations
   hosts: network
   gather_facts: false
+  vars:
+    restore_mode: overwrite
 
   tasks:
     - name: Retreive configuration from backup-server to execution environment
