@@ -2,6 +2,8 @@
 - name: Retrieve facts for network infrastructure
   hosts: network
   gather_facts: false
+  vars:
+    restore_mode: overwrite
 
   tasks:
     - name: Load read interfaces role
