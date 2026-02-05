@@ -1,4 +1,9 @@
 ---
+- name: Enable SCP server on network device
+  cisco.ios.ios_config:
+    lines:
+      - ip scp server enable
+
 ### -O forces scp versus sftp which Cisco IOS does support
 - name: Copy file over to flash on network device using SCP
   ansible.builtin.shell: >
