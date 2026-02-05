@@ -4,7 +4,7 @@
 
 ## overwrite doesn't work as of June 2025
 - name: Include task list in play
-  ansible.builtin.include_tasks: "ios/{{ restore_mode | default('merge') }}.yml"
+  ansible.builtin.include_tasks: "ios/{{ overwrite | default('merge') }}.yml"
 
 - name: Print to terminal window
   ansible.builtin.debug:
