@@ -5,26 +5,18 @@
       - ip scp server enable
 
 ### -O forces scp versus sftp which Cisco IOS does support
+### Uses sshpass when ansible_password is set (password auth); falls back to
+### plain scp for SSH-key environments (backward compatible).
 - name: Copy file over to flash on network device using SCP
+  vars:
+    _scp_auth: "{{ 'sshpass -p \"' + ansible_password + '\" ' if ansible_password | default('') | length > 0 else '' }}"
+    _scp_user: "{{ ansible_user + '@' if ansible_user is defined else '' }}"
   ansible.builtin.shell: >
-    scp -O -o StrictHostKeyChecking=no
+    {{ _scp_auth }}scp -O -o StrictHostKeyChecking=no
     /backup/{{ rollback_date }}/{{ inventory_hostname }}.txt
-    {{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
+    {{ _scp_user }}{{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
   run_once: true
   delegate_to: backup-server
-
-# - name: Copy file over to flash on network device
-#   ansible.builtin.shell: >
-#     scp -O -o StrictHostKeyChecking=no
-#     /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt
-#     {{ ansible_user }}@{{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
-#   delegate_to: localhost
-#   run_once: true
-
-# - name: Copy file over to flash on network device
-#   ansible.netcommon.net_put:
-#     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
-#     dest: "flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
 
 - name: Overwrite startup config - overwrite
   environment:
