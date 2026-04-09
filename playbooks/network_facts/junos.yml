@@ -1,0 +1,3 @@
+---
+- name: Gather Juniper Junos facts
+  junipernetworks.junos.junos_facts:

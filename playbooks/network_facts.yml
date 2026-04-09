@@ -1,0 +1,15 @@
+---
+- name: Gather facts and test connectivity
+  hosts: network
+  gather_facts: false
+
+  tasks:
+    - name: Gather network device facts
+      ansible.builtin.include_tasks: "{{ item }}"
+      with_first_found:
+        - "{{ playbook_dir }}/network_facts/{{ ansible_network_os }}.yml"
+        - "{{ playbook_dir }}/network_facts/unsupported_platform.yml"
+
+    - name: Display gathered facts
+      ansible.builtin.debug:
+        var: ansible_net_version

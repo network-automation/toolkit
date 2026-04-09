@@ -1,0 +1,3 @@
+---
+- name: Gather Cisco IOS facts
+  cisco.ios.ios_facts:
