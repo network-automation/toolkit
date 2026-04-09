@@ -1,0 +1,3 @@
+---
+- name: Gather Arista EOS facts
+  arista.eos.eos_facts:

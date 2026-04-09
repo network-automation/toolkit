@@ -1,0 +1,34 @@
+---
+- name: Retrieve network configurations
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Going to configure an ACL
+      ansible.builtin.debug:
+        msg:
+          - "Going to configure an ACL"
+          - "{{ ansible_configured_acl | default('ansible_configured_acl') }}"
+          - "{{ ansible_configured_term | default('ansible_configured_term') }}"
+          - "{{ ansible_configured_protocol | default('ssh') }}"
+          - "{{ ansible_grant_status | default('permit') }}"
+
+    - name: Merge JUNOS acl
+      junipernetworks.junos.junos_acls:
+        config:
+          - afi: ipv4
+            acls:
+              - name: "{{ ansible_configured_acl | default('ansible_configured_acl') }}"
+                aces:
+                  - name: "{{ ansible_configured_term | default('ansible_configured_term') }}"
+                    destination:
+                      port_protocol:
+                        eq: "{{ ansible_configured_protocol | default('ssh') }}"
+                    protocol: tcp
+                    grant: "{{ ansible_grant_status | default('permit') }}"
+        state: replaced
+      register: acl_output
+
+    - name: Print the ACL output
+      ansible.builtin.debug:
+        msg: "{{ acl_output }}"

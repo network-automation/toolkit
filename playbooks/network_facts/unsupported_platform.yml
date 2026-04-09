@@ -1,0 +1,4 @@
+---
+- name: Unsupported network platform
+  ansible.builtin.debug:
+    msg: "{{ ansible_network_os }} is not supported by this playbook"
