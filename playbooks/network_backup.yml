@@ -72,5 +72,5 @@
         survey_enabled: true
         survey_spec: "{{ lookup('template', '{{ playbook_dir }}/templates/backup.j2') }}"
         validate_certs: false
-        execution_environment: "{{ restore_ee | default('Supported execution environment') }}"
+        execution_environment: "{{ restore_ee | default('Default execution environment') }}"
       run_once: true
