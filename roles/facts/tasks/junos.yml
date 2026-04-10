@@ -2,5 +2,14 @@
 - name: Gather juniper junos facts
   vars:
     ansible_connection: netconf
-  junipernetworks.junos.junos_facts:
-    gather_network_resources: "{{ network_resource | default('all') }}"
+  block:
+    - name: Gather juniper junos facts with network resources
+      junipernetworks.junos.junos_facts:
+        gather_network_resources: "{{ network_resource | default('all') }}"
+  rescue:
+    - name: Gather juniper junos basic facts (fallback)
+      junipernetworks.junos.junos_facts:
+
+    - name: Set empty network_resources for report compatibility
+      ansible.builtin.set_fact:
+        ansible_network_resources: {}
