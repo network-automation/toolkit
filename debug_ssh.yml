@@ -1,0 +1,105 @@
+---
+- name: Debug SSH and libssh configuration for Cisco
+  hosts: cisco
+  gather_facts: false
+  tasks:
+    - name: Show ansible.cfg location and contents
+      delegate_to: localhost
+      run_once: true
+      block:
+        - name: Check ANSIBLE_CONFIG env var
+          ansible.builtin.command: echo $ANSIBLE_CONFIG
+          register: ansible_config_env
+
+        - name: Show ANSIBLE_CONFIG
+          ansible.builtin.debug:
+            msg: "ANSIBLE_CONFIG env: '{{ ansible_config_env.stdout }}'"
+
+        - name: Show current working directory
+          ansible.builtin.command: pwd
+          register: cwd_result
+
+        - name: Show CWD
+          ansible.builtin.debug:
+            msg: "CWD: {{ cwd_result.stdout }}"
+
+        - name: Check if project ansible.cfg exists
+          ansible.builtin.stat:
+            path: "{{ cwd_result.stdout }}/ansible.cfg"
+          register: project_cfg
+
+        - name: Show project ansible.cfg exists
+          ansible.builtin.debug:
+            msg: "Project ansible.cfg exists: {{ project_cfg.stat.exists }}"
+
+        - name: Read project ansible.cfg
+          ansible.builtin.command: cat {{ cwd_result.stdout }}/ansible.cfg
+          register: project_cfg_content
+          when: project_cfg.stat.exists
+
+        - name: Show project ansible.cfg contents
+          ansible.builtin.debug:
+            msg: "{{ project_cfg_content.stdout_lines }}"
+          when: project_cfg.stat.exists
+
+        - name: Check /etc/ansible/ansible.cfg
+          ansible.builtin.command: cat /etc/ansible/ansible.cfg
+          register: etc_cfg
+          ignore_errors: true
+
+        - name: Show /etc/ansible/ansible.cfg contents
+          ansible.builtin.debug:
+            msg: "{{ etc_cfg.stdout_lines | default('NOT FOUND') }}"
+
+        - name: Show ansible --version
+          ansible.builtin.command: ansible --version
+          register: ansible_ver
+
+        - name: Display ansible version and config file in use
+          ansible.builtin.debug:
+            msg: "{{ ansible_ver.stdout_lines }}"
+
+        - name: Show ansible-config dump for libssh
+          ansible.builtin.shell: ansible-config dump 2>/dev/null | grep -i libssh || echo "NO LIBSSH CONFIG FOUND"
+          register: libssh_config
+
+        - name: Display libssh config
+          ansible.builtin.debug:
+            msg: "{{ libssh_config.stdout_lines }}"
+
+        - name: Show pylibssh version
+          ansible.builtin.command: pip show ansible-pylibssh
+          register: pylibssh_ver
+          ignore_errors: true
+
+        - name: Display pylibssh version
+          ansible.builtin.debug:
+            msg: "{{ pylibssh_ver.stdout_lines | default('NOT INSTALLED') }}"
+
+        - name: Show netcommon version
+          ansible.builtin.shell: ansible-galaxy collection list ansible.netcommon 2>/dev/null | grep netcommon
+          register: netcommon_ver
+
+        - name: Display netcommon version
+          ansible.builtin.debug:
+            msg: "{{ netcommon_ver.stdout_lines }}"
+
+    - name: Show all connection-related vars for rtr1
+      ansible.builtin.debug:
+        msg:
+          - "ansible_connection: {{ ansible_connection | default('NOT SET') }}"
+          - "ansible_network_os: {{ ansible_network_os | default('NOT SET') }}"
+          - "ansible_network_cli_ssh_type: {{ ansible_network_cli_ssh_type | default('NOT SET') }}"
+          - "ansible_libssh_publickey_algorithms: {{ ansible_libssh_publickey_algorithms | default('NOT SET') }}"
+          - "ansible_host: {{ ansible_host | default('NOT SET') }}"
+          - "ansible_user: {{ ansible_user | default('NOT SET') }}"
+
+    - name: Attempt connection with verbose error capture
+      cisco.ios.ios_facts:
+        gather_subset: min
+      register: result
+      ignore_errors: true
+
+    - name: Show connection result
+      ansible.builtin.debug:
+        var: result
