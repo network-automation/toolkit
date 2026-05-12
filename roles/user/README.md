@@ -15,7 +15,7 @@ To use this multi-platform network automation user role:
 ```
 ---
 - name: configure user on network devices
-  hosts: routers
+  hosts: network
   gather_facts: no
 
   tasks:
