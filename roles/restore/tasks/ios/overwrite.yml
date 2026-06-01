@@ -5,18 +5,38 @@
       - ip scp server enable
 
 ### -O forces scp versus sftp which Cisco IOS does support
-### Uses sshpass when ansible_password is set (password auth); falls back to
-### plain scp for SSH-key environments (backward compatible).
+### Tries sshpass when ansible_password is set; rescues to plain scp for
+### SSH-key environments or when sshpass is unavailable on the control node.
 - name: Copy file over to flash on network device using SCP
   vars:
-    _scp_auth: "{{ 'sshpass -p \"' + ansible_password + '\" ' if ansible_password | default('') | length > 0 else '' }}"
+    _scp_user: "{{ ansible_user + '@' if ansible_user is defined else '' }}"
+    _scp_src: "/backup/{{ rollback_date }}/{{ inventory_hostname }}.txt"
+    _scp_dest: "{{ _scp_user }}{{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'"
+  block:
+    - name: Copy file over to flash using SCP (password auth via sshpass)
+      ansible.builtin.shell: >
+        sshpass -p "{{ ansible_password }}" scp -O -o StrictHostKeyChecking=no
+        {{ _scp_src }} {{ _scp_dest }}
+      run_once: true
+      delegate_to: backup-server
+  rescue:
+    - name: Copy file over to flash using SCP (SSH key auth)
+      ansible.builtin.shell: >
+        scp -O -o StrictHostKeyChecking=no {{ _scp_src }} {{ _scp_dest }}
+      run_once: true
+      delegate_to: backup-server
+  when: ansible_password | default('') | length > 0
+
+- name: Copy file over to flash on network device using SCP (SSH key auth)
+  vars:
     _scp_user: "{{ ansible_user + '@' if ansible_user is defined else '' }}"
   ansible.builtin.shell: >
-    {{ _scp_auth }}scp -O -o StrictHostKeyChecking=no
+    scp -O -o StrictHostKeyChecking=no
     /backup/{{ rollback_date }}/{{ inventory_hostname }}.txt
     {{ _scp_user }}{{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
   run_once: true
   delegate_to: backup-server
+  when: ansible_password | default('') | length == 0
 
 - name: Overwrite startup config - overwrite
   environment:
