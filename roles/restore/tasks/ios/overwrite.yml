@@ -4,10 +4,9 @@
     lines:
       - ip scp server enable
 
-### -O forces scp versus sftp which Cisco IOS does support
-### SCP runs from the execution environment using the fetched backup in /tmp
-### (same as merge restore). Tries sshpass when ansible_password is set;
-### rescues to key-based scp with BatchMode so it fails fast instead of hanging.
+### -O forces legacy scp on OpenSSH 8.8+ (Cisco IOS does not support sftp-mode scp).
+### Older scp lacks -O and already uses legacy scp by default — detect at runtime.
+### SCP runs from the execution environment using the fetched backup in /tmp.
 - name: Copy file over to flash on network device using SCP
   vars:
     _scp_host: "{{ ansible_host | default(inventory_hostname) }}"
@@ -16,24 +15,39 @@
     _scp_dest: "{{ _scp_user }}{{ _scp_host }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'"
   block:
     - name: Copy file over to flash using SCP (password auth via sshpass)
-      ansible.builtin.shell: >
-        sshpass -p "{{ ansible_password }}" scp -O -o StrictHostKeyChecking=no
-        {{ _scp_src }} {{ _scp_dest }}
+      ansible.builtin.shell: |
+        if scp -O 2>&1 | grep -q 'unknown option'; then
+          _scp_o=""
+        else
+          _scp_o="-O"
+        fi
+        sshpass -p "{{ ansible_password }}" scp $_scp_o -o StrictHostKeyChecking=no \
+          {{ _scp_src }} {{ _scp_dest }}
   rescue:
     - name: Copy file over to flash using SCP (SSH key auth)
-      ansible.builtin.shell: >
-        scp -O -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=30
-        {{ _scp_src }} {{ _scp_dest }}
+      ansible.builtin.shell: |
+        if scp -O 2>&1 | grep -q 'unknown option'; then
+          _scp_o=""
+        else
+          _scp_o="-O"
+        fi
+        scp $_scp_o -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=30 \
+          {{ _scp_src }} {{ _scp_dest }}
   when: ansible_password | default('') | length > 0
 
 - name: Copy file over to flash on network device using SCP (SSH key auth)
   vars:
     _scp_host: "{{ ansible_host | default(inventory_hostname) }}"
     _scp_user: "{{ ansible_user + '@' if ansible_user is defined else '' }}"
-  ansible.builtin.shell: >
-    scp -O -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=30
-    /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt
-    {{ _scp_user }}{{ _scp_host }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
+  ansible.builtin.shell: |
+    if scp -O 2>&1 | grep -q 'unknown option'; then
+      _scp_o=""
+    else
+      _scp_o="-O"
+    fi
+    scp $_scp_o -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=30 \
+      /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt \
+      {{ _scp_user }}{{ _scp_host }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
   when: ansible_password | default('') | length == 0
 
 - name: Overwrite startup config - overwrite
