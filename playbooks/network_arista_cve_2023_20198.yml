@@ -1,0 +1,78 @@
+---
+# Management-plane hardening for Arista EOS (parallel to network_cve_2023_20198.yml)
+# CVE-2023-20198 is Cisco IOS XE specific; this playbook applies the same pattern
+# to Arista eAPI / HTTP management exposure on EOS devices.
+# Adapted from: https://www.redhat.com/en/blog/ansible-can-help-with-the-cisco-ios-xe-software-web-ui-privilege-escalation-vulnerability
+- name: Mitigate management HTTP/API exposure on Arista EOS
+  hosts: network
+  gather_facts: false
+
+  vars:
+    # Set to false if eAPI must stay enabled and access is restricted by ACL instead.
+    remediate_http_server: true
+
+  tasks:
+    - name: Check if eAPI HTTP management is running on switch
+      arista.eos.eos_command:
+        commands:
+          - show management api http-commands
+          - show running-config | section management api http-commands
+      register: http_server_config
+      when: ansible_network_os == 'eos'
+
+    - name: Print eAPI HTTP management configuration
+      ansible.builtin.debug:
+        msg:
+          - "{{ http_server_config.stdout_lines[0] }}"
+          - "{{ http_server_config.stdout_lines[1] }}"
+      when: ansible_network_os == 'eos'
+
+    - name: Determine if eAPI HTTP management is enabled
+      ansible.builtin.set_fact:
+        http_server_enabled: >-
+          {{
+            http_server_config.stdout[0] is search('Enabled:\s+Yes', multiline=True)
+            or http_server_config.stdout[0] is search('HTTP server:\s+running', multiline=True)
+            or http_server_config.stdout[0] is search('HTTPS server:\s+running', multiline=True)
+          }}
+      when: ansible_network_os == 'eos'
+
+    - name: Disable insecure HTTP eAPI listener on Arista EOS
+      arista.eos.eos_config:
+        lines:
+          - shutdown
+        parents:
+          - management api http-commands
+          - protocol http
+        save_when: changed
+      when:
+        - ansible_network_os == 'eos'
+        - remediate_http_server | bool
+        - http_server_enabled | default(false) | bool
+
+    - name: Disable HTTPS eAPI listener on Arista EOS
+      arista.eos.eos_config:
+        lines:
+          - shutdown
+        parents:
+          - management api http-commands
+          - protocol https
+        save_when: changed
+      when:
+        - ansible_network_os == 'eos'
+        - remediate_http_server | bool
+        - http_server_enabled | default(false) | bool
+
+    - name: Determine if exploit indicators exist in syslogs
+      arista.eos.eos_command:
+        commands:
+          - show logging | include EAPI
+          - show logging | include LOGIN_SUCCESS
+          - show logging | include http-commands
+      register: logging_output
+      when: ansible_network_os == 'eos'
+
+    - name: Print syslog results
+      ansible.builtin.debug:
+        var: logging_output.stdout_lines
+      when: ansible_network_os == 'eos'
