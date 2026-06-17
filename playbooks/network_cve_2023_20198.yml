@@ -1,0 +1,56 @@
+---
+# Mitigate CVE-2023-20198 — Cisco IOS XE Web UI privilege escalation
+# https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-iosxe-webui-privesc-j22SaA4z
+# Adapted from: https://www.redhat.com/en/blog/ansible-can-help-with-the-cisco-ios-xe-software-web-ui-privilege-escalation-vulnerability
+- name: Mitigate CVE-2023-20198 Critical Vulnerability
+  hosts: network
+  gather_facts: false
+
+  vars:
+    # Set to false if the web UI must stay enabled and access is restricted by ACL instead.
+    remediate_http_server: true
+
+  tasks:
+    - name: Check if Web service is running on router
+      cisco.ios.ios_command:
+        commands: show running-config | include ip http server|secure|active
+      register: http_server_config
+      when: ansible_network_os == 'ios'
+
+    - name: Print HTTP server configuration
+      ansible.builtin.debug:
+        var: http_server_config.stdout_lines[0]
+      when: ansible_network_os == 'ios'
+
+    - name: Determine if HTTP server feature is enabled
+      ansible.builtin.set_fact:
+        http_server_enabled: >-
+          {{
+            http_server_config.stdout[0] | regex_search('^ip http (server|secure-server)', multiline=True) is not none
+          }}
+      when: ansible_network_os == 'ios'
+
+    - name: Disable Web User Interface of Cisco IOS XE
+      cisco.ios.ios_config:
+        lines:
+          - no ip http server
+          - no ip http secure-server
+        save_when: changed
+      when:
+        - ansible_network_os == 'ios'
+        - remediate_http_server | bool
+        - http_server_enabled | default(false) | bool
+
+    - name: Determine if exploit indicators exist in syslogs
+      cisco.ios.ios_command:
+        commands:
+          - 'sh logging | i %SYS-5-CONFIG_P: Configured programmatically by process SEP_webui_wsma_http from console as'
+          - 'sh logging | i %SEC_LOGIN-5-WEBLOGIN_SUCCESS: Login Success'
+          - 'sh logging | i %WEBUI-6-INSTALL_OPERATION_INFO:'
+      register: logging_output
+      when: ansible_network_os == 'ios'
+
+    - name: Print syslog results
+      ansible.builtin.debug:
+        var: logging_output.stdout_lines
+      when: ansible_network_os == 'ios'
