@@ -15,9 +15,11 @@
     _scp_key: "{{ '-i ' + ansible_ssh_private_key_file if ansible_ssh_private_key_file is defined else '' }}"
     _scp_src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
     _scp_dest: "{{ _scp_user }}{{ _scp_host }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'"
+  when: ansible_password | default('') | length > 0
   block:
     - name: Copy file over to flash using SCP (password auth via sshpass)
       ansible.builtin.shell: |
+        set -o pipefail
         if scp -O 2>&1 | grep -q 'unknown option'; then
           _scp_o=""
         else
@@ -25,9 +27,11 @@
         fi
         sshpass -p "{{ ansible_password }}" scp $_scp_o {{ _scp_port }} {{ _scp_key }} \
           -o StrictHostKeyChecking=no {{ _scp_src }} {{ _scp_dest }}
+      changed_when: true
   rescue:
     - name: Copy file over to flash using SCP (SSH key auth)
       ansible.builtin.shell: |
+        set -o pipefail
         if scp -O 2>&1 | grep -q 'unknown option'; then
           _scp_o=""
         else
@@ -35,7 +39,7 @@
         fi
         scp $_scp_o {{ _scp_port }} {{ _scp_key }} -o StrictHostKeyChecking=no \
           -o BatchMode=yes -o ConnectTimeout=30 {{ _scp_src }} {{ _scp_dest }}
-  when: ansible_password | default('') | length > 0
+      changed_when: true
 
 - name: Copy file over to flash on network device using SCP (SSH key auth)
   vars:
@@ -44,6 +48,7 @@
     _scp_port: "{{ '-P ' + (ansible_port | string) if ansible_port is defined else '' }}"
     _scp_key: "{{ '-i ' + ansible_ssh_private_key_file if ansible_ssh_private_key_file is defined else '' }}"
   ansible.builtin.shell: |
+    set -o pipefail
     if scp -O 2>&1 | grep -q 'unknown option'; then
       _scp_o=""
     else
@@ -53,6 +58,7 @@
       -o BatchMode=yes -o ConnectTimeout=30 \
       /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt \
       {{ _scp_user }}{{ _scp_host }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
+  changed_when: true
   when: ansible_password | default('') | length == 0
 
 - name: Overwrite startup config - overwrite
